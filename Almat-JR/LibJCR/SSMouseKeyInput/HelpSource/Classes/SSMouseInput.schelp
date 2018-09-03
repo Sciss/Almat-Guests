@@ -1,0 +1,91 @@
+TITLE:: SSMouseInput
+summary:: (put short description here)
+categories:: Undocumented classes
+related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff, etc.
+
+DESCRIPTION::
+(put long description here)
+
+
+CLASSMETHODS::
+
+METHOD:: addMouseResponder
+(describe method here)
+
+ARGUMENT:: mouseaction
+(describe argument here)
+
+ARGUMENT:: cb_func
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: enable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: getSingleton
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: disable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+
+INSTANCEMETHODS::
+
+METHOD:: addMouseResponder
+(describe method here)
+
+ARGUMENT:: mouseaction
+(describe argument here)
+
+ARGUMENT:: cb_func
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: enable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: isEnabled
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: initme
+(describe method here)
+
+ARGUMENT:: server
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: disable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: initCallbacks
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+
+EXAMPLES::
+
+code::
+
+s.boot;
+SSMouseInput.enable(s);
+SSMouseInput.addMouseResponder('button',{|b_state| if(b_state == 1) {"Mouse down".postln} {"Mouse up".postln}});
+SSMouseInput.addMouseResponder('movex',{|xpos| ("MouseX Position: "++xpos).postln});
+SSMouseInput.disable;
+
+::
