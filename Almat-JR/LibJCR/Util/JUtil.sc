@@ -225,11 +225,31 @@ JMap {
 	notecps {
 		^this.notemidi.midicps;
 	}
+
+	// To frequency
+	f {
+		^this.notecps;
+	}
+
+	// To midi note
+	m {
+		^this.notemidi;
+	}
 }
 
 + Symbol {
 	notecps {
 		^this.asString.notecps;
+	}
+
+	// To frequency
+	f {
+		^this.notecps;
+	}
+
+	// To midi
+	m {
+		^this.asString.m
 	}
 }
 

@@ -49,6 +49,32 @@ Reaper {
 		^super.new.init(host, port, verbose);
 	}
 
+	/*
+	Open Reaper and create a SC instance of Reaper. This method assumes that you have a Reaper project file named SC.RPP
+	in the same directory as the active document.
+	Only works on OSX.
+
+	@param filepath  An optional filepath to the Reaper project file to open.
+
+	@return  A Reaper instance
+
+	@example
+	f = "".resolveRelative +/+ "MyReaper.RPP";
+	Reaper.open(f);
+
+	@todo
+	*/
+	*open {arg filepath=nil;
+		if(filepath.isNil) {
+			filepath = Document.current.dir +/+ "SC.RPP";
+		};
+
+		// Open Reaper..
+		("open -a Reaper64"+filepath).runInTerminal;
+
+		^this.new;
+	}
+
 	send {arg addr, val=nil;
 		"Sending Msg: % %".postf(addr, val);
 		reaperAddr.sendMsg(addr,val);
