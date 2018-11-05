@@ -19,8 +19,8 @@ TODO:
 
 /* USAGE: *********************
 
-++mixer
-++pattern
+>>mixer
+>>pattern
 
 // disable
 Macro.active = false;

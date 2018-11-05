@@ -33,7 +33,8 @@ Synthe.load();
 */
 Synthe {
 	classvar <synthdefs, <>path, <synthsFolderPath, <synthsFullPath, <fileNames;
-	classvar <allSynthDefsNames;
+	classvar <guiWindow;
+	classvar <allNames, <allTypes;
 
 	*load { | synthDefsPath |
 		var sp;
@@ -43,7 +44,8 @@ Synthe {
 			path = synthDefsPath;
 		};
 		fileNames = List();
-		allSynthDefsNames = List();
+		allNames = List();
+		allTypes = List();
 		synthdefs = Dictionary.new; // add synthdefs hashed on name
 		synthsFolderPath = path +/+ "SynthDefs";
 		synthsFullPath = ( synthsFolderPath +/+ "*").pathMatch;
@@ -76,91 +78,133 @@ Synthe {
 				deftext.interpret; // interpret Synthdef & create SynthDesc, throws an error if the server is not running
 				synthdesc = SynthDescLib.global.synthDescs[name];
 				info = SynthInfo.new(synthdesc);
-				info.parseDocString(metatext);
-				info.metaData[\filePath] = filepath;
+				info.parseDocString(metatext, filepath);
 				synthdefs[name] = info;
-				allSynthDefsNames.add(name);
+				allNames.add(name);
 			};
-
 			fileNames.add(PathName.new(filepath).fileName);
 		};
-
+		// Collect all types
+		allTypes = Set.new;
+		synthdefs.values.do {|sinfo|
+			sinfo.types.do {|type|
+				allTypes.add(type);
+			};
+		};
+		allTypes = allTypes.asList.sort;
+		allNames = allNames.sort;
 	}
 
 	// Opens a window to navigate synths and file locations of synth definitions.
 	*gui {
-		var w, decorator, styler, subStyler, childView, childDecorator, substyler;
+		var decorator, styler, subStyler, childView, childDecorator, substyler;
+		var subView, btn, key, s_info;
 		var searchText, searchList, searchTypeDropdown1, searchTypeDropdown2;
+		var width=300, height=800, lineheight;
 		var findFunc;
 		if(synthdefs.isNil) { this.load };
 
 		// Master window
-		w = Window("Synth Catalog", 210@800);
-		styler = GUIStyler(w);
-		w.view.decorator = FlowLayout(w.view.bounds);
-		decorator = w.view.decorator;
+		if(guiWindow.notNil) { guiWindow.close };
+		guiWindow = Window("Synth Catalog", (width+20)@height);
+		styler = GUIStyler(guiWindow);
+		guiWindow.view.decorator = FlowLayout(guiWindow.view.bounds);
+		decorator = guiWindow.view.decorator;
 		decorator.margin = Point(5,5);
 
 		// Child window
-		childView = styler.getWindow("SynthDefs", w.view.bounds, scroll: true);
+		childView = styler.getWindow("SynthDefs", guiWindow.view.bounds, scroll: true);
 		childView.decorator = FlowLayout(childView.bounds);
 		childDecorator = decorator;
 
 		// Search
-		searchText = TextField(childView, 200@20);
+		searchText = TextField(childView, width@lineheight);
 
-		searchTypeDropdown1 = PopUpMenu(childView, 200@30)
-		 .items_().stringColor_(Color.white)
-		 .background_(Color.clear).hiliteColor_(Color.new(0.3765, 0.5922, 1.0000, 0.5));
+		searchTypeDropdown1 = PopUpMenu(childView, (width/2)@lineheight)
+		.items_(allTypes.putFirst("--").asArray).stringColor_(Color.white)
+		.background_(Color.clear);
 
-		searchList = ListView(childView, 200@60)
-		 .items_(allSynthDefsNames.asArray)
-		 .stringColor_(Color.white)
-		 .background_(Color.clear)
-		 .hiliteColor_(Color.new(0.3765, 0.5922, 1.0000, 0.5));
+		searchTypeDropdown2 = PopUpMenu(childView, (width/2)@lineheight)
+		.items_(allTypes.putFirst("--").asArray).stringColor_(Color.white)
+		.background_(Color.clear);
+
+		searchList = ListView(childView, width@200)
+		.items_(allNames.asArray)
+		.stringColor_(Color.white)
+		.background_(Color.clear)
+		.hiliteColor_(Color.new(0.3765, 0.5922, 1.0000, 0.5));
+
 
 		findFunc = { |name|
-			if (name == "") {
-				searchList.items_(allSynthDefsNames.asArray);
-			} {
-				var filtered = allSynthDefsNames.selectAs({ | item, i |
-					item.asString.containsi(name);
-				}, Array);
-				searchList.items_(filtered)
+			var type1=nil, type2=nil, filteredNames;
+			if(searchTypeDropdown1.value > 0) {
+				type1 = searchTypeDropdown1.item;
 			};
+			if(searchTypeDropdown2.value > 0) {
+				type2 = searchTypeDropdown2.item;
+			};
+			filteredNames = allNames.selectAs({ |item, i|
+				var result,t1,t2;
+				t1 = synthdefs[item].isType(type1, type2);
+				if(name=="") {
+					t2 = true;
+				} {
+					t2 = item.asString.containsi(name);
+				};
+				t1 && t2;
+			}, Array);
+			searchList.items_(filteredNames)
 		};
 
 		searchText.action = { |field |
-			var search = field.value; findFunc.(search)
+			var search = field.value; findFunc.(search);
 		};
 		searchText.keyUpAction = {| view| view.doAction; };
 
-		searchList.action_({ |sbs| // action when selecting items in the search list
-			var synthdef = sbs.items[sbs.value];
-			synthdef.postln;
-			Synth(synthdef); // Play the synth with default values.
-		});
+		searchTypeDropdown1.action = {
+			var search = searchText.value; findFunc.(search);
+		};
+
+		searchTypeDropdown2.action = {
+			var search = searchText.value; findFunc.(search);
+		};
 
 		subStyler = GUIStyler(childView);
-		synthdefs.keys.do{|key|
-			var subView, name, btn, info;
-			styler.getSizableText(childView, key.asString, 90, \left, 10);
-			btn = styler.getSizableButton(childView, "source", size: 50@20);
+		subView = subStyler.getWindow("Subwindow", width@600);
+
+		searchList.action_({ |sbs| // action when selecting items in the search list
+			var key, s_info, btn, txt, extext, synthdef = sbs.items[sbs.value];
+			synthdef.postln;
+			Synth(synthdef); // Play the synth with default values.
+			subView.removeAll; // remove subViews
+			subView.decorator = FlowLayout(subView.bounds);
+
+			s_info = synthdefs[synthdef];
+			key = s_info.name;
+
+			styler.getSizableText(subView, key.asString, 50, \left, 10);
+
+			btn = styler.getSizableButton(subView, "source", size: 50@lineheight);
 			btn.action = {|btn|
-				Document.open(synthdefs[key].filePath);
+				var idx, d = Document.open(s_info.filePath);
 			};
 
-			// Examples/Presets ~ child of child view
-			subView = subStyler.getWindow(key, 200@20);
-			subView.decorator = FlowLayout(subView.bounds);
-			info = synthdefs[key];
-			name = info.name;
-			btn = subStyler.getSizableButton(subView, name, size: 180@20);
+			btn = subStyler.getSizableButton(subView, key, size: 100@lineheight);
 			btn.action = { |btn|
-					Synth(name);
+				Synth(key);
 			};
-		};
-		w.front;
+
+			txt = subStyler.getTextEdit(subView, width@400);
+			File.readAllString(s_info.filePath).split($@).do {|chunk,i|
+				var found = chunk.findRegexp("^example "++ key.asString ++"[\n][*][/][\n](.*)");
+				if(found != []) {
+					found = found[1][1];
+					txt.string_(found[..(found.size - 5)]);
+				};
+			};
+		});
+
+		guiWindow.front;
 	}
 
 	*browseSynths{
@@ -176,17 +220,11 @@ Synthe {
 	}
 
 	/*
-	@return a set containing all synthdef types/categories
+	@return a list containing all synthdef types/categories
 	*/
 	*types {
-		var result = Set.new;
 		if(synthdefs.isNil) { this.load };
-		synthdefs.values.do {|info|
-			info.types.do {|type|
-				result.add(type);
-			};
-		};
-		^result;
+		^allTypes;
 	}
 
 	*count {
@@ -217,11 +255,10 @@ SynthInfo {
 	@desc Bass synthesizer derived from a pulse train.
 	@types Bass, Lead
 	*/
-	parseDocString {arg metaStr;
+	parseDocString {arg metaStr, filePath=nil;
 		var tmp;
-		if(metaData.isNil) {
-			metaData = Dictionary.new;
-		};
+		if(metaData.isNil) { metaData = Dictionary.new; };
+		if(filePath.notNil) { metaData[\filePath] = filePath; };
 		tmp = metaStr.split($\@)[2..];
 		tmp.do {arg ml;
 			var key,val,regexp;
@@ -231,14 +268,40 @@ SynthInfo {
 			key = ml[1][1].asSymbol;
 			val = ml[2][1];
 			if(key == 'types') { // parse types
-				val = val.split($,).collect({|item, idx|
-					item.stripWhiteSpace;
+				val = val.split($\n)[0].split($,).collect({|item, idx|
+					item.stripWhiteSpace.asSymbol;
 				});
 			};
 			metaData[key] = val;
 		};
-
 	}
+
+	/*
+	@returns true if this synth matches the given types, returns true if arguments are nil
+	*/
+	isType {|...args|
+		var found, result = true;
+
+		args.do {|testFor|
+			if(testFor.isNil) {
+				found = true;
+			} {
+				found = false;
+				this.types.do {|type|
+					if(testFor == type) {
+						found = true;
+					};
+				};
+			};
+			if(found.not) {
+				result = false;
+			};
+		};
+		^result;
+	}
+
+
+
 
 	doesNotUnderstand { | selector...args |
 		var result;
@@ -254,6 +317,6 @@ SynthInfo {
 		}
 
 		^result;
-    }
+	}
 }
 
