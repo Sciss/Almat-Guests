@@ -4,17 +4,17 @@ version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "henry"
+name = "henri"
 version = "0.1.0"
 dependencies = [
  "jack 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
-name = "henry_test"
+name = "henri_test"
 version = "0.1.0"
 dependencies = [
- "henry 0.1.0",
+ "henri 0.1.0",
  "jack 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 

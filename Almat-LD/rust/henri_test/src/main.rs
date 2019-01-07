@@ -1,8 +1,8 @@
 // extern crate henry;
-use henry;
+use henri;
 
 fn main() {
-    let mut hen = henry::Henry::new(2, 4);
+    let mut hen = henri::Henri::new(2, 4);
 
     // let mut p = hen.newphase(4);
 
@@ -18,7 +18,7 @@ fn main() {
     // p.paths[0][2] = 0.5_f64;
 
     // hen.process = Box::new(
-    //     move |_i: &[f64], o: &mut [f64], phs: &Vec<henry::PhaseSpace>| {
+    //     move |_i: &[f64], o: &mut [f64], phs: &Vec<henri::PhaseSpace>| {
     //         o[0] = phs[0].paths[0][0];
     //         o[1] = phs[0].paths[0][1];
     //         o[2] = phs[0].paths[0][2];
@@ -39,7 +39,7 @@ fn main() {
     }
 
     hen.process = Box::new(
-        move |_i: &[f64], o: &mut [f64], phs: &Vec<henry::PhaseSpace>| {
+        move |_i: &[f64], o: &mut [f64], phs: &Vec<henri::PhaseSpace>| {
             o[0] = phs[0].paths[0][4];
             o[1] = phs[0].paths[0][5];
             o[2] = phs[0].paths[0][6];

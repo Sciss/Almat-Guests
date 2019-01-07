@@ -1,5 +1,5 @@
 [package]
-name = "henry_test"
+name = "henri_test"
 version = "0.1.0"
 authors = ["david"]
 edition = "2018"
@@ -8,5 +8,5 @@ edition = "2018"
 opt-level = 3
 
 [dependencies]
-henry = { path = "../henry" }
+henri = { path = "../henri" }
 jack = "0.6.0"

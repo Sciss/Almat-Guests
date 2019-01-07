@@ -63,7 +63,7 @@ impl PhaseSpace {
     }
 }
 // #[derive(Debug, Sync)]
-pub struct Henry {
+pub struct Henri {
     pub chin: usize,
     pub chout: usize,
     pub process: Box<Fn(&[f64], &mut [f64], &Vec<PhaseSpace>) -> ()>,
@@ -74,12 +74,12 @@ pub struct Henry {
     idx: usize,
 }
 
-unsafe impl Send for Henry {}
-//unsafe impl Sync for Henry {}
+unsafe impl Send for Henri {}
+//unsafe impl Sync for Henri {}
 
-impl Henry {
-    pub fn new(chin: usize, chout: usize) -> Henry {
-        Henry {
+impl Henri {
+    pub fn new(chin: usize, chout: usize) -> Henri {
+        Henri {
             chin,
             chout,
             process: Box::new(|_i: &[f64], _o: &mut [f64], _p: &Vec<PhaseSpace>| -> () {}),
@@ -117,7 +117,7 @@ impl Henry {
     pub fn start(mut self) -> () {
         // set up jack
         let (client, _status) =
-            jack::Client::new("rusty_henry", jack::ClientOptions::NO_START_SERVER).unwrap();
+            jack::Client::new("rusty_henri", jack::ClientOptions::NO_START_SERVER).unwrap();
 
         let client = client;
 
