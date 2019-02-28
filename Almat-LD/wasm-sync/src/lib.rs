@@ -62,7 +62,7 @@ impl Osc {
     /// This should probably only be called via the collection update method.
     /// Therefore not public.
     fn update(&mut self, diff: f64) {
-        self.phase += unwrap_phase(self.incr + diff.sin() * self.coupling);
+        self.phase += unwrap_phase(self.incr + diff * self.coupling);
     }
 
 
@@ -102,7 +102,7 @@ impl OscCollection {
         for i in 0..length {
             // we also diff from self but is 0, so no effect
             for k in 0..length { 
-                diff_sum += self.oscs[k].phase - self.oscs[i].phase;
+                diff_sum += (self.oscs[k].phase - self.oscs[i].phase).sin();
             }            
             self.oscs[i].update(diff_sum);
         }
