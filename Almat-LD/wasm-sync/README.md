@@ -1,3 +1,43 @@
+# wasm-sync
+
+## Setup
+
+### To (re)compile rust lib:
+``` shell
+wasm-pack build
+
+```
+
+### Linking package to www
+In pkg (possibly with sudo):
+
+``` shell
+npm link
+```
+
+Then in /www :
+
+``` shell
+npm link wasm-sync
+```
+
+### npm
+In /www:
+
+``` shell
+npm install
+```
+
+## run
+
+``` shell
+npm run start
+```
+
+
+Is based on what follows:
+
+
 # 🦀🕸️ `wasm-pack-template`
 
 A template for kick starting a Rust and WebAssembly project using
