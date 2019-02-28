@@ -45,6 +45,10 @@ npm run start
 
 It is based on the following:
 
+* https://rustwasm.github.io/book/game-of-life/introduction.html
+
+and uses this template:
+
 
 # 🦀🕸️ `wasm-pack-template`
 
