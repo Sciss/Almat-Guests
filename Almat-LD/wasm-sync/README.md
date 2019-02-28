@@ -1,5 +1,13 @@
 # wasm-sync
 
+rust wasm experiments and a small library for dealing with coupled synchronizing oscillators.
+
+## Project directory structure
+
+`src` - Rust code, see `lib.rs`
+`pkg` - compiled wasm and js
+`www` - web app, see `index.js` 
+
 ## Setup
 
 ### To (re)compile rust lib:
@@ -35,7 +43,7 @@ npm run start
 ```
 
 
-Is based on what follows:
+It is based on the following:
 
 
 # 🦀🕸️ `wasm-pack-template`
