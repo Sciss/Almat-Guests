@@ -4,9 +4,9 @@ rust wasm experiments and a small library for dealing with coupled synchronizing
 
 ## Project directory structure
 
-`src` - Rust code, see `lib.rs`
-`pkg` - compiled wasm and js
-`www` - web app, see `index.js` 
+* `src` - Rust code, see `lib.rs`
+* `pkg` - compiled wasm and js
+* `www` - web app, see `index.js` 
 
 ## Setup
 
