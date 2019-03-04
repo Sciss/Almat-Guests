@@ -79,7 +79,8 @@ createDia n xstep init = atPoints (mconcat points) (repeat spot)
   where
     ys = take (length init) [0.0,20.0 ..]
     points = zipWith3 createPoints ys (repeat 0.0) (collectWithT n xstep init)
-    spot = circle 2 # fc black -- dia :: Diagram B
+    spot = circle 2 # fc black
 
+dia :: Diagram B
 dia =
   pad 2 . center $ createDia 2000 0.3 [Osc 0.0 0.04 0.001, Osc 3.4 0.04 0.001]
