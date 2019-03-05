@@ -73,7 +73,6 @@ createPoints y lastPhase ((thisX, thisPhase):rest)
   | lastPhase > thisPhase = p2 (thisX, y) : createPoints y thisPhase rest
   | otherwise = createPoints y thisPhase rest
 
---map (\ps -> position $ zip ps (repeat spot)) points
 createDia :: Int -> Double -> [Oscillator] -> Diagram B
 createDia n xstep init = atPoints (mconcat points) (repeat spot)
   where
