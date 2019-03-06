@@ -1,13 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Examples.Template</title>
-</head>
-
-<body>
-<div id="elm-f0111bc4e658d0f98db96260c16f7e49"></div>
-<script>
 (function(scope){
 'use strict';
 
@@ -4797,10 +4787,10 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var author$project$Examples$Template$init = function (floatSeed) {
-	return _Utils_Tuple2(0, elm$core$Platform$Cmd$none);
+var author$project$Main$init = function (floatSeed) {
+	return _Utils_Tuple2(floatSeed, elm$core$Platform$Cmd$none);
 };
-var author$project$Examples$Template$AnimationFrame = function (a) {
+var author$project$Main$AnimationFrame = function (a) {
 	return {$: 'AnimationFrame', a: a};
 };
 var elm$browser$Browser$AnimationManager$Delta = function (a) {
@@ -5250,11 +5240,11 @@ var elm$browser$Browser$AnimationManager$onAnimationFrameDelta = function (tagge
 		elm$browser$Browser$AnimationManager$Delta(tagger));
 };
 var elm$browser$Browser$Events$onAnimationFrameDelta = elm$browser$Browser$AnimationManager$onAnimationFrameDelta;
-var author$project$Examples$Template$subscriptions = function (model) {
-	return elm$browser$Browser$Events$onAnimationFrameDelta(author$project$Examples$Template$AnimationFrame);
+var author$project$Main$subscriptions = function (model) {
+	return elm$browser$Browser$Events$onAnimationFrameDelta(author$project$Main$AnimationFrame);
 };
 var elm$core$Basics$round = _Basics_round;
-var author$project$Examples$Template$update = F2(
+var author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'Increment':
@@ -5268,76 +5258,226 @@ var author$project$Examples$Template$update = F2(
 					elm$core$Platform$Cmd$none);
 		}
 	});
-var author$project$Examples$Template$Decrement = {$: 'Decrement'};
-var author$project$Examples$Template$Increment = {$: 'Increment'};
-var elm$html$Html$button = _VirtualDom_node('button');
-var elm$html$Html$div = _VirtualDom_node('div');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			elm$virtual_dom$VirtualDom$on,
-			event,
-			elm$virtual_dom$VirtualDom$Normal(decoder));
+var avh4$elm_color$Color$RgbaSpace = F4(
+	function (a, b, c, d) {
+		return {$: 'RgbaSpace', a: a, b: b, c: c, d: d};
 	});
-var elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		elm$html$Html$Events$on,
-		'click',
-		elm$json$Json$Decode$succeed(msg));
+var avh4$elm_color$Color$rgba = F4(
+	function (r, g, b, a) {
+		return A4(avh4$elm_color$Color$RgbaSpace, r, g, b, a);
+	});
+var elm$core$Basics$sin = _Basics_sin;
+var elm$virtual_dom$VirtualDom$nodeNS = function (tag) {
+	return _VirtualDom_nodeNS(
+		_VirtualDom_noScript(tag));
 };
-var author$project$Examples$Template$view = function (model) {
+var elm_community$typed_svg$TypedSvg$Core$node = elm$virtual_dom$VirtualDom$nodeNS('http://www.w3.org/2000/svg');
+var elm_community$typed_svg$TypedSvg$rect = elm_community$typed_svg$TypedSvg$Core$node('rect');
+var elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var elm_community$typed_svg$TypedSvg$Core$attribute = elm$virtual_dom$VirtualDom$attribute;
+var elm$core$String$concat = function (strings) {
+	return A2(elm$core$String$join, '', strings);
+};
+var elm$core$String$fromFloat = _String_fromNumber;
+var avh4$elm_color$Color$toCssString = function (_n0) {
+	var r = _n0.a;
+	var g = _n0.b;
+	var b = _n0.c;
+	var a = _n0.d;
+	var roundTo = function (x) {
+		return elm$core$Basics$round(x * 1000) / 1000;
+	};
+	var pct = function (x) {
+		return elm$core$Basics$round(x * 10000) / 100;
+	};
+	return elm$core$String$concat(
+		_List_fromArray(
+			[
+				'rgba(',
+				elm$core$String$fromFloat(
+				pct(r)),
+				'%,',
+				elm$core$String$fromFloat(
+				pct(g)),
+				'%,',
+				elm$core$String$fromFloat(
+				pct(b)),
+				'%,',
+				elm$core$String$fromFloat(
+				roundTo(a)),
+				')'
+			]));
+};
+var elm_community$typed_svg$TypedSvg$TypesToStrings$fillToString = function (fill) {
+	if (fill.$ === 'Fill') {
+		var color = fill.a;
+		return avh4$elm_color$Color$toCssString(color);
+	} else {
+		return 'none';
+	}
+};
+var elm_community$typed_svg$TypedSvg$Attributes$fill = A2(
+	elm$core$Basics$composeL,
+	elm_community$typed_svg$TypedSvg$Core$attribute('fill'),
+	elm_community$typed_svg$TypedSvg$TypesToStrings$fillToString);
+var elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString = function (length) {
+	switch (length.$) {
+		case 'Cm':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'cm';
+		case 'Em':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'em';
+		case 'Ex':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'ex';
+		case 'In':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'in';
+		case 'Mm':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'mm';
+		case 'Num':
+			var x = length.a;
+			return elm$core$String$fromFloat(x);
+		case 'Pc':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'pc';
+		case 'Percent':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + '%';
+		case 'Pt':
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'pt';
+		default:
+			var x = length.a;
+			return elm$core$String$fromFloat(x) + 'px';
+	}
+};
+var elm_community$typed_svg$TypedSvg$Attributes$height = function (length) {
+	return A2(
+		elm_community$typed_svg$TypedSvg$Core$attribute,
+		'height',
+		elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var elm_community$typed_svg$TypedSvg$Types$Px = function (a) {
+	return {$: 'Px', a: a};
+};
+var elm_community$typed_svg$TypedSvg$Types$px = elm_community$typed_svg$TypedSvg$Types$Px;
+var elm_community$typed_svg$TypedSvg$Attributes$InPx$height = function (value) {
+	return elm_community$typed_svg$TypedSvg$Attributes$height(
+		elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$width = function (length) {
+	return A2(
+		elm_community$typed_svg$TypedSvg$Core$attribute,
+		'width',
+		elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$InPx$width = function (value) {
+	return elm_community$typed_svg$TypedSvg$Attributes$width(
+		elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$x = function (length) {
+	return A2(
+		elm_community$typed_svg$TypedSvg$Core$attribute,
+		'x',
+		elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$InPx$x = function (value) {
+	return elm_community$typed_svg$TypedSvg$Attributes$x(
+		elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$y = function (length) {
+	return A2(
+		elm_community$typed_svg$TypedSvg$Core$attribute,
+		'y',
+		elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var elm_community$typed_svg$TypedSvg$Attributes$InPx$y = function (value) {
+	return elm_community$typed_svg$TypedSvg$Attributes$y(
+		elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var elm_community$typed_svg$TypedSvg$Types$Fill = function (a) {
+	return {$: 'Fill', a: a};
+};
+var author$project$Main$pixel = F2(
+	function (_n0, phase) {
+		var xCoord = _n0.a;
+		var yCoord = _n0.b;
+		return A2(
+			elm_community$typed_svg$TypedSvg$rect,
+			_List_fromArray(
+				[
+					elm_community$typed_svg$TypedSvg$Attributes$InPx$x(xCoord),
+					elm_community$typed_svg$TypedSvg$Attributes$InPx$y(yCoord),
+					elm_community$typed_svg$TypedSvg$Attributes$InPx$width(400),
+					elm_community$typed_svg$TypedSvg$Attributes$InPx$height(400),
+					elm_community$typed_svg$TypedSvg$Attributes$fill(
+					elm_community$typed_svg$TypedSvg$Types$Fill(
+						A4(
+							avh4$elm_color$Color$rgba,
+							0.0,
+							0.0,
+							0.0,
+							1 - elm$core$Basics$sin(phase / 2))))
+				]),
+			_List_Nil);
+	});
+var elm$core$Basics$pi = _Basics_pi;
+var elm$html$Html$div = _VirtualDom_node('div');
+var elm_community$typed_svg$TypedSvg$svg = elm_community$typed_svg$TypedSvg$Core$node('svg');
+var elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
+	function (minX, minY, vWidth, vHeight) {
+		return A2(
+			elm_community$typed_svg$TypedSvg$Core$attribute,
+			'viewBox',
+			A2(
+				elm$core$String$join,
+				' ',
+				A2(
+					elm$core$List$map,
+					elm$core$String$fromFloat,
+					_List_fromArray(
+						[minX, minY, vWidth, vHeight]))));
+	});
+var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$div,
 		_List_Nil,
 		_List_fromArray(
 			[
 				A2(
-				elm$html$Html$button,
+				elm_community$typed_svg$TypedSvg$svg,
 				_List_fromArray(
 					[
-						elm$html$Html$Events$onClick(author$project$Examples$Template$Decrement)
+						A4(elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, 800, 1600)
 					]),
 				_List_fromArray(
 					[
-						elm$html$Html$text('-')
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text(
-						elm$core$String$fromInt(model))
-					])),
-				A2(
-				elm$html$Html$button,
-				_List_fromArray(
-					[
-						elm$html$Html$Events$onClick(author$project$Examples$Template$Increment)
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('+')
+						A2(
+						author$project$Main$pixel,
+						_Utils_Tuple2(10, 20),
+						1.1),
+						A2(
+						author$project$Main$pixel,
+						_Utils_Tuple2(10, 520),
+						elm$core$Basics$pi),
+						A2(
+						author$project$Main$pixel,
+						_Utils_Tuple2(10, 1020),
+						0)
 					]))
 			]));
 };
 var elm$browser$Browser$element = _Browser_element;
-var elm$json$Json$Decode$float = _Json_decodeFloat;
-var author$project$Examples$Template$main = elm$browser$Browser$element(
-	{init: author$project$Examples$Template$init, subscriptions: author$project$Examples$Template$subscriptions, update: author$project$Examples$Template$update, view: author$project$Examples$Template$view});
-_Platform_export({'Examples':{'Template':{'init':author$project$Examples$Template$main(elm$json$Json$Decode$float)(0)}}});}(this));
-
-var app = Elm.Examples.Template.init({ node: document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49") });
-if (document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49"))
-{
-  document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49").innerText = 'This is a headless program, meaning there is nothing to show here.\n\nI started the program anyway though, and you can access it as `app` in the developer console.';
-}
-</script>
-</body>
-</html>
+var elm$json$Json$Decode$int = _Json_decodeInt;
+var author$project$Main$main = elm$browser$Browser$element(
+	{init: author$project$Main$init, subscriptions: author$project$Main$subscriptions, update: author$project$Main$update, view: author$project$Main$view});
+_Platform_export({'Main':{'init':author$project$Main$main(elm$json$Json$Decode$int)(0)}});}(this));
