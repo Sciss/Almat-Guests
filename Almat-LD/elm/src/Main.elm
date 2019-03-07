@@ -30,19 +30,40 @@ main =
 
 
 type alias Model =
-    Int
+    { oscs : List Oscillator
+    , nIterations : Int
+    }
 
 
 init : Int -> ( Model, Cmd Msg )
 init floatSeed =
-    ( floatSeed
+    -- get screen width
+    ( Model (List.concat (List.repeat 200 [ Oscillator 0.0 0.002 0.05, Oscillator 1.9 0.005 0.09 ])) 200
     , Cmd.none
     )
 
 
+
+-- should be float
+
+
+xStep : Int
+xStep =
+    2
+
+
+
+-- should be float
+
+
+yStep : Int
+yStep =
+    2
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    onAnimationFrameDelta AnimationFrame
+    Sub.none
 
 
 
@@ -70,7 +91,11 @@ unwrapPhase ph =
 
 calcDiffs : List Float -> List Float
 calcDiffs phases =
-    List.map (\phK -> List.foldl (\phJ sum -> sum + sin (phJ - phK)) 0.0 phases) phases
+    let
+        n =
+            toFloat (List.length phases)
+    in
+    List.map (\phK -> List.foldl (\phJ sum -> sum + sin (phJ - phK)) 0.0 phases / n) phases
 
 
 updateOsc : Oscillator -> Float -> Oscillator
@@ -91,53 +116,73 @@ updateOscs oscs =
     List.map2 updateOsc oscs diffs
 
 
+collectOscs : Int -> List Oscillator -> List (List Oscillator)
+collectOscs n initOscs =
+    if n <= 0 then
+        []
+
+    else
+        let
+            newOscs =
+                updateOscs initOscs
+        in
+        newOscs :: collectOscs (n - 1) newOscs
+
+
 
 -- UPDATE
 
 
 type Msg
-    = Increment
-    | Decrement
-    | AnimationFrame Float
+    = Calc
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Increment ->
-            ( model + 1, Cmd.none )
-
-        Decrement ->
-            ( model - 1, Cmd.none )
-
-        AnimationFrame fl ->
-            ( model + round fl, Cmd.none )
+        Calc ->
+            ( model, Cmd.none )
 
 
 
 -- VIEW
 
 
+oscsIterToPixels : Float -> Float -> List Oscillator -> List (Svg msg)
+oscsIterToPixels xStepSize y iteration =
+    List.indexedMap (\idx osc -> pixel ( toFloat idx * xStepSize, y ) osc.phase) iteration
+
+
 view : Model -> Html.Html Msg
 view model =
+    let
+        iterations =
+            collectOscs model.nIterations model.oscs
+    in
+    let
+        pixels =
+            List.concat (List.indexedMap (\idx oscs -> oscsIterToPixels (toFloat xStep) (toFloat yStep * toFloat idx) oscs) iterations)
+    in
     Html.div []
         [ svg
             [ viewBox 0 0 800 1600
             ]
-            [ pixel ( 10, 20 ) 1.1
-            , pixel ( 10, 520 ) pi
-            , pixel ( 10, 1020 ) 0
-            ]
+            pixels
         ]
 
 
 pixel : ( Float, Float ) -> Float -> Svg msg
 pixel ( xCoord, yCoord ) phase =
+    let
+        color =
+            Color.rgba 0.0 0.0 0.0 (1 - sin (phase / 2))
+    in
     rect
         [ x xCoord
         , y yCoord
-        , width 400
-        , height 400
-        , fill (Fill (Color.rgba 0.0 0.0 0.0 (1 - sin (phase / 2))))
+        , width (toFloat xStep)
+        , height (toFloat yStep)
+        , fill (Fill color)
+        , stroke color
         ]
         []
