@@ -58,12 +58,12 @@ s.meter
 )
 
 
-~incrs = Array.rand(10, 0.01, 0.3);
+~incrs = Array.rand(12, 0.01, 0.3);
 
 
 (
 {
-	var n = 10;
+	var n = 12;
 	var incr = ~incrs;//Rand(0.02,0.03!n); //[0.072,0.009];
 	var coupling = Rand(-0.08,0.08!n) * MouseX.kr(0,3).lag2(0.3);
 	var initPhases =  Rand(0.0,pi*2!n); //[0.0, 2.72];
@@ -74,7 +74,7 @@ s.meter
 		sumPh.do{arg ph;
 			diff = diff + (ph - thisPh).sin.cubed; 
 		};
-		diff;
+		diff / n;
 	};
 	sumPh = (sumPh + incr + (coupling * diffs)) % (2 * pi);
 	//diffs.poll;
@@ -118,3 +118,11 @@ s.scope
 	Splay.ar(sumPh.sin * 0.1);
 }.play
 )
+
+s.prepareForRecord("~/tmp/rec_20190307.wav".standardizePath,12);
+
+
+
+s.record();
+
+s.stopRecording();
