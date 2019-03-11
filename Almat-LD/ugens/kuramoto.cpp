@@ -55,10 +55,6 @@ void Kuramoto_next_a(Kuramoto *unit, int inNumSamples) {
   
   for (int i=0; i < inNumSamples; ++i) {
     int this_mode = sc_clip(mode[i], 0.f, 2.f);
-
-    // if (i == 0) {
-    //   Print("n:%d, mode:%d, modefl:%f\n", n, this_mode, mode[i]);
-    // }
       
     for (int k=0; k < n; ++k) {
       //      float *out = OUT(k);
@@ -71,9 +67,6 @@ void Kuramoto_next_a(Kuramoto *unit, int inNumSamples) {
       switch (this_mode) {
 	
       case 0:
-	//	if (i == 0) {
-      	//   Print("k:%d, this_phase:%f, increment:%f, coupling:%f\n", k, this_phase, increment, coupling);
-      	// }
       	// all differences
       	for (int j=0; j < n; ++j) {
       	  diff += sin(phases_prev[j] - this_phase);

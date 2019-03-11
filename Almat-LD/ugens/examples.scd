@@ -16,7 +16,7 @@ s.reboot;
 	Splay.ar(SinOsc.ar(0, phases)) * 0.1;
 }.play
 )
-x
+
 
 
 
