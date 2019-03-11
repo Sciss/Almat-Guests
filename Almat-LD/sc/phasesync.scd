@@ -22,7 +22,7 @@ s.prepareForRecord("/Users/poz/Desktop/phase.aiff", 12)
 	var coupling = MouseX.kr(0.000001, 1);
     var initPhases =  Rand(0.0,pi*2!n); //[0.0, 2.72];
     var fb = LocalIn.ar(n, initPhases);
-    var sumPh = fb;ˇ
+    var sumPh = fb;
     var diffs = sumPh.collect{ | thisPh, i |
         var diff = 0;
 		diff = diff + (sumPh[(i-1)%sumPh.size] - thisPh).sin * coupling.neg;
