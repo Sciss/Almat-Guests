@@ -4,7 +4,7 @@
 
 ## Installation
 
-```make install``
+```make install```
 
 ## Examples
 
