@@ -71,27 +71,31 @@ void Kuramoto_next_a(Kuramoto *unit, int inNumSamples) {
       	for (int j=0; j < n; ++j) {
       	  diff += sin(phases_prev[j] - this_phase);
       	}
+	diff = diff * coupling;
+      	diff += sin(phases_input[k] - this_phase) * coupling2;
       	diff = diff / (double) n;
       	break;
 	
       case 1:
       	// differences from neighbors
-      	diff += sin(phases_prev[(k-1)%n] - this_phase);
-      	diff += sin(phases_prev[(k+1)%n] - this_phase);
+      	diff += sin(phases_prev[(k-1)%n] - this_phase)  * coupling;
+      	diff += sin(phases_prev[(k+1)%n] - this_phase) * coupling;
+      	diff += sin(phases_input[k] - this_phase) * coupling2;
       	diff = diff / 2.f;
       	break;
 
       case 2:
       	// negative and positive difference
-      	diff -= sin(phases_prev[(k-1)%n] - this_phase);
-      	diff += sin(phases_prev[(k+1)%n] - this_phase);
+      	diff -= sin(phases_prev[(k-1)%n] - this_phase)  * coupling;
+      	diff += sin(phases_prev[(k+1)%n] - this_phase)  * coupling;
+      	diff += sin(phases_input[k] - this_phase) * coupling2;
       	diff = diff / 2.f;
       	break;
 
       }
 
       // TODO replace with different integrator
-      phases_now[k] = fmod(this_phase + increment + (diff * coupling), twopi);
+      phases_now[k] = fmod(this_phase + increment + (diff), twopi);
       
       (unit->mOutBuf[k])[i] = phases_now[k];
     }
