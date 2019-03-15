@@ -375,6 +375,6 @@ pixel ( xCoord, yCoord ) phase pixelSize =
 
 
 -- TODO
--- different couplings, not always all with all
+-- scale to vertical screen size (y pixel size)
 -- störung, input?
 -- different integration function
