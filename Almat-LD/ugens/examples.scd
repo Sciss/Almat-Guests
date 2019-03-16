@@ -22,6 +22,15 @@ s.reboot;
 )
 
 
+(
+{
+	var input = SinOsc.ar(K2A.ar(MouseX.kr(100.0, 1000.0)));
+	var hopf = Hopf.ar(input, K2A.ar(0.0001));
+	var ph = hopf[1].atan2(hopf[0]);
+	SinOsc.ar(0, ph);
+}.play
+)
+
 
 
 

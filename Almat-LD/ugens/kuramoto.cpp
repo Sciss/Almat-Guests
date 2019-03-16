@@ -165,7 +165,7 @@ void Hopf_next_a(Hopf *unit, int inNumSamples) {
   float x = unit->x;
   float y = unit->y;
   float omega = unit->omega;
-  float* out = OUT(0);
+  float** out = unit->mOutBuf;
   
   for (int i=0; i < inNumSamples; ++i) {
 
@@ -188,7 +188,9 @@ void Hopf_next_a(Hopf *unit, int inNumSamples) {
     dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y));
     omega += dd * 0.5;
 
-    out[i] = omega;
+    out[0][i] = x;
+    out[1][i] = y;
+    out[2][i] = omega;
   }
 
   unit->x = x;

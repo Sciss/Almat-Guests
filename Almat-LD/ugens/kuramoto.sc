@@ -12,10 +12,16 @@ Kuramoto : MultiOutUGen {
 }
 
 
-Hopf : UGen {
+Hopf : MultiOutUGen {
 
 	*ar { arg force, coupling;
 		^this.multiNew('audio', force, coupling)
 	}
 
+
+	init { arg ... theInputs;
+		inputs = theInputs;
+		^this.initOutputs(3, 'audio');
+	}
+	
 }
