@@ -14,14 +14,14 @@ Kuramoto : MultiOutUGen {
 
 Hopf : MultiOutUGen {
 
-	*ar { arg force, coupling;
-		^this.multiNew('audio', force, coupling)
+	*ar { arg force, coupling, radius;
+		^this.multiNew('audio', force, coupling, radius)
 	}
 
 
 	init { arg ... theInputs;
 		inputs = theInputs;
-		^this.initOutputs(3, 'audio');
+		^this.initOutputs(4, 'audio');
 	}
 	
 }

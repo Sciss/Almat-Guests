@@ -11,18 +11,18 @@ SC_COMMON=${SC_SRC_INCLUDE}/common
 SC_SERVER=${SC_SRC_INCLUDE}/server
 
 CC=g++
-CPPFLAGS=-std=c++11 -Wno-deprecated -Wno-unknown-pragmas -D_REENTRANT -DNDEBUG -DSC_MEMORY_ALIGNMENT=1 -DSC_LINUX -Wno-deprecated -fPIC
+CPPFLAGS=-std=c++11 -Wno-deprecated -Wno-unknown-pragmas -D_REENTRANT -DNDEBUG -DSC_MEMORY_ALIGNMENT=1 -DSC_LINUX -Wno-deprecated -fPIC -O3
 
 SRCS=kuramoto.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 
 kuramoto: $(OBJS)
-	g++ -shared -g -o kuramoto.so kuramoto.o
+	$(CC) -shared -o kuramoto.so kuramoto.o
 
 
 %.o: %.cpp 
-	$(CC) $(CPPFLAGS) -I $(SC_PLUGIN_INTERFACE) -I $(SC_COMMON) -I $(SC_SERVER) -g -c $<
+	$(CC) $(CPPFLAGS) -I $(SC_PLUGIN_INTERFACE) -I $(SC_COMMON) -I $(SC_SERVER) -c $<
 
 
 install: kuramoto.sc kuramoto.so

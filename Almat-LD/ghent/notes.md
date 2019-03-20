@@ -24,7 +24,7 @@ reden 15 min
 * intro
 ** what?: synchronization (David)
 ** why? -> how? Contingency -> Formats (Luc)
-** Formats -> Site -> Englement -> Aesthetic experience (Luc)
+** Formats -> Site -> Entanglement (Luc)
 ** Formats -> Iterativity -> Computation -> Speculation (David)
 **
 
@@ -55,3 +55,14 @@ graph graphname {
      a -- b -- c;
      b -- d;
  }
+
+
+
+Pfade Luc:
+
+Formats -> Site -> Entanglement
+Computation ->  Contingency -> Aesthetic experience 
+
+
+
+Epistemic object -> Entanglement -> Aesthetic experience
