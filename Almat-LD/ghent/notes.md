@@ -21,13 +21,21 @@ reden 15 min
 
 ### structure
 
-* intro
-** what?: synchronization (David)
-** why? -> how? Contingency -> Formats (Luc)
-** Formats -> Site -> Entanglement (Luc)
-** Formats -> Iterativity -> Computation -> Speculation (David)
-**
+* intro (David) 1 min
+** what?: synchronization (David) 1 min
+** why? -> how? Contingency (Luc) 2 min
+** Formats -> Site -> Entanglement (Luc) 3 min
+** Iterativity -> Formats -> Epistemic Object (David) 2 min
+** Computation -> Contingency -> Aesthetic experience  (Luc) 2 min
+** Speculation -> Computation -> Entanglement 3 min
 
+15 min
+
+* Kuramoto 1/2 Min (David) Luc Prep
+* Kuramoto demo 1 1/2 Min 
+* Visualisation 1 Min
+* 3 Min Finale
+* End when time over
 
 
 ## TODO
