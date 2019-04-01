@@ -1,0 +1,10 @@
+sinosc ph incr = (sin ph) , (ph + incr) incr
+
+sinosc ph incr = (sin (audio 0)) , (ph + incr) incr
+
+sinosc2 ph incr =
+   let ph2 = ph * ph in
+     (sin ph2) , (ph2 + incr) incr
+
+
+

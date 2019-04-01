@@ -211,25 +211,35 @@ void Hopf_next_a(Hopf *unit, int inNumSamples) {
 
     radius = radius_in[i];
     
-    dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y));// + exp(-0.1*omega*omega)*0.00001 - 0.00001;
+    dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y)) + exp(-10e6*omega*omega);
+    //    dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y));
     omega += dd * 0.5;
 
+    // multiply x (*mag) attraction strength 
     dd = (omega * -1.f * y) + ((radius - sqSum(x,y)) * x) + (coupling[i] * force[i]);
     x += (dd * 0.5);
 
+
+    // multiply y (*mag) attraction strength 
+    dd = (omega * x) + ((radius - sqSum(x,y)) * y);
+    y += (dd * 0.5);
     
+    // multiply y (*mag) attraction strength 
     dd = (omega * x) + ((radius - sqSum(x,y)) * y);
     y += (dd * 0.5);
 
-    dd = (omega * x) + ((radius - sqSum(x,y)) * y);
-    y += (dd * 0.5);
-
-
+    // multiply x (*mag) attraction strength 
     dd = (omega * -1.f * y) + ((radius - sqSum(x,y)) * x) + (coupling[i] * force[i]);
     x += (dd * 0.5);
 
-    dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y));// + exp(-0.1*omega*omega)*0.00001 - 0.00001;
+    dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y))  + exp(-10e6*omega*omega);
+    //dd = (coupling[i] * -1.f) * force[i] * y / sqrt(sqSum(x,y));
     omega += dd * 0.5;
+
+
+    // if (std::isnan(x)) {
+    // 	Print("%f\n", force[i]);
+    // }
 
     out[0][i] = x;
     out[1][i] = y;
