@@ -1,5 +1,5 @@
-s.options.numOutputBusChannels = 6;
-s.options.numInputBusChannels = 6;
+s.options.numOutputBusChannels = 24;
+s.options.numInputBusChannels = 24;
 s.options.memSize = 8192 * 10;
 s.options.numBuffers = 1024 * 10;
 
@@ -9,7 +9,7 @@ s.reboot;
 s.options.dump
 
 
-{ Out.ar(5, Impulse.ar(30) * 0.01) }.play
+{ Out.ar(0, Impulse.ar(30!6) * 0.1) }.play
 s.meter
 
 ~c = Buffer.read(s, "/home/luc/Work/plastik/multi.wav")
@@ -138,17 +138,17 @@ SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
 	var fms;
 	var n = 6;
 	var fb = LocalIn.ar(n,0.0);
-	var soundin = SoundIn.ar((0..5),inFac.lag2(0.5));
-	var inputs = LPF.ar(HPF.ar(Mix.ar(InFeedback.ar(fbbus,n)),
+	var soundin = SoundIn.ar((10..15),inFac.lag2(0.5));
+	var inputs = LPF.ar(HPF.ar(Mix.ar(InFeedback.ar(fbbus,n)+soundin),
 		[fmin1.lag2(0.2),fmin2.lag2(0.2), fmin3.lag2(0.2),
-			(fmin1*fOffset1).lag2(0.2), (fmin2*fOffset2).lag2(0.2), (fmin3*fOffset3).lag2(0.2)]),
+			fmin1.lag2(0.2), fmin2.lag2(0.2), fmin3.lag2(0.2)]),
 		[fmax1.lag2(0.2),fmax2.lag2(0.2), fmax3.lag2(0.2),
-			(fmax1*fOffset1).lag2(0.2), (fmax2*fOffset2).lag2(0.2), (fmax3*fOffset3).lag2(0.2)])
-	+ soundin;
+			fmax1.lag2(0.2), fmax2.lag2(0.2), fmax3.lag2(0.2)]);
+	//	+ soundin;
 	var filters = n.collect({arg i;
 		var out = inputs[i];
 		i.do({arg k;
-			out = BPeakEQ.ar(out,fb[k].abs.clip(6,16000).lag2(0.08),0.1,-60);
+			out = BPeakEQ.ar(out,fb[k].abs.clip(6,16000).lag2(0.1),0.1,-60);
 		});
 		out;
 	});
@@ -156,16 +156,18 @@ SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
 	var freqs = hopfs.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ) });
 	inputs.size.postln;
 	fms = n.collect({arg i;
-		BPeakEQ.ar(PMOsc.ar(freqs[i]/divFreqs, freqs[(i+1)%n]/(((i%2)+1)*((divFreqs*0.5).clip(1,4))),
-			index.lag2(1)),
-			freqs[(i+2)%n].abs.clip(30,12000).lag2(0.2), 0.4, 16);
+		BPeakEQ.ar(PMOsc.ar(freqs[i]/divFreqs, freqs[(i+1)%n]/divFreqs,
+			(freqs[(i+3)%n]/30)*index.lag2(1)),
+			freqs[(i+2)%n].abs.clip(30,12000).lag2(0.2), 0.4, 16)
+		* SinOsc.ar(freqs[(i+4)%n].lag2(4)/5000,0,0.4,0.6);
+		
 	});
 	fms = LPF.ar(fms,16000);
 	OffsetOut.ar(fbbus,fms);
 	OffsetOut.ar(fbbus,WhiteNoise.ar(0.1));
 	//	freqs.poll;
 	fms = Limiter.ar(fms*0.5, 0.7);
-	Out.ar(0, fms  * 0.5 * amp.lag3(0.5));
+	Out.ar(0, fms  * 0.5 * amp.lag3(1));
 	//	Out.ar(0, Splay.ar(fms)  * 0.05 * amp.lag2(0.4));
 	
 }).send(s);
@@ -196,12 +198,12 @@ MIDIIn.connectAll;
 
 
 
-ControlSpec.specs[\amp] = ControlSpec(0.0, 0.1, 1, 0.00001, 0);
+ControlSpec.specs[\amp] = ControlSpec(0.0, 1, 1, 0.00001, 0);
 ControlSpec.specs[\freq] = ControlSpec(6, 15000, 2, 0.001, 1);
-ControlSpec.specs[\index] = ControlSpec(0.00001, 50, 4, 0.00001, 2);
-ControlSpec.specs[\coupling] = ControlSpec(0.0001, 10, 4, 0.000001, 0.1);
+ControlSpec.specs[\index] = ControlSpec(0.00001, 50, 5, 0.00001, 2);
+ControlSpec.specs[\coupling] = ControlSpec(0.00005, 10, 6, 0.0000001, 0.1);
 ControlSpec.specs[\inFac] = ControlSpec(0.0, 1, 0.001, 0.00001, 0.1);
-ControlSpec.specs[\divFreqs] = ControlSpec(1, 10, 1, 1, 1);
+ControlSpec.specs[\divFreqs] = ControlSpec(1, 20, 2, 1, 1);
 ControlSpec.specs[\fOffset] = ControlSpec(1/1.5, 1.5, 1, 0.001, 1);
 
 ~ampCtrl = Bus.control(s, 1).set(0.0);

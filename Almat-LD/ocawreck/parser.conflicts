@@ -1,0 +1,85 @@
+
+** Conflict (shift/reduce) in state 25.
+** Token involved: EQUALS
+** This state is reached from prog after reading:
+
+LPAREN ID ID list(ID) 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+prog 
+expr EOF 
+(?)
+
+** In state 25, looking ahead at EQUALS, shifting is permitted
+** because of the following sub-derivation:
+
+LPAREN ID arg_list RPAREN 
+          loption(separated_nonempty_list(IN,expr)) 
+          separated_nonempty_list(IN,expr) 
+          expr 
+          ID list(ID) . EQUALS expr 
+
+** In state 25, looking ahead at EQUALS, reducing production
+** list(ID) -> ID list(ID) 
+** is permitted because of the following sub-derivation:
+
+LPAREN expr RPAREN 
+       ID list(ID) EQUALS expr // lookahead token appears
+          ID list(ID) . 
+
+** Conflict (reduce/reduce) in state 23.
+** Token involved: RPAREN
+** This state is reached from prog after reading:
+
+LPAREN ID 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+prog 
+expr EOF 
+(?)
+
+** In state 23, looking ahead at RPAREN, reducing production
+** expr -> ID 
+** is permitted because of the following sub-derivation:
+
+LPAREN expr RPAREN // lookahead token appears
+       ID . 
+
+** In state 23, looking ahead at RPAREN, reducing production
+** loption(separated_nonempty_list(IN,expr)) -> 
+** is permitted because of the following sub-derivation:
+
+LPAREN ID arg_list RPAREN // lookahead token appears
+          loption(separated_nonempty_list(IN,expr)) // lookahead token is inherited
+          . 
+
+** Conflict (shift/reduce) in state 11.
+** Tokens involved: TIMES SUBTRACT PLUS DIVIDE
+** The following explanations concentrate on token TIMES.
+** This state is reached from prog after reading:
+
+ID list(ID) EQUALS expr 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+prog 
+expr EOF 
+(?)
+
+** In state 11, looking ahead at TIMES, shifting is permitted
+** because of the following sub-derivation:
+
+ID list(ID) EQUALS expr 
+                   expr . TIMES expr 
+
+** In state 11, looking ahead at TIMES, reducing production
+** expr -> ID list(ID) EQUALS expr 
+** is permitted because of the following sub-derivation:
+
+expr TIMES expr // lookahead token appears
+ID list(ID) EQUALS expr . 
