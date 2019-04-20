@@ -1,0 +1,11 @@
+(** @canonical Wreckparse.Ast *)
+module Ast = Wreckparse__Ast
+
+(** @canonical Wreckparse.Lexer *)
+module Lexer = Wreckparse__Lexer
+
+(** @canonical Wreckparse.Parselib *)
+module Parselib = Wreckparse__Parselib
+
+(** @canonical Wreckparse.Parser *)
+module Parser = Wreckparse__Parser
