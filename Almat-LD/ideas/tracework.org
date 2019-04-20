@@ -1,0 +1,13 @@
+* sprache
+** trace work progess
+** wie haben sich ideen verändert
+** pointers zu code und beispiele, entscheidungen
+** 
+
+* bestimmung rekusrion, instruktion
+** beer, artikel dyn sys
+** ashby, mögliche zustände
+** histeregraphie begriff des prozesses
+** maturana/varela, autonomy
+** operational closure
+** mechanisch/organische, higher-level recursion/lower-level instructions (?)
