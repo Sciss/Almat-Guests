@@ -128,12 +128,12 @@ SinOsc.ar(MouseX.kr(0,2000).poll)
 )
 
 
-
+{ Out.ar(1, Impulse.ar(20) * 0.1) }.play
 
 
 (
 SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
-	fmin3=50, fmax3=5000, fOffset1 = 1, fOffset2 = 1, fOffset3 = 1, fbbus, index, coupling, inFac, divFreqs=1;
+	fmin3=50, fmax3=5000, pulseWidth = 0.5, pulseFac = 0.5, pulseAmount=0.5,fbbus, index, coupling, inFac, divFreqs=1;
 	
 	var fms;
 	var n = 6;
@@ -146,28 +146,35 @@ SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
 			fmax1.lag2(0.2), fmax2.lag2(0.2), fmax3.lag2(0.2)]);
 	//	+ soundin;
 	var filters = n.collect({arg i;
-		var out = inputs[i];
+		var out = HPF.ar(inputs[i],6);
 		i.do({arg k;
-			out = BPeakEQ.ar(out,fb[k].abs.clip(6,16000).lag2(0.1),0.1,-60);
+			out = BPeakEQ.ar(out,fb[k].abs.clip(6,16000).lag2(0.4),0.1,-60);
 		});
 		out;
 	});
 	var hopfs = Hopf.ar(filters, K2A.ar(0.01*coupling.lag2(2)), K2A.ar(0.0001));
-	var freqs = hopfs.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ) });
-	inputs.size.postln;
+	var freqs = hopfs.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ) }).abs;
+	var freqsLow = WrapOct.kr(A2K.kr(freqs), 4, 10).lag3(0.2) * pulseFac.lag3(0.5);
+	
+	LocalOut.ar(freqs);
 	fms = n.collect({arg i;
-		BPeakEQ.ar(PMOsc.ar(freqs[i]/divFreqs, freqs[(i+1)%n]/divFreqs,
-			(freqs[(i+3)%n]/30)*index.lag2(1)),
-			freqs[(i+2)%n].abs.clip(30,12000).lag2(0.2), 0.4, 16)
-		* SinOsc.ar(freqs[(i+4)%n].lag2(4)/5000,0,0.4,0.6);
+		PMOsc.ar(freqs[i]/divFreqs, freqs[(i+1)%n]/divFreqs,
+			(freqs[(i+3)%n].lag2(1)/100)*index.lag2(1))
+		* SelectX.ar(pulseAmount.lag3(0.3),[K2A.ar(1),LFPulse.ar( (freqsLow[(i+4)%n]),0,
+			(pulseWidth.lag3(0.4) * RMS.ar([(i+5)%n],4).clip(0.3,2)).clip(0.001,0.999) 
+		).lag3(0.02) ])
 		
 	});
+
+	fms = (BBandPass.ar(fms, freqs.reverse.lag3(0.1).clip(40,12000), 0.05) * 1.25)
+	+ fms;
+	
 	fms = LPF.ar(fms,16000);
 	OffsetOut.ar(fbbus,fms);
-	OffsetOut.ar(fbbus,WhiteNoise.ar(0.1));
+	//	OffsetOut.ar(fbbus,WhiteNoise.ar(0.1));
 	//	freqs.poll;
 	fms = Limiter.ar(fms*0.5, 0.7);
-	Out.ar(0, fms  * 0.5 * amp.lag3(1));
+	Out.ar(0, fms  * 0.02 * amp.lag3(1));
 	//	Out.ar(0, Splay.ar(fms)  * 0.05 * amp.lag2(0.4));
 	
 }).send(s);
@@ -180,8 +187,8 @@ s.meter
 ~synth = Synth(\hopffm, [\amp, ~ampCtrl.asMap,
 \fmin1,~freq1Ctrl.asMap, \fmax1, ~freq2Ctrl.asMap, \fmin2,
 ~freq3Ctrl.asMap, \fmax2, ~freq4Ctrl.asMap, \fmin3, ~freq5Ctrl.asMap,
-	\fmax3, ~freq6Ctrl.asMap, \fOffset1,~fOffset1Ctrl.asMap,
-\fOffset2,~fOffset2Ctrl.asMap, \fOffset3,~fOffset3Ctrl.asMap,
+	\fmax3, ~freq6Ctrl.asMap, \pulseWidth,~pulseWidthCtrl.asMap,
+\pulseFac,~pulseFacCtrl.asMap, \pulseAmount,~pulseAmountCtrl.asMap, 
 	\fbbus,
 	~fbbus.index, \index, ~indexCtrl.asMap, \coupling, ~couplingCtrl.asMap,
 	\inFac, ~inFacCtrl.asMap, \divFreqs, ~divFreqsCtrl.asMap])
@@ -199,12 +206,14 @@ MIDIIn.connectAll;
 
 
 ControlSpec.specs[\amp] = ControlSpec(0.0, 1, 1, 0.00001, 0);
-ControlSpec.specs[\freq] = ControlSpec(6, 15000, 2, 0.001, 1);
+ControlSpec.specs[\freq] = ControlSpec(6, 15000, 3, 0.001, 1);
 ControlSpec.specs[\index] = ControlSpec(0.00001, 50, 5, 0.00001, 2);
 ControlSpec.specs[\coupling] = ControlSpec(0.00005, 10, 6, 0.0000001, 0.1);
 ControlSpec.specs[\inFac] = ControlSpec(0.0, 1, 0.001, 0.00001, 0.1);
 ControlSpec.specs[\divFreqs] = ControlSpec(1, 20, 2, 1, 1);
-ControlSpec.specs[\fOffset] = ControlSpec(1/1.5, 1.5, 1, 0.001, 1);
+ControlSpec.specs[\pulseWidth] = ControlSpec(0.001, 0.999, 1, 0.0001, 0.5);
+ControlSpec.specs[\pulseFac] = ControlSpec(0.01, 20, 5, 0.0001, 0.5);
+ControlSpec.specs[\pulseAmount] = ControlSpec(0.0, 1, 1, 0.0001, 0.5);
 
 ~ampCtrl = Bus.control(s, 1).set(0.0);
 ~freq1Ctrl = Bus.control(s, 1).set(100.0);
@@ -213,9 +222,9 @@ ControlSpec.specs[\fOffset] = ControlSpec(1/1.5, 1.5, 1, 0.001, 1);
 ~freq4Ctrl = Bus.control(s, 1).set(1000.0);
 ~freq5Ctrl = Bus.control(s, 1).set(100.0);
 ~freq6Ctrl = Bus.control(s, 1).set(1000.0);
-~fOffset1Ctrl = Bus.control(s, 1).set(1);
-~fOffset2Ctrl = Bus.control(s, 1).set(1);
-~fOffset3Ctrl = Bus.control(s, 1).set(1);
+~pulseWidthCtrl = Bus.control(s, 1).set(0.5);
+~pulseFacCtrl = Bus.control(s, 1).set(0.5);
+~pulseAmountCtrl = Bus.control(s, 1).set(1);
 ~couplingCtrl = Bus.control(s, 1).set(0.05);
 ~indexCtrl = Bus.control(s, 1).set(1);
 ~inFacCtrl = Bus.control(s, 1).set(0);
@@ -230,13 +239,17 @@ MIDIdef.cc(\inFac, { arg v;
 // 43 input2
 
 MIDIdef.cc(\divFreqs, { arg v;
-	~divFreqsCtrl.set(ControlSpec.specs[\divFreqs].map(v/127).postln)}, 44);
+	~divFreqsCtrl.set(ControlSpec.specs[\divFreqs].map(v/127).postln)}, 43);
 
-MIDIdef.cc(\fOffset1, { arg v;
-	~fOffset1Ctrl.set(ControlSpec.specs[\fOffset].map(v/127).postln)}, 45);
+MIDIdef.cc(\pulseAmount, { arg v;
+	~pulseAmountCtrl.set(ControlSpec.specs[\pulseAmount].map(v/127).postln)}, 44);
 
-MIDIdef.cc(\fOffset2, { arg v;
-	~fOffset2Ctrl.set(ControlSpec.specs[\fOffset].map(v/127).postln)}, 46);
+
+MIDIdef.cc(\pulseFac, { arg v;
+	~pulseFacCtrl.set(ControlSpec.specs[\pulseFac].map(v/127).postln)}, 45);
+
+MIDIdef.cc(\pulseWidth, { arg v;
+	~pulseWidthCtrl.set(ControlSpec.specs[\pulseWidth].map(v/127).postln)}, 46);
 
 MIDIdef.cc(\fOffset3, { arg v;
 	~fOffset3Ctrl.set(ControlSpec.specs[\fOffset].map(v/127).postln)}, 47);
@@ -273,3 +286,7 @@ x = { Out.ar(0, PinkNoise.ar(0.1)!6) }.play
 x.free
 
 s.meter
+
+{ LFPulse.ar(100) }.plot
+
+
