@@ -51,41 +51,41 @@ let is_process name =
   | None ->
       false
 
-let string_of_typekind = function
-  | Llvm.TypeKind.Void ->
-      "Void"
-  | Llvm.TypeKind.Half ->
-      "Half"
-  | Llvm.TypeKind.Float ->
-      "Float"
-  | Llvm.TypeKind.Double ->
-      "Double"
-  | Llvm.TypeKind.X86fp80 ->
-      "X86fp80"
-  | Llvm.TypeKind.Fp128 ->
-      "Fp128"
-  | Llvm.TypeKind.Ppc_fp128 ->
-      "fp128"
-  | Llvm.TypeKind.Label ->
-      "Label"
-  | Llvm.TypeKind.Integer ->
-      "Integer"
-  | Llvm.TypeKind.Function ->
-      "Function"
-  | Llvm.TypeKind.Struct ->
-      "Struct"
-  | Llvm.TypeKind.Array ->
-      "Array"
-  | Llvm.TypeKind.Pointer ->
-      "Pointer"
-  | Llvm.TypeKind.Vector ->
-      "Vector"
-  | Llvm.TypeKind.Metadata ->
-      "Metadata"
-  | Llvm.TypeKind.X86_mmx ->
-      "mmx"
-  | Llvm.TypeKind.Token ->
-      "Token"
+(* let string_of_typekind = function
+ *   | Llvm.TypeKind.Void ->
+ *       "Void"
+ *   | Llvm.TypeKind.Half ->
+ *       "Half"
+ *   | Llvm.TypeKind.Float ->
+ *       "Float"
+ *   | Llvm.TypeKind.Double ->
+ *       "Double"
+ *   | Llvm.TypeKind.X86fp80 ->
+ *       "X86fp80"
+ *   | Llvm.TypeKind.Fp128 ->
+ *       "Fp128"
+ *   | Llvm.TypeKind.Ppc_fp128 ->
+ *       "fp128"
+ *   | Llvm.TypeKind.Label ->
+ *       "Label"
+ *   | Llvm.TypeKind.Integer ->
+ *       "Integer"
+ *   | Llvm.TypeKind.Function ->
+ *       "Function"
+ *   | Llvm.TypeKind.Struct ->
+ *       "Struct"
+ *   | Llvm.TypeKind.Array ->
+ *       "Array"
+ *   | Llvm.TypeKind.Pointer ->
+ *       "Pointer"
+ *   | Llvm.TypeKind.Vector ->
+ *       "Vector"
+ *   | Llvm.TypeKind.Metadata ->
+ *       "Metadata"
+ *   | Llvm.TypeKind.X86_mmx ->
+ *       "mmx"
+ *   | Llvm.TypeKind.Token ->
+ *       "Token" *)
 
 (* Create an alloca instruction in the entry block of the function. This
  * is used for mutable variables etc. *)
@@ -239,10 +239,6 @@ let rec codegen_expr fpm exp llvm_mod =
                 build_load field_i ("__tmp" ^ string_of_int i) builder
               in
               let alloca = create_entry_block_alloca func var_name in
-              let _ =
-                print_endline
-                  (string_of_typekind (classify_type struct_types.(3 + i)))
-              in
               ( match classify_type struct_types.(3 + i) with
               (* if loaded value is another process func, call it *)
               | Pointer ->

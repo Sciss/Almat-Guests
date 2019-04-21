@@ -51,9 +51,21 @@ jack_client_t *client;
 
 double (*callback_fun)(void);
 
+double init_callback(void) {
+    return 0.0;
+}
+
+
+
 CAMLprim value set_callback(value cb){
   CAMLparam1(cb);
   callback_fun = (double (*)(void)) Nativeint_val(cb);
+  CAMLreturn(Val_unit);
+}
+
+CAMLprim value set_init_callback(value cb){
+  CAMLparam1(cb);
+  callback_fun = &init_callback;
   CAMLreturn(Val_unit);
 }
 
@@ -72,7 +84,7 @@ int process (jack_nframes_t nframes, void *arg)
 
 	  //	  sample = Double_field(res,i);
 	  //	  sample = random_float(-1.0, 1.0);
-	  sample = (*callback_fun)();
+	  sample = (*callback_fun)() ;
 	  out1[i] = sample;  /* left */
 	  out2[i] = sample;  /* right */
 	}
@@ -81,9 +93,6 @@ int process (jack_nframes_t nframes, void *arg)
 }
 
 
-double init_callback(void) {
-    return 0.0;
-}
 
 
 /**

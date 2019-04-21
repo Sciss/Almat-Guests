@@ -3,7 +3,7 @@ open Llvm_scalar_opts
 open Wreckparse
 open Jack
 
-(* let _ = Thread.create Jack_callback.open_stream () *)
+let _ = Thread.create Jack_callback.open_stream ()
 
 external get_raw_fptr :
   string -> Llvm_executionengine.llexecutionengine -> nativeint
@@ -17,6 +17,15 @@ let parse (s : string) : Ast.expr =
   let lexbuf = Lexing.from_string s in
   let ast = Parser.prog Lexer.read lexbuf in
   ast
+
+let rec check_for_stop () =
+  match input_char stdin with
+  | '\027' ->
+      print_endline "Stopping playback" ;
+      Jack_callback.set_init_callback () ;
+      ()
+  | _ ->
+      check_for_stop ()
 
 let rec readtop cur_string =
   match input_char stdin with
@@ -71,7 +80,8 @@ let set_jack_func ee fpm llvm_mod cb_func =
   Llvm_analysis.assert_valid_function func ;
   let _ = PassManager.run_function func fpm in
   let fptr = get_raw_fptr tmp_name ee in
-  Jack_callback.set_callback fptr
+  Jack_callback.set_callback fptr ;
+  func
 
 (* delete_function func ;
    * let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in *)
@@ -99,8 +109,11 @@ let rec main_loop execution_engine fpm llvm_mod =
     | Ast.Play _ ->
         let play_func = Codegen.codegen_expr fpm expr llvm_mod in
         dump_value play_func ;
-        set_jack_func execution_engine fpm llvm_mod play_func ;
+        let set_func = set_jack_func execution_engine fpm llvm_mod play_func in
         print_newline () ;
+        check_for_stop () ;
+        delete_function set_func ;
+        let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in
         print_string "wreck> " ;
         flush stdout ;
         main_loop execution_engine fpm llvm_mod
@@ -151,7 +164,7 @@ let rec main_loop execution_engine fpm llvm_mod =
 
 let main () =
   (* ignore (initialize_native_target ()) ; *)
-  print_string "ready> " ;
+  print_string "wreck> " ;
   flush stdout ;
   (* Create the JIT. *)
   let _ = Llvm_executionengine.initialize () in
