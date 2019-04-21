@@ -7,7 +7,8 @@ type expr =
   | If of expr * expr * expr
   | Play of expr
   (* | GlobalLet of string * expr *)
-  | App of expr * expr
+  (* | App of expr * expr *)
+  | App of expr * expr list
   | Binop of binop * expr * expr
   | FunDef of string * string list * expr
   | ProcDef of string * string list * expr * expr list

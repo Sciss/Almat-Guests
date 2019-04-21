@@ -30,7 +30,7 @@ rule read =
   | "!=" { UNEQ }
   | "play" { PLAY }
   | "proc" { PROC }
-  | "fun" { FUN }
+  | "fn" { FUN }
   | "," { COMMA }
   | "let" { LET }
   | "in" { IN }

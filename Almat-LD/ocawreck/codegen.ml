@@ -25,6 +25,8 @@ let double_type = double_type context
 
 let int_type = i32_type context
 
+let int64_type = i64_type context
+
 let _ =
   Hashtbl.add intrinsics "sin"
     (declare_function "llvm.sin.f64"
@@ -42,6 +44,49 @@ let lookup_function_or_intrinsic func_name llvm_mod =
   | None ->
       Hashtbl.find_opt intrinsics func_name
 
+let is_process name =
+  match Hashtbl.find_opt process_defs name with
+  | Some _ ->
+      true
+  | None ->
+      false
+
+let string_of_typekind = function
+  | Llvm.TypeKind.Void ->
+      "Void"
+  | Llvm.TypeKind.Half ->
+      "Half"
+  | Llvm.TypeKind.Float ->
+      "Float"
+  | Llvm.TypeKind.Double ->
+      "Double"
+  | Llvm.TypeKind.X86fp80 ->
+      "X86fp80"
+  | Llvm.TypeKind.Fp128 ->
+      "Fp128"
+  | Llvm.TypeKind.Ppc_fp128 ->
+      "fp128"
+  | Llvm.TypeKind.Label ->
+      "Label"
+  | Llvm.TypeKind.Integer ->
+      "Integer"
+  | Llvm.TypeKind.Function ->
+      "Function"
+  | Llvm.TypeKind.Struct ->
+      "Struct"
+  | Llvm.TypeKind.Array ->
+      "Array"
+  | Llvm.TypeKind.Pointer ->
+      "Pointer"
+  | Llvm.TypeKind.Vector ->
+      "Vector"
+  | Llvm.TypeKind.Metadata ->
+      "Metadata"
+  | Llvm.TypeKind.X86_mmx ->
+      "mmx"
+  | Llvm.TypeKind.Token ->
+      "Token"
+
 (* Create an alloca instruction in the entry block of the function. This
  * is used for mutable variables etc. *)
 let create_entry_block_alloca func var_name =
@@ -51,15 +96,25 @@ let create_entry_block_alloca func var_name =
 (* let struct_elts = [|const_float f64 1.0; const_float f64 2.0|] in
  * let _ = define_global "tmpStruct1" (const_struct llctx struct_elts) llm in *)
 
-let rec construct_func_arg_lst = function
-  | Ast.App (func, arg) -> (
-    match func with
-    | Ast.App _ ->
-        List.append (construct_func_arg_lst func) (construct_func_arg_lst arg)
-    | expr ->
-        expr :: construct_func_arg_lst arg )
-  | exp ->
-      [exp]
+(* let rec construct_func_arg_lst = function
+ *   | Ast.App (func, arg) -> (
+ *     match func with
+ *     | Ast.App _ ->
+ *         List.append (construct_func_arg_lst func) (construct_func_arg_lst arg)
+ *     | expr ->
+ *         expr :: construct_func_arg_lst arg )
+ *   | exp ->
+ *       [exp] *)
+
+(* let rec construct_func_arg_lst = function
+ *   | Ast.App (func, arg) -> (
+ *     match func with
+ *     | Ast.App _ ->
+ *         func :: construct_func_arg_lst arg
+ *     | expr ->
+ *         expr :: construct_func_arg_lst arg )
+ *   | exp ->
+ *       [exp] *)
 
 let var_name = function
   | Ast.Var s ->
@@ -115,7 +170,7 @@ let create_argument_allocas func args =
    function (pointer) store in struct
 
 0   is output
-1   is evaluation state
+1   is evaluation state n
 2   field  is n variables
 3-- fields are variables
 
@@ -135,6 +190,12 @@ return pointer to function
  *   let _ = PassManager.run_function func fpm in
  *   name *)
 
+(* check if evaluated arg if it is function pointer
+ * put values/pointers into struct
+ * need function to check type of value
+ * call funcs with sample_counter (int)
+ *)
+
 let rec codegen_expr fpm exp llvm_mod =
   let make_process fpm (name, args) proc_def =
     let _, arg_names, body, updates = proc_def in
@@ -146,23 +207,26 @@ let rec codegen_expr fpm exp llvm_mod =
       Array.map (fun exp -> codegen_expr fpm exp llvm_mod) (Array.of_list args)
     in
     let output = const_float double_type 0.0 in
-    let eval_state = const_int int_type 0 in
+    let eval_state = const_int int64_type (-1) in
     let n = const_int int_type (Array.length args_exp) in
     let struct_elts = Array.append [|output; eval_state; n|] args_exp in
     let proc_struct = const_struct context struct_elts in
     let _ = define_global struct_name proc_struct llvm_mod in
     let func =
       declare_function func_name
-        (function_type double_type [|double_type|])
+        (function_type double_type [|int64_type|])
         llvm_mod
     in
     (* let func = codegen_proto func_name [||] in *)
     (* Create a new basic block to start insertion into. *)
     let bb = append_block context "entry" func in
     position_at_end bb builder ;
+    let cur_n = param func 0 in
     match lookup_global struct_name llvm_mod with
     | Some v ->
         let old_bindings = ref [] in
+        let function_bindings = ref [] in
+        let struct_types = Array.map type_of struct_elts in
         let _ =
           Array.iteri
             (fun i var_name ->
@@ -175,7 +239,25 @@ let rec codegen_expr fpm exp llvm_mod =
                 build_load field_i ("__tmp" ^ string_of_int i) builder
               in
               let alloca = create_entry_block_alloca func var_name in
-              ignore (build_store field_loaded alloca builder) ;
+              let _ =
+                print_endline
+                  (string_of_typekind (classify_type struct_types.(3 + i)))
+              in
+              ( match classify_type struct_types.(3 + i) with
+              (* if loaded value is another process func, call it *)
+              | Pointer ->
+                  let result =
+                    build_call field_loaded [|cur_n|]
+                      ("__call_result" ^ string_of_int i)
+                      builder
+                  in
+                  print_endline "function value!" ;
+                  (* remember fptr *)
+                  function_bindings :=
+                    (var_name, field_i) :: !function_bindings ;
+                  ignore (build_store result alloca builder)
+              | _ ->
+                  ignore (build_store field_loaded alloca builder) ) ;
               ( try
                   let old_value = Hashtbl.find named_values var_name in
                   old_bindings := (var_name, old_value) :: !old_bindings
@@ -185,9 +267,22 @@ let rec codegen_expr fpm exp llvm_mod =
             (Array.of_list arg_names)
         in
         (* Hashtbl.iter
-         *   (fun k v -> print_endline (k ^ " " ^ string_of_llvalue v))
-         *   named_values ; *)
+        *   (fun k v -> print_endline (k ^ " " ^ string_of_llvalue v))
+        *   named_values ; *)
         let ret_val = codegen_expr fpm body llvm_mod in
+        (* bind var again to fptr *)
+        List.iter
+          (fun (var_name, fun_ptr) -> Hashtbl.add named_values var_name fun_ptr)
+          !function_bindings ;
+        (* store current value in first struct field *)
+        let output_value_field =
+          build_struct_gep v 0 "__tmp_output_field" builder
+        in
+        ignore (build_store ret_val output_value_field builder) ;
+        (* store current eval n in second struct field *)
+        let eval_n_field = build_struct_gep v 1 "__tmp_eval_n_field" builder in
+        ignore (build_store cur_n eval_n_field builder) ;
+        (* TODO deal with process fun here on update *)
         let _ =
           List.iteri
             (fun i update ->
@@ -207,9 +302,9 @@ let rec codegen_expr fpm exp llvm_mod =
           !old_bindings ;
         let _ = build_ret ret_val builder in
         (* Validate the generated code, checking for consistency. *)
+        print_endline (string_of_llvalue func) ;
         Llvm_analysis.assert_valid_function func ;
         (* Optimize the function. *)
-        print_endline (string_of_llvalue func) ;
         let _ = PassManager.run_function func fpm in
         func
     | None ->
@@ -278,38 +373,42 @@ let rec codegen_expr fpm exp llvm_mod =
         !old_bindings ;
       (* Return the body computation. *)
       body_val
-  | Ast.Play app -> (
-      let fun_and_args = construct_func_arg_lst app in
-      let func = var_name (List.hd fun_and_args) in
-      let argslst = List.tl fun_and_args in
-      match Hashtbl.find_opt process_defs func with
-      | Some proc_def ->
-          make_process fpm (func, argslst) proc_def
-      | None ->
-          raise (Error "unknown process referenced") )
-  | Ast.App _ as app ->
-      let fun_and_args = construct_func_arg_lst app in
-      let func = var_name (List.hd fun_and_args) in
-      let args = Array.of_list (List.tl fun_and_args) in
+  | Ast.Play (Ast.App (func, argslst)) -> (
+    (* let fun_and_args = construct_func_arg_lst app in
+       * let func = var_name (List.hd fun_and_args) in
+       * let argslst = List.tl fun_and_args in *)
+    match Hashtbl.find_opt process_defs (var_name func) with
+    | Some proc_def ->
+        make_process fpm (var_name func, argslst) proc_def
+    | None ->
+        raise (Error "unknown process referenced") )
+  | Ast.App (func, args) as app ->
+      (* let fun_and_args = construct_func_arg_lst app in
+       * let func = var_name (List.hd fun_and_args) in *)
+      (* let args = Array.of_list (List.tl fun_and_args) in *)
       (* Look up the name in the module table. *)
-      let callee =
-        match lookup_function_or_intrinsic func llvm_mod with
-        | Some func ->
-            func
-        | None ->
-            raise (Error "unknown function referenced")
-      in
-      let params = params callee in
-      (* If argument mismatch error. *)
-      if Array.length params == Array.length args then ()
+      let args = Array.of_list args in
+      if is_process (var_name func) then
+        codegen_expr fpm (Ast.Play app) llvm_mod
       else
-        raise
-          (Error
-             (Printf.sprintf
-                "incorrect # arguments passed. Got %d, expected %d."
-                (Array.length args) (Array.length params))) ;
-      let args = Array.map (fun exp -> codegen_expr fpm exp llvm_mod) args in
-      build_call callee args "calltmp" builder
+        let callee =
+          match lookup_function_or_intrinsic (var_name func) llvm_mod with
+          | Some func ->
+              func
+          | None ->
+              raise (Error "unknown function referenced")
+        in
+        let params = params callee in
+        (* If argument mismatch error. *)
+        if Array.length params == Array.length args then ()
+        else
+          raise
+            (Error
+               (Printf.sprintf
+                  "incorrect # arguments passed. Got %d, expected %d."
+                  (Array.length args) (Array.length params))) ;
+        let args = Array.map (fun exp -> codegen_expr fpm exp llvm_mod) args in
+        build_call callee args "calltmp" builder
   | Ast.If (cond, then_, else_) ->
       let cond = codegen_expr fpm cond llvm_mod in
       (* Convert condition to a bool by comparing equal to 0.0 *)
@@ -372,6 +471,8 @@ let rec codegen_expr fpm exp llvm_mod =
       Hashtbl.add process_defs name (name, args, body, cont) ;
       (* dummy *)
       const_null double_type
+  | _ ->
+      raise (Error "cannot parse")
 
 (* let _ =
  *   let llctx = global_context () in

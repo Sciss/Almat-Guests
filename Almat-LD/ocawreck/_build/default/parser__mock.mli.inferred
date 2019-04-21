@@ -31,8 +31,10 @@ val menhir_begin_marker : int
 val xv_toplevel_expr : Ast.expr
 val xv_simple_expr : Ast.expr
 val xv_separated_nonempty_list_COMMA_simple_expr_ : Ast.expr list
+val xv_separated_nonempty_list_COMMA_ID_ : string list
 val xv_separated_list_COMMA_simple_expr_ : Ast.expr list
+val xv_separated_list_COMMA_ID_ : string list
 val xv_prog : Ast.expr
 val xv_loption_separated_nonempty_list_COMMA_simple_expr__ : Ast.expr list
-val xv_list_ID_ : string list
+val xv_loption_separated_nonempty_list_COMMA_ID__ : string list
 val menhir_end_marker : int

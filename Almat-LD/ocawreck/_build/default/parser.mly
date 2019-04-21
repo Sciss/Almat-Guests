@@ -68,9 +68,14 @@ prog:
 
 toplevel_expr:
         | e1 = simple_expr { e1 }
-        | FUN; func = ID; fargs = list(ID); EQUALS; body = simple_expr { FunDef (func, fargs, body) }
-        | PROC; func = ID; fargs = list(ID); EQUALS; body = simple_expr; LBRACE; updates = separated_list(COMMA, simple_expr) RBRACE { ProcDef (func, fargs, body, updates) }
-        | PLAY; e = simple_expr { Play e }
+        (* | FUN; func = ID; fargs = list(ID); EQUALS; body = simple_expr { FunDef (func, fargs, body) } *)
+        | FUN; func = ID; LPAREN; fargs = separated_list(COMMA, ID); RPAREN; EQUALS; body = simple_expr { FunDef (func, fargs, body) }
+        (* | PROC; func = ID; fargs = list(ID); EQUALS; body = simple_expr; LBRACE; updates = separated_list(COMMA, simple_expr) RBRACE { ProcDef (func, fargs, body, updates) } *)
+        (* | PROC; func = ID; LPAREN; fargs = separated_list(COMMA, ID); RPAREN; EQUALS; body = simple_expr; LBRACE; updates = separated_list(COMMA, simple_expr) RBRACE { ProcDef (func, fargs, body, updates) } *)
+
+        | PROC; func = ID; LPAREN; fargs = separated_list(COMMA, ID); RPAREN; EQUALS; body = simple_expr; COMMA; LPAREN; updates = separated_list(COMMA, simple_expr) RPAREN { ProcDef (func, fargs, body, updates) }
+
+        | PLAY; LPAREN; e = simple_expr; RPAREN { Play e }
         ;
           
 simple_expr:
@@ -88,7 +93,8 @@ simple_expr:
         | e1 = simple_expr; UNEQ; e2 = simple_expr { Binop (Uneq, e1, e2) }
         | IF; cond = simple_expr; THEN; then_ = simple_expr; ELSE; else_ = simple_expr { If (cond, then_, else_) }
 	| LET; x = ID; EQUALS; e1 = simple_expr; IN; e2 = simple_expr { Let (x, e1, e2) }
-        | func = simple_expr; arg = simple_expr  %prec APP { App (func, arg) }
+        (* | func = simple_expr; arg = simple_expr  %prec APP { App (func, arg) } *)
+        | func = simple_expr; LPAREN; args = separated_list(COMMA, simple_expr); RPAREN  %prec APP { App (func, args) }
         (* | func = ID; args = nonempty_list(simple_expr)  %prec APP { App (func, args) } *)
           
 	| LPAREN; e=simple_expr; RPAREN { e } 

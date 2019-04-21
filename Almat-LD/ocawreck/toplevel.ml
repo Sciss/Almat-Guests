@@ -60,9 +60,10 @@ let set_jack_func ee fpm llvm_mod cb_func =
   in
   let bb = append_block Codegen.context "entry" func in
   position_at_end bb Codegen.builder ;
+  (* deal with sample_counter *)
   let ret_val =
     build_call cb_func
-      [|const_float Codegen.double_type 0.0|]
+      [|const_int Codegen.int64_type 0|]
       "calltmp" Codegen.builder
   in
   let _ = build_ret ret_val Codegen.builder in
@@ -78,69 +79,75 @@ let set_jack_func ee fpm llvm_mod cb_func =
 (* top ::= definition | external | expression | ';' *)
 let rec main_loop execution_engine fpm llvm_mod =
   (* let llvm_mod, fpm = make_module_and_fpm () in *)
-  let expr = parse (readtop "") in
-  match expr with
-  | Ast.FunDef _ ->
-      print_endline "parsed a function definition." ;
-      dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
-      print_newline () ;
-      print_string "wreck> " ;
-      flush stdout ;
-      main_loop execution_engine fpm llvm_mod
-  | Ast.ProcDef _ ->
-      print_endline "parsed a process definition." ;
-      dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
-      print_newline () ;
-      print_string "wreck> " ;
-      flush stdout ;
-      main_loop execution_engine fpm llvm_mod
-  | Ast.Play _ ->
-      let play_func = Codegen.codegen_expr fpm expr llvm_mod in
-      dump_value play_func ;
-      set_jack_func execution_engine fpm llvm_mod play_func ;
-      print_newline () ;
-      print_string "wreck> " ;
-      flush stdout ;
-      main_loop execution_engine fpm llvm_mod
-  | _ ->
-      (* Evaluate a top-level expression into an anonymous function. *)
-      print_endline "parsed a top-level expr" ;
-      (* dump_module Codegen.llvm_module ; *)
-      let _ = Llvm_executionengine.add_module llvm_mod execution_engine in
-      anonymous_func_count := !anonymous_func_count + 1 ;
-      let tmp_name = Printf.sprintf "__toplevel%d" !anonymous_func_count in
-      let func =
-        declare_function tmp_name
-          (function_type Codegen.double_type [||])
-          llvm_mod
-      in
-      (* let func = Codegen.codegen_proto "wreck_main" [||] in *)
-      (* Create a new basic block to start insertion into. *)
-      let bb = append_block Codegen.context "entry" func in
-      position_at_end bb Codegen.builder ;
-      let ret_val = Codegen.codegen_expr fpm expr llvm_mod in
-      let _ = build_ret ret_val Codegen.builder in
-      (* dump_value func ; *)
-      dump_module llvm_mod ;
-      (* Validate the generated code, checking for consistency. *)
-      Llvm_analysis.assert_valid_function func ;
-      (* Optimize the function. *)
-      let _ = PassManager.run_function func fpm in
-      (* JIT the function, returning a function pointer. *)
-      let fp =
-        Llvm_executionengine.get_function_address tmp_name
-          (Foreign.funptr Ctypes.(void @-> returning double))
-          execution_engine
-      in
-      let result = fp () in
-      delete_function func ;
-      let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in
-      print_string "Evaluated to " ;
-      print_float result ;
-      print_newline () ;
-      print_string "wreck> " ;
-      flush stdout ;
-      main_loop execution_engine fpm llvm_mod
+  try
+    let expr = parse (readtop "") in
+    match expr with
+    | Ast.FunDef _ ->
+        print_endline "parsed a function definition." ;
+        dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
+        print_newline () ;
+        print_string "wreck> " ;
+        flush stdout ;
+        main_loop execution_engine fpm llvm_mod
+    | Ast.ProcDef _ ->
+        print_endline "parsed a process definition." ;
+        dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
+        print_newline () ;
+        print_string "wreck> " ;
+        flush stdout ;
+        main_loop execution_engine fpm llvm_mod
+    | Ast.Play _ ->
+        let play_func = Codegen.codegen_expr fpm expr llvm_mod in
+        dump_value play_func ;
+        set_jack_func execution_engine fpm llvm_mod play_func ;
+        print_newline () ;
+        print_string "wreck> " ;
+        flush stdout ;
+        main_loop execution_engine fpm llvm_mod
+    | _ ->
+        (* Evaluate a top-level expression into an anonymous function. *)
+        print_endline "parsed a top-level expr" ;
+        (* dump_module Codegen.llvm_module ; *)
+        let _ = Llvm_executionengine.add_module llvm_mod execution_engine in
+        anonymous_func_count := !anonymous_func_count + 1 ;
+        let tmp_name = Printf.sprintf "__toplevel%d" !anonymous_func_count in
+        let func =
+          declare_function tmp_name
+            (function_type Codegen.double_type [||])
+            llvm_mod
+        in
+        (* let func = Codegen.codegen_proto "wreck_main" [||] in *)
+        (* Create a new basic block to start insertion into. *)
+        let bb = append_block Codegen.context "entry" func in
+        position_at_end bb Codegen.builder ;
+        let ret_val = Codegen.codegen_expr fpm expr llvm_mod in
+        let _ = build_ret ret_val Codegen.builder in
+        (* dump_value func ; *)
+        dump_module llvm_mod ;
+        (* Validate the generated code, checking for consistency. *)
+        Llvm_analysis.assert_valid_function func ;
+        (* Optimize the function. *)
+        let _ = PassManager.run_function func fpm in
+        (* JIT the function, returning a function pointer. *)
+        let fp =
+          Llvm_executionengine.get_function_address tmp_name
+            (Foreign.funptr Ctypes.(void @-> returning double))
+            execution_engine
+        in
+        let result = fp () in
+        delete_function func ;
+        let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in
+        print_string "Evaluated to " ;
+        print_float result ;
+        print_newline () ;
+        print_string "wreck> " ;
+        flush stdout ;
+        main_loop execution_engine fpm llvm_mod
+  with _ ->
+    ignore (print_endline "parse error") ;
+    print_string "wreck> " ;
+    flush stdout ;
+    main_loop execution_engine fpm llvm_mod
 
 let main () =
   (* ignore (initialize_native_target ()) ; *)
