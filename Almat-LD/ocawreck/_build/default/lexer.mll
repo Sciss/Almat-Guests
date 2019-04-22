@@ -5,6 +5,7 @@ open Parser
 let white = [' ' '\t']+
 let digit = ['0'-'9']
 let frac = '.' digit*
+let comment_line = "//"([^ '\n' ]+)
 let exp = ['e' 'E'] ['-' '+']? digit+
 let float = digit* frac? exp?
 let letter = ['a'-'z' 'A'-'Z']
@@ -13,6 +14,7 @@ let id = ['a'-'z' '_'] ['a'-'z' '_' '0'-'9']*
 rule read = 
   parse
   | white { read lexbuf }
+  | "(*" [^ '\n']* "*)" { read lexbuf } 
   | "=" { EQUALS }
   | "*" { TIMES }
   | "+" { PLUS }

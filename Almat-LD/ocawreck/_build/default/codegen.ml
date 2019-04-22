@@ -11,6 +11,11 @@ let builder = builder context
 
 let named_values : (string, llvalue) Hashtbl.t = Hashtbl.create 10
 
+let print_named_values () =
+  Hashtbl.iter
+    (fun k v -> print_endline ("hashtbl: " ^ k ^ ", " ^ string_of_llvalue v))
+    named_values
+
 let intrinsics : (string, llvalue) Hashtbl.t = Hashtbl.create 10
 
 let process_defs :
@@ -133,13 +138,15 @@ let codegen_proto name args llvm_mod =
     (* If 'f' conflicted, there was already something named 'name'. If it
      * has a body, don't allow redefinition or reextern. *)
     | Some f ->
-        (* If 'f' already has a body, reject this. *)
-        if block_begin f <> At_end f then
-          raise (Error "redefinition of function") ;
-        (* If 'f' took a different number of arguments, reject. *)
-        if element_type (type_of f) <> ft then
-          raise (Error "redefinition of function with different # args") ;
-        f
+        delete_function f ;
+        declare_function name ft llvm_mod
+    (* (\* If 'f' already has a body, reject this. *\)
+         * if block_begin f <> At_end f then
+         *   raise (Error "redefinition of function") ;
+         * (\* If 'f' took a different number of arguments, reject. *\)
+         * if element_type (type_of f) <> ft then
+         *   raise (Error "redefinition of function with different # args") ; *)
+    (* f *)
   in
   (* Set names for all arguments. *)
   Array.iteri
@@ -203,6 +210,8 @@ let rec codegen_expr fpm exp llvm_mod =
     let base_name = Printf.sprintf "__%s%d" name !process_count in
     let func_name = base_name ^ "_func" in
     let struct_name = base_name ^ "_struct" in
+    (* print_endline "codegen args" ;
+     * flush stdout ; *)
     let args_exp =
       Array.map (fun exp -> codegen_expr fpm exp llvm_mod) (Array.of_list args)
     in
@@ -247,7 +256,6 @@ let rec codegen_expr fpm exp llvm_mod =
                       ("__call_result" ^ string_of_int i)
                       builder
                   in
-                  print_endline "function value!" ;
                   (* remember fptr *)
                   function_bindings :=
                     (var_name, field_i) :: !function_bindings ;
@@ -259,12 +267,9 @@ let rec codegen_expr fpm exp llvm_mod =
                   old_bindings := (var_name, old_value) :: !old_bindings
                 with Not_found -> () ) ;
               (* Remember this binding. *)
-              Hashtbl.add named_values var_name alloca )
+              Hashtbl.replace named_values var_name alloca )
             (Array.of_list arg_names)
         in
-        (* Hashtbl.iter
-        *   (fun k v -> print_endline (k ^ " " ^ string_of_llvalue v))
-        *   named_values ; *)
         let ret_val = codegen_expr fpm body llvm_mod in
         (* bind var again to fptr *)
         List.iter
@@ -278,7 +283,6 @@ let rec codegen_expr fpm exp llvm_mod =
         (* store current eval n in second struct field *)
         let eval_n_field = build_struct_gep v 1 "__tmp_eval_n_field" builder in
         ignore (build_store cur_n eval_n_field builder) ;
-        (* TODO deal with process fun here on update *)
         let _ =
           List.iteri
             (fun i update ->
@@ -293,16 +297,23 @@ let rec codegen_expr fpm exp llvm_mod =
         in
         (* Pop all our variables from scope. *)
         List.iter
+          (fun var_name -> Hashtbl.remove named_values var_name)
+          arg_names ;
+        List.iter
           (fun (var_name, old_value) ->
             Hashtbl.add named_values var_name old_value )
           !old_bindings ;
+        List.iter
+          (fun (var_name, _) -> Hashtbl.remove named_values var_name)
+          !function_bindings ;
         let _ = build_ret ret_val builder in
         (* Validate the generated code, checking for consistency. *)
-        print_endline (string_of_llvalue func) ;
+        (* print_endline (string_of_llvalue func) ; *)
         Llvm_analysis.assert_valid_function func ;
         (* Optimize the function. *)
         let _ = PassManager.run_function func fpm in
-        func
+        (* we clear the entire local variables table at the end!! *)
+        Hashtbl.clear named_values ; func
     | None ->
         raise (Error "cannot find process struct")
   in
@@ -363,6 +374,7 @@ let rec codegen_expr fpm exp llvm_mod =
       Hashtbl.add named_values var_name alloca ;
       let body_val = codegen_expr fpm body llvm_mod in
       (* Pop all our variables from scope. *)
+      (* Hashtbl.remove named_values var_name ; *)
       List.iter
         (fun (var_name, old_value) ->
           Hashtbl.add named_values var_name old_value )
@@ -464,7 +476,9 @@ let rec codegen_expr fpm exp llvm_mod =
         func
       with e -> delete_function func ; raise e )
   | Ast.ProcDef (name, args, body, cont) ->
-      Hashtbl.add process_defs name (name, args, body, cont) ;
+      if is_process name then
+        Hashtbl.replace process_defs name (name, args, body, cont)
+      else Hashtbl.add process_defs name (name, args, body, cont) ;
       (* dummy *)
       const_null double_type
   | _ ->

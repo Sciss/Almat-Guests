@@ -30,7 +30,6 @@ let rec check_for_stop () =
 let rec readtop cur_string =
   match input_char stdin with
   | ';' ->
-      print_endline ("got: " ^ cur_string) ;
       cur_string
   | '\n' ->
       readtop cur_string
@@ -76,11 +75,12 @@ let set_jack_func ee fpm llvm_mod cb_func =
       "calltmp" Codegen.builder
   in
   let _ = build_ret ret_val Codegen.builder in
-  dump_module llvm_mod ;
+  (* dump_module llvm_mod ; *)
   Llvm_analysis.assert_valid_function func ;
   let _ = PassManager.run_function func fpm in
   let fptr = get_raw_fptr tmp_name ee in
   Jack_callback.set_callback fptr ;
+  print_endline "Starting playback..." ;
   func
 
 (* delete_function func ;
@@ -92,23 +92,27 @@ let rec main_loop execution_engine fpm llvm_mod =
   try
     let expr = parse (readtop "") in
     match expr with
-    | Ast.FunDef _ ->
-        print_endline "parsed a function definition." ;
-        dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
+    | Ast.FunDef (name, _, _) ->
+        print_newline () ;
+        print_endline (name ^ ": function definition") ;
+        ignore (Codegen.codegen_expr fpm expr llvm_mod) ;
         print_newline () ;
         print_string "wreck> " ;
         flush stdout ;
         main_loop execution_engine fpm llvm_mod
-    | Ast.ProcDef _ ->
-        print_endline "parsed a process definition." ;
-        dump_value (Codegen.codegen_expr fpm expr llvm_mod) ;
+    | Ast.ProcDef (name, _, _, _) ->
+        print_newline () ;
+        print_endline (name ^ ": process definition") ;
+        ignore (Codegen.codegen_expr fpm expr llvm_mod) ;
         print_newline () ;
         print_string "wreck> " ;
         flush stdout ;
         main_loop execution_engine fpm llvm_mod
     | Ast.Play _ ->
+        print_newline () ;
+        flush stdout ;
         let play_func = Codegen.codegen_expr fpm expr llvm_mod in
-        dump_value play_func ;
+        (* dump_value play_func ; *)
         let set_func = set_jack_func execution_engine fpm llvm_mod play_func in
         print_newline () ;
         check_for_stop () ;
@@ -119,7 +123,7 @@ let rec main_loop execution_engine fpm llvm_mod =
         main_loop execution_engine fpm llvm_mod
     | _ ->
         (* Evaluate a top-level expression into an anonymous function. *)
-        print_endline "parsed a top-level expr" ;
+        (* print_endline "parsed a top-level expr" ; *)
         (* dump_module Codegen.llvm_module ; *)
         let _ = Llvm_executionengine.add_module llvm_mod execution_engine in
         anonymous_func_count := !anonymous_func_count + 1 ;
@@ -136,7 +140,7 @@ let rec main_loop execution_engine fpm llvm_mod =
         let ret_val = Codegen.codegen_expr fpm expr llvm_mod in
         let _ = build_ret ret_val Codegen.builder in
         (* dump_value func ; *)
-        dump_module llvm_mod ;
+        (* dump_module llvm_mod ; *)
         (* Validate the generated code, checking for consistency. *)
         Llvm_analysis.assert_valid_function func ;
         (* Optimize the function. *)
@@ -150,7 +154,7 @@ let rec main_loop execution_engine fpm llvm_mod =
         let result = fp () in
         delete_function func ;
         let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in
-        print_string "Evaluated to " ;
+        (* print_string "Evaluated to: " ; *)
         print_float result ;
         print_newline () ;
         print_string "wreck> " ;

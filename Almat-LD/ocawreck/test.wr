@@ -1,0 +1,33 @@
+fn myfun(x) = let y = x * 10 in y + 1.2;
+
+proc mysin3(x) =
+     sin(x) * 0.5, (x + 0.05);
+
+proc mymod(x, y) =
+     sin(x) * y , (x + 0.04, y);
+
+
+play(mymod(0, mysin3(0)));
+
+proc myletsin(x) = let a = sin(x) in a * 0.5, (x + 0.075 + (a*0.04));
+
+
+play(myletsin(0.1));
+
+play(mysin3(0));
+
+(* fis thingy *)
+proc myfis(x, y) =
+     let res = sin(x * (y * 0.8) + 0.001) in
+          res, (res, y);
+
+proc mymod1(x) =
+     sin(x) , (x + 0.0000029);
+
+proc mymod2(x, y) =
+     let res1 = sin(x) + 1.001 in
+     	 res1 + (y + 1.2) , (res1, y);
+
+play(myfis(0, mymod2(0, mymod1(0.2))));
+
+
