@@ -11,6 +11,7 @@ type token =
   | PROC
   | PLUS
   | PLAY
+  | MOD
   | LT
   | LPAREN
   | LET

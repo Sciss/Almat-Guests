@@ -37,9 +37,61 @@ let _ =
     (declare_function "llvm.sin.f64"
        (function_type double_type [|double_type|])
        llvm_init_module) ;
+  Hashtbl.add intrinsics "cos"
+    (declare_function "llvm.cos.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "exp"
+    (declare_function "llvm.exp.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "exp2"
+    (declare_function "llvm.exp2.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "log"
+    (declare_function "llvm.log.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "log10"
+    (declare_function "llvm.log10.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "log2"
+    (declare_function "llvm.log2.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "abs"
+    (declare_function "llvm.fabs.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "sqrt"
+    (declare_function "llvm.sqrt.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
   Hashtbl.add intrinsics "pow"
     (declare_function "llvm.pow.f64"
        (function_type double_type [|double_type; double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "min"
+    (declare_function "llvm.minnum.f64"
+       (function_type double_type [|double_type; double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "max"
+    (declare_function "llvm.maxnum.f64"
+       (function_type double_type [|double_type; double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "floor"
+    (declare_function "llvm.floor.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "ceil"
+    (declare_function "llvm.ceil.f64"
+       (function_type double_type [|double_type|])
+       llvm_init_module) ;
+  Hashtbl.add intrinsics "round"
+    (declare_function "llvm.round.f64"
+       (function_type double_type [|double_type|])
        llvm_init_module)
 
 let lookup_function_or_intrinsic func_name llvm_mod =
@@ -339,6 +391,8 @@ let rec codegen_expr fpm exp llvm_mod =
           build_fmul lhs_val rhs_val "multmp" builder
       | Ast.Div ->
           build_fdiv lhs_val rhs_val "divtmp" builder
+      | Ast.Mod ->
+          build_frem lhs_val rhs_val "remtmp" builder
       | _ as compare ->
           let comp =
             match compare with

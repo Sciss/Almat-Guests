@@ -5,10 +5,16 @@ luc.doebereiner@gmail.com, 2019
 
 ```dune build toplevel.exe```
 
+### Build and test parser only
+
+```dune build wreckparse.cma```
+```dune utop _build/default/ -- -implicit-bindings```
+
 ## TODO
 * processes as combination of processes (without update part)
 * indentation in emacs mode
 * functions as args
+* delays, filters
 * mapping, zipping, apply, parallel etc.
 * inc sample counter for forks in paths
 * audio input

@@ -31,8 +31,8 @@ let rec readtop cur_string =
   match input_char stdin with
   | ';' ->
       cur_string
-  | '\n' ->
-      readtop cur_string
+  (* | '\n' ->
+   *     readtop cur_string *)
   | ch ->
       readtop (cur_string ^ String.make 1 ch)
 
@@ -155,13 +155,15 @@ let rec main_loop execution_engine fpm llvm_mod =
         delete_function func ;
         let _ = Llvm_executionengine.remove_module llvm_mod execution_engine in
         (* print_string "Evaluated to: " ; *)
+        print_newline () ;
         print_float result ;
         print_newline () ;
         print_string "wreck> " ;
         flush stdout ;
         main_loop execution_engine fpm llvm_mod
-  with _ ->
-    ignore (print_endline "parse error") ;
+  with ex ->
+    let msg = Printexc.to_string ex and stack = Printexc.get_backtrace () in
+    Printf.printf "Error: %s%s\n" msg stack ;
     print_string "wreck> " ;
     flush stdout ;
     main_loop execution_engine fpm llvm_mod

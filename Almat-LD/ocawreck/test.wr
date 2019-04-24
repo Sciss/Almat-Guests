@@ -1,4 +1,8 @@
+// testing wreck
 fn myfun(x) = let y = x * 10 in y + 1.2;
+
+
+fn powtest(x) = sin(x) + pow(x,2);
 
 proc mysin3(x) =
      sin(x) * 0.5, (x + 0.05);
@@ -12,22 +16,26 @@ play(mymod(0, mysin3(0)));
 proc myletsin(x) = let a = sin(x) in a * 0.5, (x + 0.075 + (a*0.04));
 
 
+
 play(myletsin(0.1));
 
 play(mysin3(0));
 
-(* fis thingy *)
+// fis thingy 
 proc myfis(x, y) =
-     let res = sin(x * (y * 0.8) + 0.001) in
-          res, (res, y);
+     let res = sin( (x * y + 0.0000001) ) in
+          res, (res+0.002, y);
 
-proc mymod1(x) =
-     sin(x) , (x + 0.0000029);
+proc mymod1(x) = sin(x) * 0.25 , (x + 0.000012);
 
 proc mymod2(x, y) =
-     let res1 = sin(x) + 1.001 in
-     	 res1 + (y + 1.2) , (res1, y);
+     let res1 = sin(x) + ((pow(y,2) + 0.5) * 2) in
+     	 (res1*3)+0.5, ( (res1+0.008) + x, y);
 
-play(myfis(0, mymod2(0, mymod1(0.2))));
+
+play(myfis(0.1,mymod2(0.2,mymod1(0.1))));
+
+
+
 
 

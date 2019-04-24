@@ -143,21 +143,28 @@ With argument `EOB-P', position cursor at end of buffer."
 (defvar wreck-mode-syntax-table nil "Syntax table for `wreck-mode'.")
 
 (setq wreck-mode-syntax-table
-      (let ((synTable (make-syntax-table)))
-        ;; Wolfram Language style comment “(* … *)”
-        (modify-syntax-entry ?\( ". 1" synTable)
-        (modify-syntax-entry ?\) ". 4" synTable)
-        (modify-syntax-entry ?* ". 23" synTable)
+      (let ( (synTable (make-syntax-table)))
+        ;; comment “// ...”
+        (modify-syntax-entry ?\/ ". 12b" synTable)
+        (modify-syntax-entry ?\n "> b" synTable)
         synTable))
 
-(define-derived-mode wreck-mode fundamental-mode "wreck"
+;; (setq wreck-mode-syntax-table
+;;       (let ((synTable (make-syntax-table)))
+;;         ;; Wolfram Language style comment “(* … *)”
+;;         (modify-syntax-entry ?\( ". 1" synTable)
+;;         (modify-syntax-entry ?\) ". 4" synTable)
+;;         (modify-syntax-entry ?* ". 23" synTable)
+;;         synTable))
+
+(define-derived-mode wreck-mode nil "wreck"
   "major mode for editing wreck language code."
   (setq font-lock-defaults '(wreck-font-lock-keywords))
-  (setq-local comment-start "(*")
-  (setq-local comment-start-skip "/\\*+[ \t]*")
-  (setq-local comment-end "*)")
-  (setq-local comment-end-skip "[ \t]*\\*+/")
+  (setq-local comment-start "//")
+  (setq-local comment-end "")
   (use-local-map wreck-mode-map))
+
+(show-paren-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.wr\\'" . wreck-mode))
 

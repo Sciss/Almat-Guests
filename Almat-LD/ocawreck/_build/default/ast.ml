@@ -1,4 +1,4 @@
-type binop = Add | Subtr | Mult | Div | Lt | Gt | Le | Ge | Eq | Uneq
+type binop = Add | Subtr | Mult | Div | Lt | Gt | Le | Ge | Eq | Uneq | Mod
 
 let string_of_binop = function
   | Add ->
@@ -21,6 +21,8 @@ let string_of_binop = function
       "Eq"
   | Uneq ->
       "Uneq"
+  | Mod ->
+      "Mod"
 
 type expr =
   | Var of string

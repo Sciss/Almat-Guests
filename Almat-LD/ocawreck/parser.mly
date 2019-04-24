@@ -17,6 +17,7 @@
 %token IF
 %token THEN
 %token ELSE
+%token MOD
 %token SUBTRACT
 %token LPAREN
 %token RPAREN
@@ -34,13 +35,14 @@
 
 
 %nonassoc IF THEN ELSE COMMA 
-%nonassoc LET LPAREN PROC FUN PLAY
+%nonassoc LET PROC FUN PLAY
 %nonassoc LT LE GT GE EQ UNEQ
+%left MOD
 %left PLUS
 %left SUBTRACT
 %left DIVIDE
 %left TIMES
-%nonassoc APP
+%left APP
 %nonassoc ID FLOAT
 
 %start <Ast.expr> prog
@@ -81,6 +83,7 @@ toplevel_expr:
 simple_expr:
 	| i = FLOAT { Float i }
 	| x = ID { Var x }
+        | e1 = simple_expr; MOD; e2 = simple_expr { Binop (Mod, e1, e2) }
         | e1 = simple_expr; SUBTRACT; e2 = simple_expr { Binop (Subtr, e1, e2) }
 	| e1 = simple_expr; DIVIDE; e2 = simple_expr { Binop (Div, e1, e2) }
 	| e1 = simple_expr; TIMES; e2 = simple_expr { Binop (Mult, e1, e2) } 
