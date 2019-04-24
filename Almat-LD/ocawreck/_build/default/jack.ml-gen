@@ -1,2 +1,0 @@
-(** @canonical Jack.Jack_callback *)
-module Jack_callback = Jack__Jack_callback
