@@ -1,6 +1,8 @@
 # UGens
 
-Contains SuperCollider UGens created during the project: Kuramoto, Hopf
+Contains SuperCollider UGens created during the project: Kuramoto, Hopf.
+They work with SuperCollider 3.9.x or newer.
+ScalaCollider-UGens includes these two UGens starting from version 1.19.4.
 
 ## Build
 
