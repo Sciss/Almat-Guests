@@ -1,0 +1,54 @@
+* Intro text :LD:
+** longo, materiality, algos that matter
+* Information :LD:CONCEPT:
+** write on simondon's information and role in coupling of systems
+** Transduction, propagation
+** the living being is contemporary to itself, pre-indivudal (apeiron)w ithin and without
+** technical object
+** disparate
+* Ron K Iteration :LD:ALMAT:
+** https://www.researchcatalogue.net/view/386118/394872
+*** social reality of both algorithms and art: 
+they have become forms of architecture often received in states of
+distraction.
+* Computation :LD:CONCEPT:
+** what is computatio?n
+* Form of the text :LD:
+** mind map elm web app
+** overview map
+** keywords, metadata
+** small map with current heading in center showing neighbors
+* Agency                                                                 :LD:CONCEPT:
+** Algorithms as agents. What is agency? How is different from subjectivity?
+
+* System :LD:CONCEPT:
+** TODO collect different definitions
+* Apparatus                                                              :LD:CONCEPT:
+** artistic machine or “apparatus” (https://www.researchcatalogue.net/view/381565/381566)
+* Research Questions   :LD:METHOD:ALMAT:
+** How do algorithmic processes emerge? How do they structure the praxis of experimental computer music?
+* Recursivity :LD:CONCEPT:
+** recursivity, re-entry, feedback, repetition vs reciprocation (Wechselwirkung) https://www.researchcatalogue.net/view/426429/621931
+** difference and repetition
+* Körper (DP and HH)  :LD:WORK:
+**  relationship between corporeality and the algorithmic
+* ANEMONE ACTINIARIA (DP and HH) :LD:WORK:
+** http://2016.xcoax.org/pdf/xcoax2016-RutzPirro.pdf
+** inspired by the notion of an emergent new
+machine through ‘orientation’ and ‘composition’ as outlined by
+Heinz von Foerster and Dirk Baecker
+** intrinsic form of spatialisation
+** a Foersterian double closure where the two systems we develop become oriented and aligned with another (Foerster [1993]
+2003)
+* Vocab :LD:
+** dispositif, apparatus
+* references 
+** Dreyfus, Hubert. What Computers Can’t Do: A Critique of Artificial Reason.
+** Canguilhem, Georges. “The Living and Its Milieu”
+
+* arbeitsweise, code :LD:METHOD:
+** textuelle ebene
+** library als modulares grosses system
+** compilerbau vs sprache selbst, unterschiedliches denken
+** organisches in arbeiten und/oder text (code)
+

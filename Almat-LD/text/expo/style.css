@@ -1,0 +1,133 @@
+
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap');
+
+body {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-family: "Inconsolata";
+    font-size: 1.1em;
+    font-weight: 400;
+    background-color: #EEE;
+}
+
+.nav-list a {
+    text-decoration : none;
+    font-weight: 700;
+    color: #000;
+}
+
+.small-nav {
+
+    min-height: 200px;
+}
+
+.nav-list {
+    display : grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding-bottom: 5px;
+}
+
+
+.nav-list-overview {
+    display : grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    text-align : center;
+    padding-top: 10px;
+}
+
+
+.nav-list-overview a {
+    text-decoration : none;
+    font-weight: 700;
+    color: #000;
+}
+
+
+.subgraph  {
+    text-align: center;
+}
+
+.overview-graph  {
+    text-align: center;
+}
+
+
+.keywords {
+
+        min-height: 200px;
+}
+
+.references {
+
+        min-height: 200px;
+}
+
+
+
+.head {
+
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding: 20px 0px;
+}
+
+
+#title {
+    font-weight: 700;
+    font-size: 1.8em;
+}
+
+#pagetitle {
+    font-weight: 700;
+    font-size: 1.4em;
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+
+
+.metadata {
+
+    grid-column: 1;
+    grid-row: 2;
+
+    
+}
+
+.content {
+
+    grid-column: 2;
+    grid-row: 2;
+   
+}
+
+
+.wrapper {
+  display: block;
+
+}
+
+
+@media (min-width: 800px) {
+
+        .wrapper {
+	    display: grid;
+	    grid-gap: 15px;
+            grid-template-columns: 2fr 6fr;
+ 	}
+	
+
+	
+}
+
+@media (min-width: 1400px) {
+
+    .content {
+	column-count: 2;
+	column-gap: 30px;	
+    }
+
+}

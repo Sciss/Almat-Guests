@@ -1,11 +1,33 @@
 // testing wreck
-fn myfun(x) = let y = x * 10 in y + 1.2;
+fn myfun(x) =
+   let y = x * 10 in
+       y + 1.2;
 
 
 fn powtest(x) = sin(x) + pow(x,2);
 
-proc mysin3(x) =
-     sin(x) * 0.5, (x + 0.05);
+proc swapsin(x,y) = sin(x), (y,x); // not swapping?
+
+proc inc1(x,y) = ((x % y) / y) * 2 * 3.1415 , (x + 1, y);
+proc inc2(x,y) = ((x % y) / y) * 2 * 3.1415 , (x + 1, y);
+
+play( swapsin(inc1(0,100), inc2(0,1600)) );
+
+proc mysin3(x) = let a = sin(x) * 0.5 in a, (a+0.05);
+
+struct Ugen {
+       float x;
+       float y;		
+}
+
+
+proc mysin3(x,y) = let a = sin(x!2) * 0.5 in a, (a+0.05);
+
+proc mysin3(x,y) = let a = sin(x) * 0.5 in a, (a+0.05);
+
+//fn _(x) = x+0.05
+
+play(mysin3(0));
 
 proc mymod(x, y) =
      sin(x) * y , (x + 0.04, y);
@@ -13,13 +35,18 @@ proc mymod(x, y) =
 
 play(mymod(0, mysin3(0)));
 
-proc myletsin(x) = let a = sin(x) in a * 0.5, (x + 0.075 + (a*0.04));
+proc myletsin(x) =
+     let a = sin(x) in
+     	 a * 0.5, (x + 0.075 + (a*0.04));
 
 
 
 play(myletsin(0.1));
 
 play(mysin3(0));
+
+proc lp(now, last) = let x1 = now in x1 + last, (now, x1);
+
 
 // fis thingy 
 proc myfis(x, y) =
@@ -33,9 +60,21 @@ proc mymod2(x, y) =
      	 (res1*3)+0.5, ( (res1+0.008) + x, y);
 
 
+fn proc1(x) = myfis(0.1,mymod2(0.2,mymod1(x)));
+
 play(myfis(0.1,mymod2(0.2,mymod1(0.1))));
 
 
 
 
+//
 
+proc inc(x,y) = (x % y) / y, (x + 1, y);
+
+proc mul(p,f) = p * f, (p, f);
+
+play(inc(0,mul(inc(0,1000),1000)));
+
+play(myfis(0.1,inc(0,mul(inc(0,1000),1000))));
+
+play(lp(inc(0),0));
