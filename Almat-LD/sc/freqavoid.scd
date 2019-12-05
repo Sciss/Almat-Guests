@@ -138,8 +138,8 @@ SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
 	var fms;
 	var n = 6;
 	var fb = LocalIn.ar(n,0.0);
-	var soundin = SoundIn.ar((10..15),inFac.lag2(0.5));
-	var inputs = LPF.ar(HPF.ar(Mix.ar(InFeedback.ar(fbbus,n)+soundin),
+	var soundin = SoundIn.ar((10..15));
+	var inputs = LPF.ar(HPF.ar(Mix.ar(SelectX.ar(inFac.lag2(0.5),[InFeedback.ar(fbbus,n),soundin])),
 		[fmin1.lag2(0.2),fmin2.lag2(0.2), fmin3.lag2(0.2),
 			fmin1.lag2(0.2), fmin2.lag2(0.2), fmin3.lag2(0.2)]),
 		[fmax1.lag2(0.2),fmax2.lag2(0.2), fmax3.lag2(0.2),
@@ -173,8 +173,8 @@ SynthDef(\hopffm, { arg amp = 0.1, fmin1=50, fmax1=5000, fmin2=50, fmax2=5000,
 	OffsetOut.ar(fbbus,fms);
 	//	OffsetOut.ar(fbbus,WhiteNoise.ar(0.1));
 	//	freqs.poll;
-	fms = Limiter.ar(fms*0.5, 0.7);
-	Out.ar(0, fms  * 0.02 * amp.lag3(1));
+	fms = Limiter.ar(fms*0.6, 0.7);
+	Out.ar(0, fms  * 0.07 * amp.lag3(1));
 	//	Out.ar(0, Splay.ar(fms)  * 0.05 * amp.lag2(0.4));
 	
 }).send(s);

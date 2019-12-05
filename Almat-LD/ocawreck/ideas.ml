@@ -1,3 +1,11 @@
+(
+var x = 5
+x
+)
+
+let x = 5 in
+    x
+
 type process = Process of float * process Lazy.t
 
 let next = function Process (_, cont) -> Lazy.force cont
@@ -30,7 +38,7 @@ let rec collect proc = function
 (* Tests *)
 
 ;;
-collect (sinosc (const 0.0) (const 0.1)) 400
+collect (sinosc (const 0.0) (const 0.1)) 100
 
 ;;
 collect (inc (const 0.0)) 100
