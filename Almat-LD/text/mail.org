@@ -1,0 +1,69 @@
+Hi everyone,
+
+I hope your all well. Sorry, for being a little quiet. I have been
+(re)reading the ALMAT documentation (mainly of the iterations) and
+some of your papers. I've also started writing a small app for
+organizing my more conceptual reflections on the ALMAT
+documentation. You can find that here:
+https://git.iem.at/davidpirro/almat_luc/tree/master/text
+
+Apart from that, I've been trying to collect more general talking
+points. Things that came to mind while reading, observations,
+problems, ideas etc. Here are the talking points in a org-mode-like
+list:
+
+* Form of documentation (of iterations)
+** Going beyond the limits of the RC
+** Types of material: 
+   dialog, spoken/written language, reflection, media, concept, talk,
+   critique, code, work description, technical documentation
+** Finding forms for these types of materials
+** What to do with all the dialogues?
+** Who speaks?
+** Fragments and missing contexts (introductions, glue etc).
+** The meaning of arrows. Network of annotations
+** Forms particular to the practice of the artist (text<->speech for JR, e.g.)
+* Types of publications
+** Number, kind
+* Material outside of RC
+** Journal/conference papers
+* Code/Algorithms
+** How to integrate, how to access?
+** How to experience (in Browser etc)? 
+* Navigation of the documentation/publication
+** As a project archive
+** Network of concepts
+** Main thread?
+** Filtering, algorithmic restructuring, queries?
+** As an "Exhibition" (spatial structure) with rooms etc 
+** Searchable
+* Issues/Problems
+** Tone, critique issues
+** The concept of "apparatus" (also vs. machine)
+** Language issues
+** DP/HHR reflection on practices with 
+regard to central ALMAT concepts is missing somewhat.
+** Resume Ron, JR
+* Central concepts
+** Matter
+** Contingency
+** Affect
+** Recursion/Iteration
+** Code/Text
+** Language
+** Space
+** Computation
+** Agency
+** Experimentation
+** Speculation
+** Body
+** Analysis/Re-Synthesis
+** Mechanic/Organic
+** Machine/Apparatus
+** Representation
+** Entanglements
+
+I look forward to seeing you on Saturday.
+
+Best,
+Luc
