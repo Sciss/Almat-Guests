@@ -23,7 +23,7 @@ s.meter
 		, K2A.ar(0) // mode needs to be audio rate,
 		// 0 - all are coupled
 		// 1 - neighbors are coupled
-		// 1 - neighbors are coupled, to prev negatively
+		// 2 - neighbors are coupled, to prev negatively
 		, Rand(0.0,3.0!n) // init phases
 		, K2A.ar(Rand(0.02,0.04!n)) // phase increments, audio rate
 		, K2A.ar(0!n) // external phases, audio rate
@@ -42,7 +42,7 @@ s.meter
 {
 	var input = SinOsc.ar(K2A.ar(MouseX.kr(100.0, 1000.0)).poll);
 	//var input = SoundIn.ar(0);
-	var hopf = Hopf.ar(input, K2A.ar(0.001));
+	var hopf = Hopf.ar(input, K2A.ar(0.001), DC.ar(0.0));
 	(hopf[2] * 44100 / (2*pi)).poll;
 	//	var ph = hopf[1].atan2(hopf[0]);
 	//	(ph - Delay1.ar(ph)).poll(label: \ph);
@@ -51,7 +51,7 @@ s.meter
 	//var ph = hopf[1].atan2(hopf[0]);
 	//	SinOsc.ar(0, ph) + input;
 	//	(((hopf * 10) + input) * 0.1);
-	hopf[3] * 0.00001; 
+	Pan2.ar(hopf[3] * 0.01);
 }.play
 )
 
@@ -63,12 +63,14 @@ s.scope
 
 (
 {
-	var n = 60;
+	// note: for higher numbers of n, you must increase the wire buffer
+	// settings of scsynth
+	var n = 10; // 60;
 	var phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(2) // mode needs to be audio rate,
 		// 0 - all are coupled
 		// 1 - neighbors are coupled
-		// 1 - neighbors are coupled, to prev negatively
+		// 2 - neighbors are coupled, to prev negatively
 		, Rand(0.0,3.0!n) // init phases
 		, K2A.ar(Rand(0.1,0.35!n)) // phase increments, audio rate
 		, K2A.ar(0!n) // external phases, audio rate
@@ -78,12 +80,6 @@ s.scope
 	Splay.ar(SinOsc.ar(0, phases)) * 0.1;
 }.play
 )
-
-a = Signal.newClear(4096);
-a.waveFill({ arg x, old, i; exp(x.squared.neg*1000) }, -1, 1);
-a.plot
-b = Buffer.sendCollection(s, a.asWavetable);
-
 
 
 
@@ -96,16 +92,16 @@ x = { arg off = 0;
 	//	var mics = HPF.ar(SoundIn.ar((0..5)),400).poll;
 	//	var mics = Resonz.ar(SoundIn.ar((0..5)),Rand(400,2000!n),0.2).poll;
 	var mics = DelayC.ar(HPF.ar(SoundIn.ar((0..5)),400),1,Rand(0.0,0.1!n));
-	var hopf = Hopf.ar(mics, K2A.ar(0.001));
+	var hopf = Hopf.ar(mics, K2A.ar(0.001), DC.ar(0));
 	var hilbert = Hilbert.ar(mics);
 	//var hilbert = HilbertFIR.ar(mics, LocalBuf(2048));
 
 	hopfFreqs = hopf.collect({ arg item; item[2] * 44100 / (2*pi)});
-	
+
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
 
 	hopf = hopf.collect({ arg item; item[3] });
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(2) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -120,10 +116,10 @@ x = { arg off = 0;
 		, K2A.ar(MouseX.kr(0,0.8!n))
 		// LFNoise1.ar(0.01!n).range(0.1,0.6)//
 	); // coupling, audio rate
-	
+
 		Out.ar(0, phases.sin * 0.005 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	//Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -134,7 +130,14 @@ x.set(\off, 1);
 
 s.meter
 
-{ Out.ar(0, Osc.ar(b.bufnum, 0, SinOsc.ar(10) * 2 * pi) * 0.05) }.play
+
+a = Signal.newClear(4096);
+a.waveFill({ arg x, old, i; exp(x.squared.neg*1000) }, -1, 1);
+a.plot
+b = Buffer.sendCollection(s, a.asWavetable);
+b.plot
+
+{ Out.ar(0, Pan2.ar(Osc.ar(b.bufnum, 0, SinOsc.ar(10) * 2 * pi) * 0.07)) }.play
 
 
 
@@ -148,15 +151,15 @@ x = { arg off = 0;
 	//	var mics = BPeakEQ.ar(HPF.ar(SoundIn.ar((0..5)),400),650,3,12);
 	//	var mics = HPF.ar(SoundIn.ar((0..5)),500).poll;
 	var mics = SoundIn.ar((0..5));
-	var hopf = Hopf.ar(mics, K2A.ar(0.001));
+	var hopf = Hopf.ar(mics, K2A.ar(0.001), DC.ar(0));
 	var hilbert = Hilbert.ar(mics);
 
 	hopfFreqs = hopf.collect({ arg item; item[2] * 44100 / (2*pi) });
-	
+
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
 
 	hopf = hopf.collect({ arg item; item[3] });
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(1) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -167,11 +170,11 @@ x = { arg off = 0;
 		, hopf // external phases, audio rate
 		, K2A.ar(0.00001!n)//K2A.ar(Rand(0.005,0.005!n) * MouseX.kr(0,10).lag2(0.1))
 		// external phases coupling, audio rate
-		, K2A.ar(0.0!n) 
+		, K2A.ar(0.0!n)
 	); // coupling, audio rate
 
 		// Out.ar(0, SinOsc.ar(0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
-	
+
 	Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.02 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -189,16 +192,16 @@ x = { arg off = 0;
 	var phases, hopfFreqs, n = 6;
 	//	var mics = SoundIn.ar((0..5));
 	//	var mics = BPeakEQ.ar(HPF.ar(SoundIn.ar((0..5)),400),650,3,12);
-	var mics = HPF.ar(SoundIn.ar((8..13)),1000).poll;
-	var hopf = Hopf.ar(mics, K2A.ar(0.005));
+	var mics = HPF.ar(SoundIn.ar((8..13)),1000, DC.ar(0)).poll;
+	var hopf = Hopf.ar(mics, K2A.ar(0.005), DC.ar(0));
 	var hilbert = Hilbert.ar(mics);
 
 	hopfFreqs = hopf.collect({ arg item; item[2] * 44100 / (2*pi) });
-	
+
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
 
 	hopf = hopf.collect({ arg item; item[3] });
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(1) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -209,11 +212,11 @@ x = { arg off = 0;
 		, hopf // external phases, audio rate
 		, K2A.ar(0.0006!n)//K2A.ar(Rand(0.005,0.005!n) * MouseX.kr(0,10).lag2(0.1))
 		// external phases coupling, audio rate
-		, K2A.ar(MouseX.kr(0,0.8!n)) 
+		, K2A.ar(MouseX.kr(0,0.8!n))
 	); // coupling, audio rate
 
 		// Out.ar(0, SinOsc.ar(0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
-	
+
 	Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -236,24 +239,24 @@ x = { arg off = 0;
 		//Gate.ar(K2A.ar((fr.poll / s.sampleRate) * (2*pi)).lag2(0.05), K2A.ar(hasFr)) + 0.00001;
 		Gate.ar(K2A.ar(fr).lag2(0.05), K2A.ar(hasFr)) + 0.00001;
 	});
-	
+
 	//var hopf = Hopf.ar(mics, K2A.ar(0.001));
 	mics = BPF.ar(mics,freqIncs.clip(50,12000).poll,2);
-	
+
 	hilbert = Hilbert.ar(mics);
 
-	//	
+	//
 	//phasesInput.poll;
 	//phasesInput = Integrator.ar(K2A.ar(freqIncs)).mod(2*pi);
 	//phasesInput = mics - SinOsc.ar(0, phasesInput);
-	
+
 	// hopfFreqs = hopf.collect({ arg item; item[2] * s.sampleRate / (2*pi)});
-	
+
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
 
-	
+
 	// hopf = hopf.collect({ arg item; item[3] });
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(2) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -268,10 +271,10 @@ x = { arg off = 0;
 		, K2A.ar(MouseX.kr(0,0.8!n))
 		// LFNoise1.ar(0.01!n).range(0.1,0.6)//
 	); // coupling, audio rate
-	
+
 		Out.ar(0, phases.sin * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	//Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -304,7 +307,7 @@ x = { arg off = 0;
 	var coup,hopf, hilbert, phases, phasesInput, hopfFreqs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),50);
 	var fb = LocalIn.ar(n);
-	
+
 	//var hopf = Hopf.ar(mics, K2A.ar(0.001));
 	//	hilbert = Hilbert.ar(mics);
 	//	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
@@ -317,9 +320,9 @@ x = { arg off = 0;
 	corrs.poll;
 
 	coup = RMS.ar(mics).explin(0.00001,0.05,3,0.000001).lag2(4);
-	
+
 	//	corrs = mics - fb;
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(3) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -336,10 +339,10 @@ x = { arg off = 0;
 	); // coupling, audio rate
 
 	LocalOut.ar(phases);
-	
+
 		Out.ar(0, phases.sin * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	// Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -355,7 +358,7 @@ x = { arg off = 0;
 	var coup, hopf, hilbert, phases, phasesInput, hopfFreqs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),300);
 	var fb = LocalIn.ar(n);
-	
+
 	//var hopf = Hopf.ar(mics, K2A.ar(0.001));
 	//	hilbert = Hilbert.ar(mics);
 	//	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
@@ -366,11 +369,11 @@ x = { arg off = 0;
 	// var corrs = fftIn.collect({ arg in, i; RMS.ar(IFFT.ar(PV_Mul(in, PV_Conj(fftOut[i])))) });
 	// corrs = (1 / corrs.clip(0.00001, 10)) * 2 * pi;
 	// corrs.poll;
-	
+
 	var corrs = (mics - fb);
 
 	coup = RMS.ar(mics).explin(0.00001,0.05,3,0.000001).lag2(1);
-	
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(3) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -387,10 +390,10 @@ x = { arg off = 0;
 	); // coupling, audio rate
 
 	LocalOut.ar(phases);
-	
+
 		Out.ar(0, phases.sin * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	// Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -405,14 +408,14 @@ x = { arg off = 0;
 	var coup, hilbert, phases, phasesInput, hopfFreqs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),1000);
 	var fb = LocalIn.ar(n);
-	
-	var hopf = Hopf.ar(mics, K2A.ar(0.001));
+
+	var hopf = Hopf.ar(mics, K2A.ar(0.001), DC.ar(0));
 	hilbert = Hilbert.ar(mics);
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
 	hopf = hopf.collect({ arg item; item[3] });
 
 	coup = RMS.ar(mics).explin(0.00001,0.05,3,0.000001);
-	
+
 	// var fftIn = FFT(LocalBuf(4096!n), mics);
 	// var fftOut = FFT(LocalBuf(4096!n), fb);
 	// var corrs = fftIn.collect({ arg in, i; RMS.ar(IFFT.ar(PV_Mul(in, PV_Conj(fftOut[i])))) });
@@ -421,8 +424,8 @@ x = { arg off = 0;
 
 	// var corrs = (mics - fb);
 
-	
-	
+
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(2) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -438,12 +441,12 @@ x = { arg off = 0;
 		// LFNoise1.ar(0.01!n).range(0.1,0.6)//
 	); // coupling, audio rate
 
-	
+
 	LocalOut.ar(phases);
-	
+
 	Out.ar(0, (phases.sin * coup.lag(4)) * 0.02 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	// Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -451,10 +454,11 @@ x = { arg off = 0;
 
 s.reboot;
 
+// XXX TODO: where does 'MovingAverage' come from?
 (
 {
 
-	var input = SoundIn.ar(5); 
+	var input = SoundIn.ar(5);
 	var namp = MovingAverage.power(input,44100*0.5,44100*0.5) - MovingAverage.power(input,44100*3,44100*3);
 	(namp * 1000).poll;
 	DC.ar(0);
@@ -487,18 +491,18 @@ s.reboot;
 
 	var mics = LPF.ar(HPF.ar(SoundIn.ar((0..5)),50), 11000);
 	var coupling = Mix.ar(MovingAverage.rms(mics,44100,44100)).linlin(0.01,0.03,0.005,0.5).lag(4);
-	var hopf = Hopf.ar(mics, K2A.ar(MouseX.kr(0.001,0.9,1)).poll, K2A.ar(0.0001));
+	var hopf = Hopf.ar(mics, K2A.ar(MouseX.kr(0.001,0.9,1)).poll, K2A.ar(0.0001), DC.ar(0));
 
 	var freqs = hopf.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ) });
 	var phases = hopf.collect({ arg item; item[3] });
 
 	var oscs = Blip.ar(freqs/[10,20,10,40,5,10], 250);
 
-	
-	
+
+
 	oscs = oscs.collect({ arg ph;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18), 0.21);
-		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0))); 
+		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0)));
 	});
 	//	phases.scope;
 	Limiter.ar(oscs*0.7,0.9) * 0.001;
@@ -522,14 +526,14 @@ s.reboot;
 	var phases = hopf.collect({ arg item; item[3] });
 
 	var oscs = Blip.ar(freqs/60, 250);
-	
+
 	oscs = oscs.collect({ arg ph, i;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18),
 			32.collect({ arg i; i.linlin(0,31,0.22,0.4)}));
 		// var micbands = BBandPass.ar(mics[i], Array.geom(32, 70, 1.18),
 		// 	32.collect({ arg i; i.linlin(0,31,0.25,0.8)}));
 		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4,
-			-0.9, 1.exprand(12.0), 2.exprand(16.0))); 
+			-0.9, 1.exprand(12.0), 2.exprand(16.0)));
 	});
 	//	phases.scope;
 	oscs * 0.07 * 0.005 * Line.kr(0,1,0.4);
@@ -559,10 +563,10 @@ s.reboot;
 		BBandPass.ar(osc, Array.geom(32, 60, 1.185),
 			32.collect({ arg i; i.linlin(0,31,0.2,0.3)}));
 	});
-	
+
 	oscs = bands.collect({ arg osc, i;
 		Mix.ar(Compander.ar(osc, bands[(i+1)%6], 0.03, 0.4,
-			-0.9, 1.exprand(6.0), 2.exprand(10.0))); 
+			-0.9, 1.exprand(6.0), 2.exprand(10.0)));
 	});
 	//	phases.scope;
 	oscs * 0.05 * 0.005 * Line.kr(0,1,0.4);
@@ -582,7 +586,7 @@ Array.geom(6, 170, 1.8)
 {
 
 	var mics = BBandPass.ar(SoundIn.ar((0..5)),Array.geom(6, 170, 1.8),0.01);
-	var hopf = Hopf.ar(mics, K2A.ar(MouseX.kr(0.001,0.9,1)), K2A.ar(0.0001));
+	var hopf = Hopf.ar(mics, K2A.ar(MouseX.kr(0.001,0.9,1)), K2A.ar(0.0001), DC.ar(0));
 	var freqs = hopf.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ).poll });
 	var phases = hopf.collect({ arg item; item[3] });
 
@@ -590,7 +594,7 @@ Array.geom(6, 170, 1.8)
 
 	oscs = oscs.collect({ arg ph;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18), 0.21);
-		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0))); 
+		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0)));
 	});
 	//	phases.scope;
 	Limiter.ar(oscs*0.7,0.9) * 0.02;
@@ -626,7 +630,7 @@ x = { arg off = 0;
 	var corrs,coup, hilbert, phases, phasesInput, hopfFreqs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),300);
 	var fb = LocalIn.ar(n);
-	
+
 	var hopf = Hopf.ar(mics, K2A.ar(0.001));
 	//	hilbert = Hilbert.ar(mics);
 	//	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
@@ -641,16 +645,16 @@ x = { arg off = 0;
 	// var corrs = fftIn.collect({ arg in, i; RMS.ar(IFFT.ar(PV_Mul(in, PV_Conj(fftOut[i])))) });
 	// corrs = (1 / corrs.clip(0.00001, 10)) * 2 * pi;
 	// corrs.poll;
-	
+
 
 	//	mics = mics.collect({arg m, i; m.atan2(mics[(i-2)%n])});
 
 	//	corrs = (mics - fb);
 	//	corrs = mics;
 
-	
-	
-	
+
+
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(4) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -667,10 +671,10 @@ x = { arg off = 0;
 	); // coupling, audio rate
 
 	LocalOut.ar(phases);
-	
+
 	Out.ar(0, phases.sin * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	// Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -685,7 +689,7 @@ x = { arg off = 0;
 	var corrs,coup, hilbert, phases, phasesInput, hopfFreqs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),400);
 	var fb = LocalIn.ar(n);
-	
+
 	var hopf = Hopf.ar(mics, K2A.ar(0.001));
 	hilbert = Hilbert.ar(mics);
 	hilbert = hilbert.collect({ arg item; item[1].atan2(item[0]) });
@@ -697,17 +701,17 @@ x = { arg off = 0;
 	// var corrs = fftIn.collect({ arg in, i; RMS.ar(IFFT.ar(PV_Mul(in, PV_Conj(fftOut[i])))) });
 	// corrs = (1 / corrs.clip(0.00001, 10)) * 2 * pi;
 	// corrs.poll;
-	
+
 
 	//	mics = mics.collect({arg m, i; m.atan2(mics[(i-2)%n])});
 	coup = RMS.ar(mics,20).expexp(0.04,0.13,4,0.2).lag2(10);
-	
+
 	corrs = (mics - fb);
 	//	corrs = mics;
 
-	
-	
-	
+
+
+
 	phases = Kuramoto.ar(n // number or oscs, set on init
 		, K2A.ar(2) // mode needs to be audio rate,
 		// 0 - all are coupled
@@ -724,10 +728,10 @@ x = { arg off = 0;
 	); // coupling, audio rate
 
 	LocalOut.ar(phases);
-	
+
 		Out.ar(0, phases.sin * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
-	
+
 	// Out.ar(0, Osc.ar(b.bufnum, 0, phases) * 0.01 * Line.kr(0,1,0.5) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 }.play
 )
@@ -742,7 +746,7 @@ x = { arg off = 0;
 x = { arg off = 0;
 	var corrs,coup, hilbert, phases, phasesInput, hopfFreqs, freqs, oscs, n = 6;
 	var mics = HPF.ar(SoundIn.ar((0..5)),300);
-	
+
 	var hopf = Hopf.ar(mics, K2A.ar(0.1), K2A.ar(0.001));
 
 	hopf = hopf.collect({ arg item; item[3] });
@@ -770,10 +774,10 @@ x = { arg off = 0;
 	oscs = oscs.collect({ arg ph;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18), 0.21);
 		Mix.ar(Compander.ar(bands, bands, 0.03, 0.5, -0.95,
-			2.exprand(12.0), 3.exprand(16.0))); 
+			2.exprand(12.0), 3.exprand(16.0)));
 	});
 
-	
+
 	Out.ar(0, oscs * 0.007 * Line.kr(0,1,1) * EnvGen.kr(Env([1,0],[0.4]),off,doneAction:2));
 
 
@@ -798,11 +802,11 @@ x = { arg off = 0;
 
 	var oscs = Blip.ar(freqs/[10,20,10,40,10,5], 350);
 
-	
-	
+
+
 	oscs = oscs.collect({ arg ph;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18), 0.21);
-		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0))); 
+		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4, -0.9, 1.exprand(12.0), 2.exprand(16.0)));
 	});
 	//	phases.scope;
 	Limiter.ar(oscs*0.7,0.9) * 0.01;
