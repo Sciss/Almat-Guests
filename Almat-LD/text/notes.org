@@ -7,17 +7,138 @@
 ** technical object
 ** disparate
 * Ron K Iteration :LD:ALMAT:
+// could be organised better, stuff is hard to find, duplicates, not linked etc
 ** https://www.researchcatalogue.net/view/386118/394872
 *** social reality of both algorithms and art: 
 they have become forms of architecture often received in states of
 distraction.
+** https://www.researchcatalogue.net/view/386118/386119
+*** intro defines terms: configuration and iteration
+*** what is open air?
+*** minimalism as 'removal of distractions'
+** On the "Implausible", https://www.researchcatalogue.net/view/386118/394872
+*** the social reality of both algorithms and art: they have become forms of architecture often received in states of distraction.
+*** neuhaus
+*** Plausible sounds enact  a "passive aggressive" relation to potential listeners, they lie in wait for the listener
+*** the margin of attention 
+***  Weather at Six takes an active carillon as its "plausible" sound and creates its electronic doppelganger. 
+*** climate change, scale (weather vs climate)
+***  an algorithm imitates something, but an element of error or transformation is introduced, voluntarily or involuntarily, that serves as a generator of trajectories. 
+*** Doppelgänger denotes something that is phenotypically the same, but genotypically different.
+*** Another useful term may be "irritation", which I guess is the moment where we move from plausible to implausible and passing the margin of "something bothering us", or something "not fitting". 
+** margins
+*** https://en.wikipedia.org/wiki/Levenshtein_distance
+** ultrasound :BODY:
+***  continuum from the tactile to the audible using ultra-sound and signal processing.
+***  synaesthesia between movement and sound.
+*** . The piece works as a set of episodes, then within an episode all performance is just with physical objects. So everything is revealed in this sense. 
+** patterns https://www.researchcatalogue.net/view/386118/422038 :CODE:
+*** I’m trying to understand my kind of reservations against the model of patterns (hhr)
+*** the patterns library represents a kind of full functional model
+*** function/imperative: writing a score is totally non-causal you know, you can do all these things. But when it comes to actually perform it in time it’s one thing after another, and the rule of time enters in.
+** non-conscious congnition https://www.researchcatalogue.net/view/386118/424450 :COGNITION:
+*** Katherine Hayles’ definition of cognitive systems doesn’t necessarily involve consciousness.
+*** anything that’s adaptive to its environment is executing a kind of cognitive function
+*** interesting to think of the cognitive processes as essentially akin to functional programs or patterns
+** minimalism https://www.researchcatalogue.net/view/386118/424553
+*** misspelled words here?
+*** escavate?
+*** removal of distraction
+*** You don’t need the complete representation
+*** estrope?
+*** I associate minimalism with a sense of completeness: if you think about the removal of distractions, that idea includes the reduction to necessity.  (hhr)
+*** rethinked?
+** functional vs. imperative https://www.researchcatalogue.net/view/386118/426033
+*** The score it’s immutable and then you’re making these different very sequential interventions into it. 
+*** routines
+*** decisions
+*** The problem was that the whole world of computer programming had no interest in time
+** Experimentalism https://www.researchcatalogue.net/view/386118/429093 :EXPERIMENT:LISTENING:
+*** I think the role of experimentalism in music has been to reconceive music as a way of listening as much as an act of "self" expression. So compositions become proposed relations to sound.
+*** // this seems pretty unclear, what fo Schaefer, Schafer, Cage, Xenakis and Ranciere have in common in this context?
+*** So, my shorthand definition of (American) Experimentalism is that it proceeds from Artaud by removing (or at least sublimating) the expressionist and occult elements.
+*** John Cage was an algorithmic (or, at any rate, systematic) composer. And so was Pauline Oliveros.  But in her case, the materiality of the algorithm was often the listening subject.
+*** // interesting description of compositional process
+** open cube 
+*** Listening To The Air
+**** While we conceive of sound in terms of pitch, it can be equally well
+understood in terms of distance.
+*** Listening to the Air seeks to expose the shaping influence of air currents on these short sounds in networks of intermodulation and feedback that produce long sounds as a kind of audible shadow.
+*** open air synthesizer
+** sc meeting https://www.researchcatalogue.net/view/386118/431830
+*** duplicate material (functional vs imperative)
+*** Software systems preconfigure the way we approach an artistic object, because we have this background layer, we know how these systems work. So they interfere with the way we conceive a specific piece. 
+*** should show code
+*** every distinct subgrouping of pitches from a specific musical phrase., This kind of idea is atemporal
+*** "Most thing in the language are streams, in the nerd sense." //?
+*** Patterns are an interesting example because they are abstractions over element of arbitrary type.
+** attention https://www.researchcatalogue.net/view/386118/432190
+***  we have very limited cognitive capabilities to understand these whole systems we're building
+*** the question regarding whether we are purely sequential or if there’s some second layer of parallelism, the idea to recurrently return to something from before. 
+** Listening To The Air https://www.researchcatalogue.net/view/386118/432464
+*** ultrasound
+*** feedback networks
+*** Ron used a number of different objects to physically alter the feedback loop configuration.
+*** reflective and diffractive properties of different paraphernalia 
+*** // synth could be explained / demonstrated in more detail + git
+*** // negative part pow 0.5 = nan?
+** The Fifth Root Of Two https://www.researchcatalogue.net/view/386118/444476
+*** // requires musical notation
+*** // what is ~computeDurs?
+*** from other mentions of the piece it wasn't clear that ron meant powersets
+*** // code is sometimes unclear, too much syntactic sugar
+*** // filtered powerset is very inefficient
+** Passim https://www.researchcatalogue.net/view/386118/422072
+*** social media
+Most of focus of attention in relation to social media goes to "viral"
+elements.  I am curious about what searches persist on the margin of
+the social media economy of attention.
+
+* general
+** (documented) code missing
+** a lot of spoken language, podcast?
 * Computation :LD:CONCEPT:
 ** what is computatio?n
+* Erin iteration :ALMAT:
+** david idea of body https://www.researchcatalogue.net/view/432756/452641
+*** iterativity
+*** { HH 03-Apr-2018} I would even go as far as trying to forget 'body and mind', as a dual; why not imagine there is no mind, and there are just bodies.
+*** no answer by erin?
+*** ASMR hides an understanding of the human body as a machine
+*** mechanic vs organic
+*** slightly more patronizing tone, seems to inhibit
+*** social algo
+*** magic (vs algo)
+*** incompressible
+*** the non-embodied, non-situated, non-algorithmic thinking implicit in ASMR
+** asmr https://www.researchcatalogue.net/view/432756/432761
+*** magic
+*** intimacy 
+*** plasticity
+*** gender
+*** the private
+*** no space
+*** the organic, stimulus, tele sex, body
+*** health, meditation
+*** lower-class sound art, die klangkunst der proleten
+*** discovery, experimentation
+*** drugs
+** https://www.researchcatalogue.net/view/432756/461874
+*** reden aneinander vorbei
+** recursion https://www.researchcatalogue.net/view/432756/483403
+** "shifting the idea of what embodiment means to micro-rythms instead of emotional categorization
+** https://www.researchcatalogue.net/view/432756/466590 :CODE: 
+*** communicating from human to human *trough* the algorithm, through the notation
 * Form of the text :LD:
 ** mind map elm web app
 ** overview map
 ** keywords, metadata
 ** small map with current heading in center showing neighbors
+** hard to read, e.g. https://www.researchcatalogue.net/view/432756/452641
+** visualizing threads
+** multiple ways of navigating
+* JR iteration :ALMAT:
+** https://www.researchcatalogue.net/view/487048/511517            :LANGUAGE: 
 * Agency                                                                 :LD:CONCEPT:
 ** Algorithms as agents. What is agency? How is different from subjectivity?
 
@@ -51,4 +172,6 @@ Heinz von Foerster and Dirk Baecker
 ** library als modulares grosses system
 ** compilerbau vs sprache selbst, unterschiedliches denken
 ** organisches in arbeiten und/oder text (code)
-
+* Questions
+** Apparatus?
+** 
