@@ -16,11 +16,13 @@ list:
 ** Going beyond the limits of the RC
 ** Types of material: 
    dialog, spoken/written language, reflection, media, concept, talk,
-   critique, code, work description, technical documentation
+   critique, code, work description, technical documentation, description of events/workshops
 ** Finding forms for these types of materials
 ** What to do with all the dialogues?
+anmerken wenn stil problematisch
 ** Who speaks?
 ** Fragments and missing contexts (introductions, glue etc).
+*** TODO sticky note where missing
 ** The meaning of arrows. Network of annotations
 ** Forms particular to the practice of the artist (text<->speech for JR, e.g.)
 * Types of publications
@@ -67,3 +69,14 @@ I look forward to seeing you on Saturday.
 
 Best,
 Luc
+* Gespräach 7.12
+** auswahl an gesprächen
+** working document
+** ausstellung
+** simple tagging
+** crawler, what can we get from rendered
+** meta-discourse
+** identify passage that don't seem publishable, e.g. "document class" expo jr iteration
+** compositional process, the development of ways of creating rc expositions, differences between iterations
+how did the documentation evolve
+
