@@ -29,6 +29,7 @@ anmerken wenn stil problematisch
 ** Number, kind
 * Material outside of RC
 ** Journal/conference papers
+pdfs as objects in meta-expo
 * Code/Algorithms
 ** How to integrate, how to access?
 ** How to experience (in Browser etc)? 
@@ -36,15 +37,24 @@ anmerken wenn stil problematisch
 ** As a project archive
 ** Network of concepts
 ** Main thread?
+linearisierung? wie alles durchlesen? nach teilaspekten strukturieren (z.b. zeitachse, tabellarisch, metatext, kuratierte räume/teilaspekte) 
 ** Filtering, algorithmic restructuring, queries?
+index
 ** As an "Exhibition" (spatial structure) with rooms etc 
+how to create a map of docu, scope der doku zeigen, walkthrough wie artefakte gewachsen sind
 ** Searchable
 * Issues/Problems
 ** Tone, critique issues
+*** TODO postit where problamtic
 ** The concept of "apparatus" (also vs. machine)
 ** Language issues
+*** fehlerliste: redundanz, negationen fehlend, füllwörter
+*** TODO korrekturbeispiel machen
 ** DP/HHR reflection on practices with 
 regard to central ALMAT concepts is missing somewhat.
+*** wie praktiken/projekte mit hhr/dp resonieren, response to residencies
+*** was hat sich für hhr/dp verändert and forschungsfragen m it hinblick auf praktiken/erfahrungen/residenzen
+*** Interview zu Konzepten, CMJ interview
 ** Resume Ron, JR
 * Central concepts
 ** Matter
@@ -69,7 +79,7 @@ I look forward to seeing you on Saturday.
 
 Best,
 Luc
-* Gespräach 7.12
+* Gespräch 7.12
 ** auswahl an gesprächen
 ** working document
 ** ausstellung
