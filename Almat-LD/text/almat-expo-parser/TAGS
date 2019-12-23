@@ -1,0 +1,206 @@
+
+./app/Main.hs,122
+module Main Main0,1
+mkImportOptions mkImportOptions7,8
+parseArgs parseArgs18,19
+usage usage22,23
+main main25,26
+
+./test/Spec.hs,15
+main main0,1
+
+./src/ExpositionParser.hs,966
+module ExpositionParserExpositionParser3,4
+data TextTypeTextType17,18
+  = TextLink TextLink18,19
+  | TextMetaTextMeta19,20
+  | TextTextTextText20,21
+      { html html21,22
+      , links links22,23
+instance ToJSON ToJSON TextType26,27
+data MediaContentTypeMediaContentType28,29
+  = ImageTool ImageTool29,30
+  | VideoTool VideoTool30,31
+  | AudioTool AudioTool31,32
+  | TextTool TextTool32,33
+instance ToJSON ToJSON MediaContentType35,36
+data MediaWithMetaData MediaWithMetaData37,38
+  MediaWithMetaDataMediaWithMetaData38,39
+    { mediaFile mediaFile39,40
+    , mediaId mediaId40,41
+    , mediaPosition mediaPosition41,42
+    , mediaSize mediaSize42,43
+    , mediaMeta mediaMeta43,44
+    , mediaContent mediaContent44,45
+instance ToJSON ToJSON MediaWithMetaData48,49
+filterMetaBlocks filterMetaBlocks51,52
+applyMetaBlocks applyMetaBlocks62,63
+addMetaData addMetaData74,75
+weaveWithMetaData weaveWithMetaData92,93
+
+./src/Crawler.hs,3751
+module CrawlerCrawler4,5
+data Exposition Exposition55,56
+  ExpositionExposition56,57
+    { expositionToc expositionToc57,58
+    , expositionId expositionId58,59
+    , expositionMetaData expositionMetaData59,60
+    , expositionWeaves expositionWeaves60,61
+instance ToJSON ToJSON Exposition64,65
+data Weave Weave66,67
+  WeaveWeave67,68
+    { weaveTitle weaveTitle68,69
+    , weaveUrl weaveUrl69,70
+    , weaveTools weaveTools70,71
+    , weavePopovers weavePopovers71,72
+instance ToJSON ToJSON Weave75,76
+data Popover Popover77,78
+  PopoverPopover78,79
+    { popoverId popoverId79,80
+    , popoverContent popoverContent82,83
+instance ToJSON ToJSON Popover86,87
+data Position Position88,89
+  PositionPosition89,90
+    { left left90,91
+    , top top91,92
+instance ToJSON ToJSON Position95,96
+data Size Size97,98
+  SizeSize98,99
+    { width width99,100
+    , height height100,101
+instance ToJSON ToJSON Size104,105
+data Tool Tool106,107
+  ToolTool107,108
+    { toolMediaFile toolMediaFile108,109
+    , toolId toolId109,110
+    , position position110,111
+    , size size111,112
+    , toolContent toolContent112,113
+    , hoverText hoverText113,114
+instance ToJSON ToJSON Tool117,118
+instance Ord Ord Tool119,120
+  compare compare120,121
+data ToolContentToolContent134,135
+  = TextContentTextContent135,136
+      { textToolContent textToolContent136,137
+  | ImageContentImageContent138,139
+      { imageUrl imageUrl139,140
+  | VideoContentVideoContent141,142
+      { videoUrl videoUrl142,143
+  | AudioContentAudioContent144,145
+      { audioUrl audioUrl145,146
+instance ToJSON ToJSON ToolContent149,150
+data ImportOptions ImportOptions151,152
+  ImportOptionsImportOptions152,153
+    { markdown markdown153,154
+    , writeMarkdown writeMarkdown154,155
+    , epub epub155,156
+    , expId expId156,157
+    , download download157,158
+    , pageId pageId158,159
+type ToolTypeName ToolTypeName161,162
+type ToolSpec ToolSpec163,164
+data ExpositionMetaData ExpositionMetaData165,166
+  ExpoMetaDataExpoMetaData166,167
+    { metaTitle metaTitle167,168
+    , metaDate metaDate168,169
+    , metaAuthors metaAuthors169,170
+    , metaKeywords metaKeywords170,171
+    , metaExpMainUrl metaExpMainUrl171,172
+instance ToJSON ToJSON ExpositionMetaData175,176
+encodeTxt encodeTxt178,179
+checkClass checkClass182,183
+styleProperty styleProperty192,193
+extractSizePos extractSizePos204,205
+textContent textContent218,219
+imageContent imageContent222,223
+videoContent videoContent227,228
+audioContent audioContent232,233
+toolSpecs toolSpecs239,240
+getTools getTools249,250
+downloadFile downloadFile273,274
+toolUrl toolUrl278,279
+toolFileExtension toolFileExtension286,287
+toolFileName toolFileName291,292
+downloadTool downloadTool296,297
+downloadTools downloadTools304,305
+popoverUrl popoverUrl317,318
+getPopovers getPopovers320,321
+toolToMarkdown toolToMarkdown333,334
+textToolsToMarkdown textToolsToMarkdown342,343
+addMetaString addMetaString354,355
+addMetaStringList addMetaStringList360,361
+mdReaderOptions mdReaderOptions370,371
+mdWriterOptions mdWriterOptions376,377
+toolToMd toolToMd382,383
+lastN lastN391,392
+expToEPub expToEPub394,395
+mkYamlHeader mkYamlHeader422,423
+expToMarkdown expToMarkdown439,440
+insertFileNames insertFileNames461,462
+getWeave getWeave479,480
+parseExposition parseExposition494,495
+toc toc510,511
+getExposition getExposition525,526
+detailsUrl detailsUrl533,534
+trim trim538,539
+unwrapTxt unwrapTxt541,542
+parseDetailsPage parseDetailsPage545,546
+getDetailsPageData getDetailsPageData572,573
+crawlExposition crawlExposition619,620
+
+./src/TextContent.hs,831
+module TextContentTextContent3,4
+takeUntil takeUntil19,20
+dropUntil dropUntil25,26
+stripText stripText31,32
+removeNl removeNl36,37
+concatNl concatNl39,40
+collectLinks collectLinks42,43
+type TextAndMeta TextAndMeta50,51
+extractMeta extractMeta52,53
+collectYamlString collectYamlString65,66
+parseAndExtractMeta parseAndExtractMeta71,72
+data TextBlockTextBlock75,76
+  = MetaBlock MetaBlock76,77
+  | TextBlockTextBlock77,78
+      { metaData metaData78,79
+      , html html79,80
+      , links links80,81
+  | LinkBlock LinkBlock82,83
+instance ToJSON ToJSON TextBlock85,86
+data Link Link87,88
+  LinkLink88,89
+    { href href89,90
+    , text text90,91
+instance ToJSON ToJSON Link94,95
+asLink asLink96,97
+isMeta isMeta106,107
+toTextBlock toTextBlock109,110
+hoverMeta hoverMeta121,122
+
+./src/MetaData.hs,650
+module MetaDataMetaData4,5
+data ParsedMetaData ParsedMetaData15,16
+  ParsedMetaDataParsedMetaData16,17
+    { linksTo linksTo17,18
+    , kind kind18,19
+    , author author19,20
+    , keywords keywords20,21
+    , persons persons21,22
+    , date date22,23
+    , place place23,24
+instance ToJSON ToJSON ParsedMetaData27,28
+instance FromJSON FromJSON ParsedMetaData29,30
+instance Semigroup Semigroup Value32,33
+  Array Array33,34
+  e e38,39
+  _ _42,43
+instance Semigroup Semigroup ParsedMetaData45,46
+  m1 m146,47
+instance Monoid Monoid ParsedMetaData56,57
+  mempty mempty57,58
+decodeMetaData decodeMetaData60,61
+
+./Setup.hs,15
+main main1,2

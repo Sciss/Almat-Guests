@@ -1,0 +1,1525 @@
+[
+    [
+        {
+            "mediaPosition": {
+                "left": 75,
+                "top": 1505
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "504506",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Initial Conversation",
+                        "href": "https://www.researchcatalogue.net/view/487048/504507"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 175
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 75,
+                "top": 1555
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "510801",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "References",
+                        "href": "https://www.researchcatalogue.net/view/487048/510798"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 175
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 103,
+                "top": 205
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "706055",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\"><span class=\"html-text-editor-content mceContentBody\">\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt; text-align: justify;line-height: 1.25em;\">Almat&#39;s </span><a href=\"https://almat.iem.at/methodology.html\" style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt; text-align: justify;line-height: 1.25em;\" target=\"_blank\">⬀methodology</a><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt; text-align: justify;line-height: 1.25em;\"> is based on iterative reconfiguration. A configuration encompasses the members of the team, Hanns Holger Rutz and David Pirrò, an invited guest artist along with a proposal within which she or he works, a &quot;machinery&quot;, including two software systems developed by Rutz (SoundProcesses) and Pirrò (rattle), and possibly more systems brought into the experiment by the guest artists, which we aim to couple and to explore from different perspectives. An iteration takes the form of an online preparation phase, in which the core team and the guest artist engage in a dialogue about their practice and their relation to Almat, as well as the specific preparation of a two months residency period, in which algorithmic sound studies are developed in situ at the IEM in Graz.</span></p>\r\n<p style=\"text-align: justify;\"><br /><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">The third iteration is conducted with Dutch-American sound artist and music-technology researcher <a href=\"https://jonathanreus.com\">⬀Jonathan Reus</a> This research catalogue entry documents our work process.</span></p>\r\n<p> </p>\r\n<p><span style=\"font-size: 8pt; color: #999999;line-height: 1.25em;\"></span></p>\n</span>\n<div class=\"icon\"></div></div>",
+                    "links": [
+                        {
+                            "text": "⬀Jonathan Reus",
+                            "href": "https://jonathanreus.com"
+                        }
+                    ]
+                }
+            },
+            "mediaSize": {
+                "height": 320,
+                "width": 516
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 105,
+                "top": 555
+            },
+            "mediaMeta": {
+                "kind": [
+                    "Overview",
+                    "_",
+                    "Biography"
+                ],
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "706056",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\"><span class=\"html-text-editor-content mceContentBody\">\n<p style=\"text-align: justify;\"><strong><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">Musical background</span></strong></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">The performative dimension of music plays a central role in Jonathan&#39;s work. He got serious about music making in Northern Florida as part of a musical culture connected to the folk traditions of the southern Appalachian Mountains, where &quot;music is traditionally a lived art [...], it is played in day-to-day situations and has some sort of role in daily life [1]&quot;. Despite having invested the past decade developing an electronic art and music practice, he carries with him this way of playing and way of thinking about music. He describes his approach to electronic music as follows: &quot;My point of interest when working on new music pieces usually involves an interest in the idiosyncrasies of a technological object or technique that encounters me. It&#39;s usually about asking how do we play these things. What is the role of the objects that create these sounds in my daily life? [1]&quot;. </span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\"><br /></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\"><strong style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px;line-height: 1.25em;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">Computers</span></strong></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">Having worked as a software engineer for a number of years, computing and software languages compromised both aspects of daily life and found their way to be a fundamental part of his musical practice. One representative example of how he approaches these machines artistically is his series of performances with obsolete Apple computers, exemplified by ⬀<a href=\"https://jonathanreus.com/portfolio/imac-music/\"><em>iMac Music</em></a>, a performance where he turns old iMac G3 computers into musical instruments. There is a long process of going into the electronics, transforming the machine into something that can be physically played. As Jonathan explains: &quot;You can think of it a bit as a preparation you might do on a guitar or a piano, developing specific hardware and techniques to turn this kind of live circuit system into something you can perform with and talk to [1]&quot;.</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\"><br /></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: small;line-height: 1.25em;\"><strong>Live coding</strong></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">Another way Jonathan works with computing is through live coding. He has been live coding for a while, he taught classes on live coding and has organised the first Algoraves in Hamburg and Berlin. Apart from the performative dimension of writing code on stage, he also uses live (interpretive) coding as a method to develop work, as a tool to experiment with sound in real-time. Describing the way he approached the earthquake vest in his work ⬀<a href=\"https://jonathanreus.com/portfolio/the-intimate-earthquake-archive/\"><em>The Intimate Earthquake Archive</em></a> he says: &quot;These earthquake vests have a little embedded computer in their backpacks that has a system that was completed live coded. The development of it was live coded. I was plugged into the backpack, sending commands in real-time and feeling the difference and understanding what needed to be changed. For me this way of working is the most enjoyable, the most fruitful. And maybe this has something to do with this sort of folk music ways of thinking about creating [1]&quot;</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\"><br /></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\">[1] <a href=\"https://www.researchcatalogue.net/view/487048/539717\"><em>Wordweaving</em></a>, SignaleSoirée Graz, 26 November 2018</span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 10pt;line-height: 1.25em;\"><br /></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 8pt; color: #999999;line-height: 1.25em;\"></span></p>\n</span>\n<div class=\"icon\"></div></div>",
+                    "links": [
+                        {
+                            "text": "iMac Music",
+                            "href": "https://jonathanreus.com/portfolio/imac-music/"
+                        },
+                        {
+                            "text": "The Intimate Earthquake Archive",
+                            "href": "https://jonathanreus.com/portfolio/the-intimate-earthquake-archive/"
+                        },
+                        {
+                            "text": "Wordweaving",
+                            "href": "https://www.researchcatalogue.net/view/487048/539717"
+                        }
+                    ]
+                }
+            },
+            "mediaSize": {
+                "height": 863,
+                "width": 513
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1505
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "511694",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Language / Live Coding",
+                        "href": "https://www.researchcatalogue.net/view/487048/511517"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1555
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "511695",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Memory / Representational Models",
+                        "href": "https://www.researchcatalogue.net/view/487048/511646"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1605
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "522323",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Speech Recognition",
+                        "href": "https://www.researchcatalogue.net/view/487048/522325"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1655
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "524178",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Speech to Text to Speech to Text to ...",
+                        "href": "https://www.researchcatalogue.net/view/487048/524168"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1705
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "524179",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Tools, Implementation, Feedback",
+                        "href": "https://www.researchcatalogue.net/view/487048/524137"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1755
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "524180",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Catalogues as Platforms for Process-based Works",
+                        "href": "https://www.researchcatalogue.net/view/487048/524148"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 342
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1805
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531995",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Anatomy and AI",
+                        "href": "https://www.researchcatalogue.net/view/487048/531984"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 27,
+                "width": 250
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 310,
+                "top": 1855
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531978",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Autoencoder: Cutting / Dissecting",
+                        "href": "https://www.researchcatalogue.net/view/487048/531934"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 27,
+                "width": 250
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1505
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "526107",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "About the Document Class",
+                        "href": "https://www.researchcatalogue.net/view/487048/526089"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1555
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "526106",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Content / Command",
+                        "href": "https://www.researchcatalogue.net/view/487048/526067"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1605
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "526105",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Flow: GUI, Text, Visualisation",
+                        "href": "https://www.researchcatalogue.net/view/487048/526059"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1655
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "526104",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Voice Control",
+                        "href": "https://www.researchcatalogue.net/view/487048/526075"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1705
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "532025",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "SynthLibrary Class",
+                        "href": "https://www.researchcatalogue.net/view/487048/532008"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 27,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 690,
+                "top": 1755
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "540304",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Wordweaving",
+                        "href": "https://www.researchcatalogue.net/view/487048/539717"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 27,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 920,
+                "top": 741
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "540315",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\"><span class=\"html-text-editor-content mceContentBody\">\n<p style=\"text-align: justify;\"><strong><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Live coding</span></strong></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">During the ALMAT residency Jonathan is working on several aspects of live coding practice, addressing technical, aesthetical and poetical questions. For example, with the aim of solving a specific limitation that derives from the ephemeral quality of live coding - namely that many processes get lost in the flow of writing and rewriting - he developed a <a href=\"https://www.researchcatalogue.net/view/487048/532008\">SuperCollider library</a> that allows to collect and catalogue synths played during live performances. These synthesis processes are then available for being reused and modified at a later point, filling the gap between live coding and (out of time) composition. </span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif;\"> </span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\"><strong>Live coding and story telling</strong></span></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Jon is also interested in incorporating storytelling into live coding performances. He wants to experiment what musical performative possibilities there are for story telling. &quot;I really like what story telling is, as a performative practice. It&#39;s a bit like weaving. Usually there are anecdotes that are sort of woven together, and it&#39;s very improvisational [1]&quot;.</span></p>\r\n<p style=\"text-align: justify;\"> </p>\r\n<p style=\"text-align: justify;\"><strong><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Voice and language</span></strong></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Working on this concept, he came to the idea of exploring <a href=\"https://www.researchcatalogue.net/view/487048/526075\">voice and language</a>, in particular analysis of the voice. After surveying different open source speech recognition packages, he wrote a ⬀<a href=\"https://github.com/jreus/SphinxOSC\">python frontend</a> / supercollider backend - based on <a href=\"https://cmusphinx.github.io\">⬀Sphinx</a> - for getting some of the speech analysis data into the computer. Feeding the phonemes from the recognition algorithm into SuperCollider he can use them to transform parameters of the synthesis process, using his voice to modify sounds in real-time.   </span></p>\r\n<p style=\"text-align: justify;\"> </p>\r\n<p style=\"text-align: justify;\"><strong><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Speech recognition</span></strong></p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 10pt; font-family: arial, helvetica, sans-serif;line-height: 1.25em;\">Being confronted with the limitations of tools like Sphinx, Jon has been trying to find ways that are a little less discrete and a little bit more open to deal with his voice. Trying to create a more complex classifier or feature detector, he wants to build a tool capable of capturing specific inflections and peculiar vocal utterances, pulling speech apart into its phonetic, sub-phonetic or non-phonetic qualities.  </span></p>\n</span>\n<div class=\"icon\"></div></div>",
+                    "links": [
+                        {
+                            "text": "SuperCollider library",
+                            "href": "https://www.researchcatalogue.net/view/487048/532008"
+                        },
+                        {
+                            "text": "voice and language",
+                            "href": "https://www.researchcatalogue.net/view/487048/526075"
+                        },
+                        {
+                            "text": "python frontend",
+                            "href": "https://github.com/jreus/SphinxOSC"
+                        },
+                        {
+                            "text": "⬀Sphinx",
+                            "href": "https://cmusphinx.github.io"
+                        }
+                    ]
+                }
+            },
+            "mediaSize": {
+                "height": 676,
+                "width": 517
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1109,
+                "top": 1708
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "518492",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Speech Analysis Sketchpad",
+                        "href": "https://www.researchcatalogue.net/view/487048/516339"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1109,
+                "top": 1756
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531878",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Memory / Learning Sketchpad",
+                        "href": "https://www.researchcatalogue.net/view/487048/531596"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1111,
+                "top": 1585
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531711",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextLink",
+                    "contents": {
+                        "text": "Automatic Transcript",
+                        "href": "https://www.researchcatalogue.net/view/487048/531677"
+                    }
+                }
+            },
+            "mediaSize": {
+                "height": 26,
+                "width": 238
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 53,
+                "top": 2267
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538917",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 10pt;\"><br /></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 98,
+                "width": 1135
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 69,
+                "top": 2039
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538905",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 8pt;\"></span></p>\n<p><span style=\"font-size: 10pt;\">The iteration with Jonathan Reus was embedded in Algorithms that Matter (A<span style=\"font-size: 8pt;\">LMAT</span>). A<span style=\"font-size: 8pt;\">LMAT</span> is a three-year project running from 2017 to 2020, within the framework of the Austrian Science Fund (FWF) – PEEK AR 403-GBL – and funded by the Austrian National Foundation for Research, Technology and Development (FTE) and by the State of Styria. It is hosted by the Institute of Electronic Music and Acoustics (IEM) at the University of Music and Performing Arts Graz.<br /></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 130,
+                "width": 1135
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 80,
+                "top": 1455
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531950",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 12pt;\"><strong>Points of Entry</strong></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 46,
+                "width": 129
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 315,
+                "top": 1455
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531951",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 12pt;\"><strong>Topics and Transcriptions</strong></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 46,
+                "width": 225
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1115,
+                "top": 1658
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531960",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 12pt;\"><strong>Sketches</strong></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 46,
+                "width": 193
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1117,
+                "top": 1543
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "531955",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextText",
+                    "html": "<div class=\"tool-content\" style=\"top:0px;right:0px;bottom:0px;left:0px;opacity:1\">\n<html><body><span class=\"simple-text-editor-content mceContentBody\">\n<p><span style=\"font-size: 12pt;\"><strong>Experiments</strong></span></p>\n</span></body></html>\n<div class=\"icon\"></div></div>",
+                    "links": []
+                }
+            },
+            "mediaSize": {
+                "height": 46,
+                "width": 193
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1385,
+                "top": 165
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "755488",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "TextTool",
+                "contents": {
+                    "tag": "TextMeta"
+                }
+            },
+            "mediaSize": {
+                "height": 150,
+                "width": 509
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 69,
+                "top": 2154
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538908",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/a6/11/60/ed/a61160ed022cb8a026e2ffe7cce6d64a.png?t=cf00e803d1ebfc88828ffb62d6b7edc1&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 73,
+                "width": 75
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 77,
+                "top": 50
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538838",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/d4/b1/2a/28/d4b12a28f935790f6f023359fd953fbf.png?t=508542add6a7dabd1bdb093b85329557&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 109,
+                "width": 200
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 184,
+                "top": 2156
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538911",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/3e/45/a4/3c/3e45a43c63a46fc81dcd0f85209c9b99.png?t=7b2760d6304037af41073500ab79ed41&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 72,
+                "width": 90
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 309,
+                "top": 2196
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538914",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/00/63/e4/9c/0063e49cb79c8602af39ec813e1f4c9e.png?t=9941c53ad82f1963a7641d3188379ef1&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 31,
+                "width": 250
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 463,
+                "top": 30
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "664427",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/ce/7c/5e/e1/ce7c5ee18ab806a1c85a9815ef491da2.png?t=1322efb016186cc2678497868c6cef3d&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 106,
+                "width": 674
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 466,
+                "top": 110
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "664429",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/7f/94/62/0f/7f94620fefa51386afe53c2c5bad0d9e.png?t=11e994a9ed4928d364093cdfb4170a7c&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 59,
+                "width": 375
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 657,
+                "top": 727
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "539673",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/77/d9/de/7b/77d9de7b1987af61cf29e12b141acf08.png?t=5995a61294bda8e5dc6ec3a4d537ee69&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 224,
+                "width": 215
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 657,
+                "top": 984
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "538902",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/fc/d3/89/cd/fcd389cd0b2d89c0c9920fb979cf1a1c.png?t=898be00416fad5a87d75eeabeea7c3da&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 216,
+                "width": 216
+            }
+        },
+        {
+            "mediaPosition": {
+                "left": 1457,
+                "top": 372
+            },
+            "mediaMeta": {
+                "kind": "Overview",
+                "date": null,
+                "keywords": [
+                    "Live coding",
+                    "Speech recognition",
+                    "Voice",
+                    "Language"
+                ],
+                "author": null,
+                "linksTo": null,
+                "place": null,
+                "persons": [
+                    "HHR",
+                    "POZ",
+                    "DP",
+                    "JR"
+                ]
+            },
+            "mediaId": "540832",
+            "mediaFile": null,
+            "mediaContent": {
+                "tag": "ImageTool",
+                "contents": "https://media.researchcatalogue.net/rc/cache/a4/df/95/93/a4df9593d7baf6fba16607a44099b6c6.png?t=ac8742cead6b4f2638ede9b1f6f921c1&e=1577218800"
+            },
+            "mediaSize": {
+                "height": 557,
+                "width": 235
+            }
+        }
+    ]
+]
