@@ -1,7 +1,7 @@
 * luc
 ** notes
 *** make org of pages/expositions and state of commenting
-** correction example of dialog <2020-01-13 Mon>
+** DONE correction example of dialog <2020-01-13 Mon>
 ** notes reading iteartions <2020-01-20 Mon>
 ** notes reading first two columns <2020-01-27 Mon>
 ** crawler <2020-02-03 Mon>
