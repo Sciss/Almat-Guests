@@ -1,3 +1,6 @@
+* anchors
+** ⌕ subsection
+** ↗ response 
 * fields
 ** links-to: relation to other object or page
 ** kind: type of media such as logo, screenshot etc.
