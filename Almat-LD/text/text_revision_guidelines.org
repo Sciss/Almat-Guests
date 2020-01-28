@@ -16,3 +16,4 @@ should be replaced by something more precise.
 * Changing the order of subordinate clauses can sometimes improve comprehensibility.
 * "kind of.." "like.." "sort of.." etc should be deleted when not strictly necessary 
 * When discourse is too contextual, try to introduce a bit of context by expanding implicit assumptions
+* I'm marking relevant style correction with 'style' post-it
