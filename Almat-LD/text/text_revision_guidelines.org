@@ -1,0 +1,18 @@
+* When someone starts to talk, they often use superfluous or relativizing intros that can be deleted.
+* There are some "Italianisms" and "Germanisms" 
+e.g. the way David uses "intend" may be hard to understand for
+non-Romance language speakers.
+* Contractions should probably be expanded.
+* Redundancies should be deleted.
+* "the thing is" or "..and then the thing" etc. 
+should be replaced by something more precise.
+* Mark certain argumentative turns by clearer conjunctions
+  ("however" instead of "but" at the beginning of a phrase, "thus"
+  etc.).
+* Sometimes replace "you" with "one" which is bit more formal and at times clearer.
+* Sometimes place an adverb first 
+("There is, obviously" vs "Obviously, there is"). Is better because it
+  introduces the function and tone of the phrase right from the start.
+* Changing the order of subordinate clauses can sometimes improve comprehensibility.
+* "kind of.." "like.." "sort of.." etc should be deleted when not strictly necessary 
+* When discourse is too contextual, try to introduce a bit of context by expanding implicit assumptions

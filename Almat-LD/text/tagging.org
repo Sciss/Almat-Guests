@@ -7,6 +7,9 @@
 ** author: e.g. JR
 ** date: 
 ** place:
+** origin: conversation, email, presentation, program notes
+when origin is not explicity declared, we assume origin:online
+this applies to comments, resume, proposals etc.
 * general metadata fields for entire page
 ** title: 
 ** type: meta - refers to page
