@@ -3,14 +3,32 @@
 <a href="#ML_as_memory">⌕</a>
 ** ⌕ subsection
 ** ↗ response 
-** ⁺ caption
+** ⁺s caption
 * fields
 ** links-to: relation to other object or page
-** kind: type of media such as logo, screenshot, contextual etc.
-** author: e.g. JR
+** kind
+*** logo
+*** screenshot
+*** photo
+*** meta
+** type
+*** contextual
+*** comment
+*** caption
+*** proposal
+*** description
+*** code
+*** experiment
+*** bib
+** author
+** persons
 ** date: 
 ** place:
-** origin: conversation, email, presentation, program notes
+** origin
+*** conversation
+*** email
+*** presentation
+*** program notes
 when origin is not explicity declared, we assume origin:online
 this applies to comments, resume, proposals etc.
 * general metadata fields for entire page
@@ -28,3 +46,10 @@ this applies to comments, resume, proposals etc.
 ** links-to with links in texts
 ** navigational elements with text only containing a link, connects pages but not an object
 * page is also an object
+
+* issues
+** photo: keywords
+only the content or also the context?
+** kind and type is getting ambigous
+I think it make sense to use kind to distinguish different media
+type is also a specification when we have a 'textual' kind
