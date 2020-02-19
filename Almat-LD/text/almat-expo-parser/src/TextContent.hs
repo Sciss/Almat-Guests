@@ -15,6 +15,8 @@ import           Data.String.Utils (endswith, startswith, strip)
 import           GHC.Generics
 import           MetaData
 import           Text.HTML.TagSoup (Tag (..), parseTags, renderTags)
+import Debug.Trace (trace)
+import qualified Data.Char as Char
 
 -- Utils for navigating parsed tags
 takeUntil :: Tag String -> [Tag String] -> [Tag String]
@@ -36,6 +38,12 @@ stripText []               = []
 
 removeNl :: [String] -> [String]
 removeNl = filter (/= "\n")
+
+remove160 :: String -> String
+remove160 = filter (/= (Char.chr 160))
+
+stripSpace :: String -> String
+stripSpace = strip . remove160           
 
 concatNl :: [String] -> String
 concatNl = intercalate "\n"
@@ -117,7 +125,8 @@ toTextBlock str =
   where
     (txt, meta) = parseAndExtractMeta str
     linksInText = collectLinks txt
-    parsedMeta = mconcat $ mapMaybe decodeMetaData meta
+    meta160  = (map remove160 meta)
+    parsedMeta = mconcat $ mapMaybe decodeMetaData $ trace ("meta " ++ show meta160) meta160
 
 hoverMeta :: String -> ParsedMetaData
 hoverMeta str = mconcat $ mapMaybe decodeMetaData meta

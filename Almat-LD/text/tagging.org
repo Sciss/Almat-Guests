@@ -1,36 +1,58 @@
 * anchors
 <a name="ML_as_memory"></a>
 <a href="#ML_as_memory">⌕</a>
-** ⌕ subsection
+** ⌕ content description
 ** ↗ response 
 ** ⁺s caption
 * fields
+** TODO describe how to add metadata.hs
 ** links-to: relation to other object or page
-** kind
+** meta: boolean (default=false)
+** group: grouping objects on a page by same group identifier
+** belongs-to: 
+** kind: 
+*** TODO describe what a kind is
 *** logo
 *** screenshot
+*** diagram
 *** photo
-*** meta
-** type
+*** code
+*** bib
+*** conversation
+*** essay
+*** passim
+*** biography
+** function
+*** TODO describe what function is
 *** contextual
 *** comment
 *** caption
-*** proposal
 *** description
-*** code
 *** experiment
-*** bib
 ** author
 ** persons
 ** date: 
+YYYY-MM-DD
+DD.MM.YY or DD.MM.YYYY
+DD-MMM(alpha)-YY or DD-MMM(alpha)-YYYY
+YYMMDD
+plus spans, [FROM, TO]
+year
+Jan-2010
+2010
+23_06_18
+two digit YY always 20YY
 ** place:
-** origin
-*** conversation
+** keywords: array of strings
+** origin:
+*** project proposal
+*** spoken
 *** email
 *** presentation
 *** program notes
 when origin is not explicity declared, we assume origin:online
 this applies to comments, resume, proposals etc.
+* author date tag: e.g. {JCR, 18.09.21}
 * general metadata fields for entire page
 ** title: 
 ** type: meta - refers to page
@@ -50,6 +72,11 @@ this applies to comments, resume, proposals etc.
 * issues
 ** photo: keywords
 only the content or also the context?
+** list all possible date formats
 ** kind and type is getting ambigous
 I think it make sense to use kind to distinguish different media
 type is also a specification when we have a 'textual' kind
+** timespan
+** case sensitivity
+** dialogue
+** type and kind confusion (meta) 504507

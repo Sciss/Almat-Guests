@@ -149,58 +149,98 @@ parseDetailsPage parseDetailsPage545,546
 getDetailsPageData getDetailsPageData572,573
 crawlExposition crawlExposition619,620
 
-./src/TextContent.hs,831
+./src/TextContent.hs,891
 module TextContentTextContent3,4
-takeUntil takeUntil19,20
-dropUntil dropUntil25,26
-stripText stripText31,32
-removeNl removeNl36,37
-concatNl concatNl39,40
-collectLinks collectLinks42,43
-type TextAndMeta TextAndMeta50,51
-extractMeta extractMeta52,53
-collectYamlString collectYamlString65,66
-parseAndExtractMeta parseAndExtractMeta71,72
-data TextBlockTextBlock75,76
-  = MetaBlock MetaBlock76,77
-  | TextBlockTextBlock77,78
-      { metaData metaData78,79
-      , html html79,80
-      , links links80,81
-  | LinkBlock LinkBlock82,83
-instance ToJSON ToJSON TextBlock85,86
-data Link Link87,88
-  LinkLink88,89
-    { href href89,90
-    , text text90,91
-instance ToJSON ToJSON Link94,95
-asLink asLink96,97
-isMeta isMeta106,107
-toTextBlock toTextBlock109,110
-hoverMeta hoverMeta121,122
+takeUntil takeUntil21,22
+dropUntil dropUntil27,28
+stripText stripText33,34
+removeNl removeNl38,39
+remove160 remove16041,42
+stripSpace stripSpace44,45
+concatNl concatNl47,48
+collectLinks collectLinks50,51
+type TextAndMeta TextAndMeta58,59
+extractMeta extractMeta60,61
+collectYamlString collectYamlString73,74
+parseAndExtractMeta parseAndExtractMeta79,80
+data TextBlockTextBlock83,84
+  = MetaBlock MetaBlock84,85
+  | TextBlockTextBlock85,86
+      { metaData metaData86,87
+      , html html87,88
+      , links links88,89
+  | LinkBlock LinkBlock90,91
+instance ToJSON ToJSON TextBlock93,94
+data Link Link95,96
+  LinkLink96,97
+    { href href97,98
+    , text text98,99
+instance ToJSON ToJSON Link102,103
+asLink asLink104,105
+isMeta isMeta114,115
+toTextBlock toTextBlock117,118
+hoverMeta hoverMeta130,131
 
-./src/MetaData.hs,650
-module MetaDataMetaData4,5
-data ParsedMetaData ParsedMetaData15,16
-  ParsedMetaDataParsedMetaData16,17
-    { linksTo linksTo17,18
-    , kind kind18,19
-    , author author19,20
-    , keywords keywords20,21
-    , persons persons21,22
-    , date date22,23
-    , place place23,24
-instance ToJSON ToJSON ParsedMetaData27,28
-instance FromJSON FromJSON ParsedMetaData29,30
-instance Semigroup Semigroup Value32,33
-  Array Array33,34
-  e e38,39
-  _ _42,43
-instance Semigroup Semigroup ParsedMetaData45,46
-  m1 m146,47
-instance Monoid Monoid ParsedMetaData56,57
-  mempty mempty57,58
-decodeMetaData decodeMetaData60,61
+./src/MetaData.hs,2024
+module MetaDataMetaData7,8
+data ElementKind ElementKind20,21
+  LogoLogo21,22
+  | ScreenshotScreenshot22,23
+  | PhotoPhoto23,24
+  | MetaMeta24,25
+  | DialogueDialogue25,26
+instance ToJSON ToJSON ElementKind28,29
+instance FromJSON FromJSON ElementKind32,33
+  parseJSON parseJSON33,34
+instance Semigroup Semigroup ElementKind44,45
+  v v45,46
+data ElementType ElementType48,49
+  ContextualContextual49,50
+  | CommentComment50,51
+  | CaptionCaption51,52
+  | ProposalProposal52,53
+  | DescriptionDescription53,54
+  | CodeCode54,55
+  | ExperimentExperiment55,56
+  | BibBib56,57
+instance FromJSON FromJSON ElementType60,61
+instance ToJSON ToJSON ElementType75,76
+instance Semigroup Semigroup ElementType77,78
+  v v78,79
+data ElementOrigin ElementOrigin81,82
+  Conversation Conversation82,83
+  Conversation | Email Email82,83
+  Conversation | Email | Presentation Presentation82,83
+  Conversation | Email | Presentation | ProgramNotes ProgramNotes82,83
+  Conversation | Email | Presentation | ProgramNotes | OnlineOnline82,83
+instance ToJSON ToJSON ElementOrigin85,86
+instance Semigroup Semigroup ElementOrigin87,88
+  v v88,89
+instance FromJSON FromJSON ElementOrigin90,91
+  parseJSON parseJSON91,92
+data ParsedMetaData ParsedMetaData99,100
+  ParsedMetaDataParsedMetaData100,101
+    { linksTo linksTo101,102
+    , kind kind102,103
+    , author author103,104
+    , elementType elementType104,105
+    , keywords keywords105,106
+    , persons persons106,107
+    , date date107,108
+    , place place108,109
+    , origin origin109,110
+instance ToJSON ToJSON ParsedMetaData113,114
+instance FromJSON FromJSON ParsedMetaData117,118
+    parseJSON parseJSON118,119
+instance Semigroup Semigroup Value130,131
+  Array Array131,132
+  e e136,137
+  _ _140,141
+instance Semigroup Semigroup ParsedMetaData143,144
+  m1 m1144,145
+instance Monoid Monoid ParsedMetaData156,157
+  mempty mempty157,158
+decodeMetaData decodeMetaData160,161
 
 ./Setup.hs,15
 main main1,2
