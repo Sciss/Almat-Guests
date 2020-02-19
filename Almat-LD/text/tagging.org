@@ -3,7 +3,7 @@
 <a href="#ML_as_memory">⌕</a>
 ** ⌕ content description
 ** ↗ response 
-** ⁺s caption
+** ⁺ caption
 * fields
 ** TODO describe how to add metadata.hs
 ** links-to: relation to other object or page
@@ -16,12 +16,20 @@
 *** screenshot
 *** diagram
 *** photo
+*** scan
+*** footer
 *** code
+*** sound
 *** bib
+*** resume
 *** conversation
 *** essay
 *** passim
 *** biography
+*** scan
+*** footer
+*** code
+*** sound
 ** function
 *** TODO describe what function is
 *** contextual
