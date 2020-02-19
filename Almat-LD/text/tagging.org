@@ -3,7 +3,7 @@
 <a href="#ML_as_memory">⌕</a>
 ** ⌕ subsection
 ** ↗ response 
-** ⁺s caption
+** ⁺ caption
 * fields
 ** links-to: relation to other object or page
 ** kind
@@ -11,6 +11,10 @@
 *** screenshot
 *** photo
 *** meta
+*** scan
+*** footer
+*** code
+*** sound
 ** type
 *** contextual
 *** comment
@@ -19,12 +23,19 @@
 *** description
 *** code
 *** experiment
+*** artwork
 *** bib
+*** transcript
+*** artist talk
+*** work presentation
+*** resume
 ** author
 ** persons
 ** date: 
 ** place:
 ** origin
+** tag
+tag related elements within the same page?
 *** conversation
 *** email
 *** presentation
