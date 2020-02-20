@@ -6,11 +6,13 @@ module ExpositionParser
   , weaveWithMetaData
   ) where
 
+import           Control.Monad
+import           Control.Monad.Trans.Writer
 import           Crawler
-import           Data.Aeson   (ToJSON)
-import qualified Data.List    as L
-import           Data.Maybe   (maybe)
-import qualified Data.Text    as T
+import           Data.Aeson                 (ToJSON)
+import qualified Data.List                  as L
+import           Data.Maybe                 (maybe)
+import qualified Data.Text                  as T
 import           GHC.Generics
 import           MetaData
 import           TextContent
@@ -71,24 +73,32 @@ applyMetaBlocks tools =
   where
     metaInfo = mconcat (mediaMeta <$> filterMetaBlocks tools)
 
+blockToContent :: TextBlock -> (ParsedMetaData, MediaContentType)
+blockToContent b =
+  case b of
+    LinkBlock l     -> (mempty, TextTool (TextLink l))
+    MetaBlock m     -> (m, TextTool TextMeta)
+    TextBlock m h l -> (m, TextTool (TextText (T.pack h) l))
+
 -- |Create metadata from tools
-addMetaData :: Tool -> MediaWithMetaData
-addMetaData t =
+addMetaData :: Tool -> Writer [String] MediaWithMetaData
+addMetaData t = do
   let mediaFn =
         MediaWithMetaData (toolMediaFile t) (toolId t) (position t) (size t)
-      metaFromHover = maybe mempty (hoverMeta . T.unpack) (hoverText t)
-      (meta, media) =
-        case toolContent t of
-          TextContent txt ->
-            case toTextBlock (T.unpack txt) of
-              LinkBlock l     -> (mempty, TextTool (TextLink l))
-              MetaBlock m     -> (m, TextTool TextMeta)
-              TextBlock m h l -> (m, TextTool (TextText (T.pack h) l))
-          ImageContent i -> (metaFromHover, ImageTool i)
-          VideoContent i -> (metaFromHover, VideoTool i)
-          AudioContent i -> (metaFromHover, AudioTool i)
-   in mediaFn meta media
+  metaFromHover <-
+    case (hoverText t) of
+      Nothing -> return $ (mempty :: ParsedMetaData)
+      Just ht -> (hoverMeta . T.unpack) ht
+  case toolContent t of
+    TextContent txt -> do
+      block <- toTextBlock (T.unpack txt)
+      let (meta, media) = blockToContent block
+      return $ mediaFn meta media
+    ImageContent i -> return $ mediaFn metaFromHover (ImageTool i)
+    VideoContent i -> return $ mediaFn metaFromHover (VideoTool i)
+    AudioContent i -> return $ mediaFn metaFromHover (AudioTool i)
 
 -- |Process a page, apply metadata.
-weaveWithMetaData :: Weave -> [MediaWithMetaData]
-weaveWithMetaData weave = applyMetaBlocks $ fmap addMetaData (weaveTools weave)
+weaveWithMetaData :: Weave -> Writer [String] [MediaWithMetaData]
+weaveWithMetaData weave = do
+  fmap applyMetaBlocks $ mapM addMetaData (weaveTools weave)

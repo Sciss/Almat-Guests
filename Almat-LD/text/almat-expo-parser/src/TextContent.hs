@@ -8,15 +8,17 @@ module TextContent
   , hoverMeta
   ) where
 
-import           Data.Aeson        (ToJSON)
-import           Data.List         (concat, filter, intercalate, null)
-import           Data.Maybe        (fromMaybe, mapMaybe)
-import           Data.String.Utils (endswith, startswith, strip)
+import           Control.Monad
+import           Control.Monad.Trans.Writer
+import           Data.Aeson                 (ToJSON)
+import qualified Data.Char                  as Char
+import           Data.List                  (concat, filter, intercalate, null)
+import           Data.Maybe                 (catMaybes, fromMaybe, mapMaybe)
+import           Data.String.Utils          (endswith, startswith, strip)
+import           Debug.Trace                (trace)
 import           GHC.Generics
 import           MetaData
-import           Text.HTML.TagSoup (Tag (..), parseTags, renderTags)
-import Debug.Trace (trace)
-import qualified Data.Char as Char
+import           Text.HTML.TagSoup          (Tag (..), parseTags, renderTags)
 
 -- Utils for navigating parsed tags
 takeUntil :: Tag String -> [Tag String] -> [Tag String]
@@ -43,7 +45,7 @@ remove160 :: String -> String
 remove160 = filter (/= (Char.chr 160))
 
 stripSpace :: String -> String
-stripSpace = strip . remove160           
+stripSpace = strip . remove160
 
 concatNl :: [String] -> String
 concatNl = intercalate "\n"
@@ -115,20 +117,20 @@ asLink _ = Nothing
 isMeta :: TextAndMeta -> Bool
 isMeta (t, m) = null (removeNl $ stripText t) && (not . null) m
 
-toTextBlock :: String -> TextBlock
-toTextBlock str =
+toTextBlock :: String -> Writer [String] TextBlock
+toTextBlock str = do
+  let (txt, meta) = parseAndExtractMeta str
+      linksInText = collectLinks txt
+      meta160 = map remove160 meta
+  parsedMeta <- (mconcat . catMaybes) <$> mapM decodeMetaData meta160
   if isMeta (txt, meta)
-    then MetaBlock parsedMeta
-    else fromMaybe
+    then return $ MetaBlock parsedMeta
+    else return $
+         fromMaybe
            (TextBlock parsedMeta (renderTags txt) linksInText)
            (asLink (txt, meta))
-  where
-    (txt, meta) = parseAndExtractMeta str
-    linksInText = collectLinks txt
-    meta160  = (map remove160 meta)
-    parsedMeta = mconcat $ mapMaybe decodeMetaData $ trace ("meta " ++ show meta160) meta160
 
-hoverMeta :: String -> ParsedMetaData
-hoverMeta str = mconcat $ mapMaybe decodeMetaData meta
-  where
-    (_, meta) = parseAndExtractMeta str
+hoverMeta :: String -> Writer [String] ParsedMetaData
+hoverMeta str =
+  let (_, meta) = parseAndExtractMeta str
+   in (mconcat . catMaybes) <$> mapM decodeMetaData meta

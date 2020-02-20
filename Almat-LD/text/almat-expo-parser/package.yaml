@@ -40,6 +40,8 @@ dependencies:
 - tagsoup
 - MissingH
 - vector
+- time
+- transformers
 
 library:
   source-dirs: src

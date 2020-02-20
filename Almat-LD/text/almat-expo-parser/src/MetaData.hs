@@ -1,131 +1,110 @@
-
-e{-# LANGUAGE DeriveGeneric        #-}
+{-# LANGUAGE BangPatterns         #-}
+{-# LANGUAGE DeriveGeneric        #-}
 {-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE RecordWildCards      #-}
 {-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE BangPatterns #-}
 
 module MetaData
   ( ParsedMetaData(..)
   , decodeMetaData
   ) where
 
-import           Data.Aeson            (ToJSON)
-import qualified Data.ByteString.Char8 as B
-import qualified Data.Vector           as V
+import           Control.Monad
+import           Control.Monad.Trans.Writer
+import           Data.Aeson                 (ToJSON)
+import qualified Data.ByteString.Char8      as B
+import           Data.Text                  as T
+import qualified Data.Vector                as V
 import           Data.Yaml
+import           Debug.Trace                (trace)
 import           GHC.Generics
-import Debug.Trace (trace)
-import Data.Text as T
 
-data ElementKind =
-  Logo 
-  | Screenshot 
+data ElementKind
+  = Logo
+  | Screenshot
+  | Diagram
   | Photo
-  | Meta
-  | Dialogue
+  | Scan
+  | Footer
+  | Code
+  | Sound
+  | Bib
+  | Resume
+  | Conversation
+  | Essay
+  | Passum
+  | Biography
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
 
--- instance FromJSON ElementKind
-
-instance FromJSON ElementKind  where
-  parseJSON (String s) =
-    let !_a = trace ("string is " ++ (T.unpack s)) s in
-    case s of
-      "logo" -> return Logo
-      "screenshot" -> return Screenshot
-      "photo" -> return Photo
-      "meta" -> return Meta
-      "Dialogue" -> return Dialogue -- only testing
-      _ -> mempty
-
+instance FromJSON ElementKind
 
 instance Semigroup ElementKind where
   v <> v' = v'
 
-
-data ElementType =
-  Contextual
+data ElementFunction
+  = Contextual
   | Comment
   | Caption
   | Proposal
   | Description
-  | Code
   | Experiment
-  | Bib
   deriving (Generic, Show, Eq)
 
+instance FromJSON ElementFunction
 
-instance FromJSON ElementType
+instance ToJSON ElementFunction
 
--- instance FromJSON ElementType  where
---   parseJSON (String s) = case s of
---     "contextual" -> return Contextual
---     "comment" -> return Comment
---     "caption" -> return Caption
---     "proposal" -> return Proposal
---     "description" -> return Description
---     "code" -> return Code
---     "experiment" -> return Experiment
---     "bib" -> return Bib
---     _ -> mempty
-
-
-instance ToJSON ElementType
-
-instance Semigroup ElementType where
+instance Semigroup ElementFunction where
   v <> v' = v'
 
-
-data ElementOrigin =
-  Conversation | Email | Presentation | ProgramNotes | Online 
+data ElementOrigin
+  = ProjectProposal
+  | Spoken
+  | Email
+  | Presentation
+  | ProgramNotes
+  | RC
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementOrigin
 
+instance FromJSON ElementOrigin
+
 instance Semigroup ElementOrigin where
   v <> v' = v'
-
-instance FromJSON ElementOrigin  where
-  parseJSON (String s) = case s of
-    "conversation" -> return Conversation
-    "email" -> return Email
-    "presentation" -> return Presentation
-    "program notes" -> return ProgramNotes
-    _ -> return Online
-
 
 data ParsedMetaData =
   ParsedMetaData
     { linksTo  :: Maybe Value
+    , meta     :: Bool
     , kind     :: Maybe ElementKind
     , author   :: Maybe Value
-    , elementType   :: Maybe ElementType
+    , function :: Maybe ElementFunction
     , keywords :: Maybe Value
     , persons  :: Maybe Value
     , date     :: Maybe Value
     , place    :: Maybe Value
-    , origin    :: ElementOrigin
+    , origin   :: ElementOrigin
     }
   deriving (Generic, Show, Eq)
 
 instance ToJSON ParsedMetaData
 
 -- instance FromJSON ParsedMetaData
-
 instance FromJSON ParsedMetaData where
-    parseJSON = withObject "ParsedMetaData" $ \v -> ParsedMetaData
-        <$> v .:? "links-to" 
-        <*> v .:? "kind"
-        <*> v .:? "author"
-        <*> v .:? "type"
-        <*> v .:? "keywords"
-        <*> v .:? "persons"
-        <*> v .:? "date"
-        <*> v .:? "place"
-        <*> v .:? "origin" .!= Online
+  parseJSON =
+    withObject "ParsedMetaData" $ \v ->
+      ParsedMetaData <$> v .:? "links-to" <*> v .:? "meta" .!= False <*>
+      v .:? "kind" <*>
+      v .:? "author" <*>
+      v .:? "function" <*>
+      v .:? "keywords" <*>
+      v .:? "persons" <*>
+      v .:? "date" <*>
+      v .:? "place" <*>
+      v .:? "origin" .!= RC
 
 -- |Specific JSON 'Value' semigroup for metadata "inheritance"
 instance Semigroup Value where
@@ -145,9 +124,10 @@ instance Semigroup ParsedMetaData where
   m1 <> m2 =
     ParsedMetaData
       (linksTo m1 <> linksTo m2)
+      (meta m1 && meta m2)
       (kind m1 <> kind m2)
       (author m1 <> author m2)
-      (elementType m1 <> elementType m2)
+      (function m1 <> function m2)
       (keywords m1 <> keywords m2)
       (persons m1 <> persons m2)
       (date m1 <> date m2)
@@ -156,10 +136,22 @@ instance Semigroup ParsedMetaData where
 
 instance Monoid ParsedMetaData where
   mempty =
-    ParsedMetaData Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Online
+    ParsedMetaData
+      Nothing
+      False
+      Nothing
+      Nothing
+      Nothing
+      Nothing
+      Nothing
+      Nothing
+      Nothing
+      RC
 
-decodeMetaData :: String -> Maybe ParsedMetaData
+decodeMetaData :: String -> Writer [String] (Maybe ParsedMetaData)
 decodeMetaData str =
   case decodeEither' (B.pack str) :: Either ParseException ParsedMetaData of
-    Right d -> Just d
-    Left f  -> trace (show f) Nothing
+    Right d -> return $ Just d
+    Left f -> do
+      tell ["Tried parsing: \n" ++ str ++ "\nError: " ++ (show f) ++ "\n\n"]
+      return Nothing

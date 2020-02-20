@@ -1,9 +1,13 @@
 module Main where
 
+import           Control.Monad
+import           Control.Monad.Trans.Writer
 import           Crawler
-import qualified Data.Text.IO       as TIO
+import           Data.List                  (intercalate)
+import qualified Data.Text.IO               as TIO
+import           Data.Time.Clock            (getCurrentTime)
 import           ExpositionParser
-import           System.Environment (getArgs)
+import           System.Environment         (getArgs)
 
 mkImportOptions :: String -> String -> ImportOptions
 mkImportOptions expoId weaveId =
@@ -28,4 +32,7 @@ main = do
   args <- getArgs
   let options = parseArgs args
   expo <- crawlExposition options
-  TIO.putStrLn $ encodeTxt $ fmap weaveWithMetaData (expositionWeaves expo)
+  let (weaves, log) = runWriter $ mapM weaveWithMetaData (expositionWeaves expo)
+  t <- getCurrentTime
+  writeFile ("tmp_" ++ (show t) ++ ".log") (intercalate "\n" log)
+  TIO.putStrLn $ encodeTxt $ weaves
