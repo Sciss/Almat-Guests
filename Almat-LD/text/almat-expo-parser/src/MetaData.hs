@@ -24,6 +24,7 @@ data ElementKind
   | Screenshot
   | Diagram
   | Photo
+  | Video
   | Scan
   | Footer
   | Code
@@ -32,7 +33,7 @@ data ElementKind
   | Resume
   | Conversation
   | Essay
-  | Passum
+  | Passim
   | Biography
   deriving (Generic, Show, Eq)
 
@@ -50,6 +51,8 @@ data ElementFunction
   | Proposal
   | Description
   | Experiment
+  | Overview
+  | Info
   deriving (Generic, Show, Eq)
 
 instance FromJSON ElementFunction

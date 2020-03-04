@@ -21,6 +21,7 @@
 *** logo
 *** screenshot
 *** diagram
+*** video
 *** photo
 *** scan
 *** footer
@@ -39,6 +40,8 @@
 *** caption
 *** description
 *** experiment
+*** overview
+*** info
 ** author
 ** persons
 ** date: 
@@ -63,6 +66,9 @@ two digit YY always 20YY
 when origin is not explicity declared, we assume origin:online
 this applies to comments, resume, proposals etc.
 *** RC (default)
+** event
+*** SCmeeting
+*** openCUBE
 * author date tag: e.g. {JCR, 18.09.21}
 * general metadata fields for entire page
 ** title: 
