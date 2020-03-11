@@ -56,8 +56,13 @@ Jan-2010
 23_06_18
 two digit YY always 20YY
 ** place:
+*** CUBE
+** artwork:
+*** ListeningToTheAir
+*** TheFifthRootOfTwo
 ** keywords: array of strings
 ** origin:
+*** skype
 *** project proposal
 *** spoken
 *** email

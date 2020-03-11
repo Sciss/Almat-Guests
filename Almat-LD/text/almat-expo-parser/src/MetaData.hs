@@ -69,6 +69,7 @@ data ElementOrigin
   | Presentation
   | ProgramNotes
   | RC
+  | Skype
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementOrigin
@@ -78,6 +79,18 @@ instance FromJSON ElementOrigin
 instance Semigroup ElementOrigin where
   v <> v' = v'
 
+data ElementArtwork
+  = TheFifthRoothOfTwo
+  | ListeningToTheAir
+  deriving (Generic, Show, Eq)
+
+instance ToJSON ElementArtwork
+
+instance FromJSON ElementArtwork
+
+instance Semigroup ElementArtwork where
+  v <> v' = v'
+  
 data ParsedMetaData =
   ParsedMetaData
     { linksTo  :: Maybe Value
