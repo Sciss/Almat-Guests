@@ -1,9 +1,27 @@
 * anchors
 <a name="ML_as_memory"></a>
-<a href="#ML_as_memory">⌕</a>
+<a href="#ML_as_memory">↗</a>
 ** ⌕ content description
 ** ↗ response 
 ** ⁺ caption
+* image template
+---
+kind: photo
+author: POZ
+persons: EG
+place: lydgalleriet
+event: thresholdOfTheAlgorithmic
+group: heartrate
+keywords: [_, heart rate sensor, electronics, sensor, heart rate, Erin Gee]
+---
+* meta template
+---
+meta: true
+title: Iteration RK
+persons: [HHR, POZ, DP, RK]
+function: Overview
+keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
+---
 * How to add closed vocabulary entries:
 1. Open the file [[./almat-expo-parser/src/MetaData.hs]]
 2. There are a number of sum types for closed vocabulary fields, they
@@ -33,6 +51,7 @@
 *** essay
 *** passim
 *** biography
+*** quote
 ** function
 *** TODO describe what function is
 *** contextual
@@ -40,8 +59,12 @@
 *** caption
 *** description
 *** experiment
+*** documentation
 *** overview
 *** info
+*** survey
+*** definition
+*** presentation
 ** author
 ** persons
 ** date: 
@@ -57,9 +80,13 @@ Jan-2010
 two digit YY always 20YY
 ** place:
 *** CUBE
+*** experimentalstudio
+*** lydgalleriet
+*** ORPHEUSinstitute
 ** artwork:
 *** ListeningToTheAir
 *** TheFifthRootOfTwo
+*** PinchAndSoothe
 ** keywords: array of strings
 ** origin:
 *** skype
@@ -74,6 +101,9 @@ this applies to comments, resume, proposals etc.
 ** event
 *** SCmeeting
 *** openCUBE
+*** signaleSoiree
+*** thresholdOfTheAlgorithmic
+*** SimulationAndComputerExperimentationInMusicAndSoundArt
 * author date tag: e.g. {JCR, 18.09.21}
 * general metadata fields for entire page
 ** title: 

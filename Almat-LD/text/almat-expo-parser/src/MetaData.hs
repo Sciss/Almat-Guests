@@ -35,6 +35,7 @@ data ElementKind
   | Essay
   | Passim
   | Biography
+  | Quote
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
@@ -53,6 +54,10 @@ data ElementFunction
   | Experiment
   | Overview
   | Info
+  | Survey
+  | Definition
+  | Presentation
+  | Documentation
   deriving (Generic, Show, Eq)
 
 instance FromJSON ElementFunction
@@ -82,6 +87,7 @@ instance Semigroup ElementOrigin where
 data ElementArtwork
   = TheFifthRoothOfTwo
   | ListeningToTheAir
+  | PinchAndSoothe
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementArtwork
@@ -89,6 +95,21 @@ instance ToJSON ElementArtwork
 instance FromJSON ElementArtwork
 
 instance Semigroup ElementArtwork where
+  v <> v' = v'
+
+data ElementEvent
+  = SCmeeting
+  | openCUBE
+  | signaleSoiree
+  | thresholdsOfTheAlgorithmic
+  | SimulationAndComputerExperimentationInMusicAndSoundArt
+  deriving (Generic, Show, Eq)
+
+instance ToJSON ElementEvent
+
+instance FromJSON ElementEvent
+
+instance Semigroup ElementEvent where
   v <> v' = v'
   
 data ParsedMetaData =
