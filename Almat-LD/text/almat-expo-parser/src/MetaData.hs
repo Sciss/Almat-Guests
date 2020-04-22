@@ -36,6 +36,12 @@ data ElementKind
   | Passim
   | Biography
   | Quote
+  | Collage
+  | Title
+  | Program
+  | Slideshow
+  | Note
+  | Diary
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
@@ -88,6 +94,15 @@ data ElementArtwork
   = TheFifthRoothOfTwo
   | ListeningToTheAir
   | PinchAndSoothe
+  | Moor
+  | Notebook
+  | Hough
+  | Site
+  | Fragments
+  | Spokes
+  | Knots
+  | PreciousObjects
+  | LeapSpace
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementArtwork
@@ -103,6 +118,9 @@ data ElementEvent
   | signaleSoiree
   | thresholdsOfTheAlgorithmic
   | SimulationAndComputerExperimentationInMusicAndSoundArt
+  | imperfectReconstruction
+  | interpolations
+  | artsBirthday2017
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementEvent

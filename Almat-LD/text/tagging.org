@@ -52,6 +52,11 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** passim
 *** biography
 *** quote
+*** collage
+*** program
+*** slideshow
+*** note
+*** diary
 ** function
 *** TODO describe what function is
 *** contextual
@@ -87,6 +92,15 @@ two digit YY always 20YY
 *** ListeningToTheAir
 *** TheFifthRootOfTwo
 *** PinchAndSoothe
+*** Moor
+*** Notebook
+*** Hough
+*** Site
+*** Fragments
+*** Spokes
+*** Knots
+*** PreciousObjects
+*** LeapSpace
 ** keywords: array of strings
 ** origin:
 *** skype
@@ -104,6 +118,11 @@ this applies to comments, resume, proposals etc.
 *** signaleSoiree
 *** thresholdOfTheAlgorithmic
 *** SimulationAndComputerExperimentationInMusicAndSoundArt
+*** imperfectReconstruction
+*** interpolations
+*** artsBirthday2017
+** order
+this field used when elements on a page need to be parsed consecutively
 * author date tag: e.g. {JCR, 18.09.21}
 * general metadata fields for entire page
 ** title: 
