@@ -57,12 +57,14 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** slideshow
 *** note
 *** diary
+*** catalogue
 ** function
 *** TODO describe what function is
 *** contextual
 *** comment
 *** caption
 *** description
+*** sketch
 *** experiment
 *** documentation
 *** overview
@@ -70,6 +72,9 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** survey
 *** definition
 *** presentation
+*** note
+** project
+*** SchwarmenVernetzen
 ** author
 ** persons
 ** date: 
@@ -121,6 +126,7 @@ this applies to comments, resume, proposals etc.
 *** imperfectReconstruction
 *** interpolations
 *** artsBirthday2017
+*** schwarmenVernetzen
 ** order
 this field used when elements on a page need to be parsed consecutively
 * author date tag: e.g. {JCR, 18.09.21}

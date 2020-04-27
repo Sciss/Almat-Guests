@@ -42,6 +42,7 @@ data ElementKind
   | Slideshow
   | Note
   | Diary
+  | Catalogue
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
@@ -64,6 +65,8 @@ data ElementFunction
   | Definition
   | Presentation
   | Documentation
+  | Sketch
+  | Note
   deriving (Generic, Show, Eq)
 
 instance FromJSON ElementFunction
@@ -112,6 +115,17 @@ instance FromJSON ElementArtwork
 instance Semigroup ElementArtwork where
   v <> v' = v'
 
+data ElementProject
+  = SchwarmenVernezten
+  deriving (Generic, Show, Eq)
+
+instance ToJSON ElementProject
+
+instance FromJSON ElementProject
+
+instance Semigroup ElementProject where
+  v <> v' = v'
+
 data ElementEvent
   = SCmeeting
   | openCUBE
@@ -121,6 +135,7 @@ data ElementEvent
   | imperfectReconstruction
   | interpolations
   | artsBirthday2017
+  | schwatmenVernetzen
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementEvent
