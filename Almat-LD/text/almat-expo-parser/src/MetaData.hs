@@ -43,6 +43,7 @@ data ElementKind
   | Note
   | Diary
   | Catalogue
+  | BlogEntry
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
@@ -84,6 +85,8 @@ data ElementOrigin
   | ProgramNotes
   | RC
   | Skype
+  | Lecture Performance
+  | Dream
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementOrigin

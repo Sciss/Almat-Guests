@@ -58,6 +58,7 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** note
 *** diary
 *** catalogue
+*** blogEntry
 ** function
 *** TODO describe what function is
 *** contextual
@@ -117,6 +118,8 @@ two digit YY always 20YY
 when origin is not explicity declared, we assume origin:online
 this applies to comments, resume, proposals etc.
 *** RC (default)
+*** lecture performance
+*** dream
 ** event
 *** SCmeeting
 *** openCUBE
