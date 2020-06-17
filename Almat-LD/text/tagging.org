@@ -10,8 +10,7 @@ kind: photo
 author: POZ
 persons: EG
 place: lydgalleriet
-event: thresholdOfTheAlgorithmic
-group: heartrate
+event: thresh
 keywords: [_, heart rate sensor, electronics, sensor, heart rate, Erin Gee]
 ---
 * meta template
@@ -40,6 +39,7 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** screenshot
 *** diagram
 *** video
+*** plan
 *** photo
 *** scan
 *** footer
@@ -59,6 +59,20 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** diary
 *** catalogue
 *** blogEntry
+*** list
+*** memo
+*** graph
+*** proposal
+*** pseudocode
+*** report
+*** comment
+*** git (elements that only link to git)
+*** subtitle
+*** screenRecording
+*** keywords
+*** pin
+*** histogram
+*** spectrogram
 ** function
 *** TODO describe what function is
 *** contextual
@@ -74,9 +88,18 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** definition
 *** presentation
 *** note
+*** room recording
+*** response
+*** prototype
+*** brainstorming
 ** project
 *** SchwarmenVernetzen
+*** AlgorithmicSegments
 ** author
+author is the author of a RC contribution
+** quoted
+used together with the kind:quote to specify who is quoted and avoid
+ambiguity with tag 'author'
 ** persons
 ** date: 
 YYYY-MM-DD
@@ -94,6 +117,7 @@ two digit YY always 20YY
 *** experimentalstudio
 *** lydgalleriet
 *** ORPHEUSinstitute
+*** Kunsthaus
 ** artwork:
 *** ListeningToTheAir
 *** TheFifthRootOfTwo
@@ -107,6 +131,7 @@ two digit YY always 20YY
 *** Knots
 *** PreciousObjects
 *** LeapSpace
+*** ThroughSegments
 ** keywords: array of strings
 ** origin:
 *** skype

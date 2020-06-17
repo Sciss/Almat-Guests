@@ -109,6 +109,7 @@ data ElementArtwork
   | Knots
   | PreciousObjects
   | LeapSpace
+  | ThroughSegments
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementArtwork
@@ -120,6 +121,7 @@ instance Semigroup ElementArtwork where
 
 data ElementProject
   = SchwarmenVernezten
+  | AlgorithmicSegments
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementProject
@@ -130,15 +132,15 @@ instance Semigroup ElementProject where
   v <> v' = v'
 
 data ElementEvent
-  = SCmeeting
-  | openCUBE
-  | signaleSoiree
-  | thresholdsOfTheAlgorithmic
+  = ScMeeting
+  | OpenCUBE
+  | SignaleSoiree
+  | ThresholdsOfTheAlgorithmic
   | SimulationAndComputerExperimentationInMusicAndSoundArt
-  | imperfectReconstruction
-  | interpolations
-  | artsBirthday2017
-  | schwatmenVernetzen
+  | ImperfectReconstruction
+  | Interpolations
+  | ArtsBirthday2017
+  | SchwatmenVernetzen
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementEvent
