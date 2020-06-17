@@ -64,10 +64,8 @@ data ElementFunction
   | Info
   | Survey
   | Definition
-  | Presentation
   | Documentation
   | Sketch
-  | Note
   deriving (Generic, Show, Eq)
 
 instance FromJSON ElementFunction
@@ -85,7 +83,7 @@ data ElementOrigin
   | ProgramNotes
   | RC
   | Skype
-  | Lecture Performance
+  | LecturePerformance
   | Dream
   deriving (Generic, Show, Eq)
 
