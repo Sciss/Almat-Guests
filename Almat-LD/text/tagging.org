@@ -5,6 +5,7 @@
 ** ↗ response 
 ** ⁺ caption
 * image template
+** TODO add how to  
 ---
 kind: photo
 author: POZ
@@ -60,12 +61,9 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** catalogue
 *** blogEntry
 *** list
-*** memo
 *** graph
-*** proposal
 *** pseudocode
 *** report
-*** comment
 *** git (elements that only link to git)
 *** subtitle
 *** screenRecording
@@ -92,32 +90,20 @@ keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
 *** response
 *** prototype
 *** brainstorming
-** project
-*** SchwarmenVernetzen
-*** AlgorithmicSegments
-** author
-author is the author of a RC contribution
-** quoted
-used together with the kind:quote to specify who is quoted and avoid
-ambiguity with tag 'author'
-** persons
-** date: 
-YYYY-MM-DD
-DD.MM.YY or DD.MM.YYYY
-DD-MMM(alpha)-YY or DD-MMM(alpha)-YYYY
-YYMMDD
-plus spans, [FROM, TO]
-year
-Jan-2010
-2010
-23_06_18
-two digit YY always 20YY
-** place:
-*** CUBE
-*** experimentalstudio
-*** lydgalleriet
-*** ORPHEUSinstitute
-*** Kunsthaus
+*** memo
+*** proposal
+** origin:
+*** skype
+*** project proposal
+*** spoken
+*** email
+*** presentation
+*** program notes
+when origin is not explicity declared, we assume origin:online
+this applies to comments, resume, proposals etc.
+*** RC (default)
+*** lecture performance
+*** dream
 ** artwork:
 *** ListeningToTheAir
 *** TheFifthRootOfTwo
@@ -132,19 +118,9 @@ two digit YY always 20YY
 *** PreciousObjects
 *** LeapSpace
 *** ThroughSegments
-** keywords: array of strings
-** origin:
-*** skype
-*** project proposal
-*** spoken
-*** email
-*** presentation
-*** program notes
-when origin is not explicity declared, we assume origin:online
-this applies to comments, resume, proposals etc.
-*** RC (default)
-*** lecture performance
-*** dream
+** project
+*** SchwarmenVernetzen
+*** AlgorithmicSegments
 ** event
 *** SCmeeting
 *** openCUBE
@@ -155,8 +131,34 @@ this applies to comments, resume, proposals etc.
 *** interpolations
 *** artsBirthday2017
 *** schwarmenVernetzen
+** author
+author is the author of a RC contribution
+** date: 
+YYYY-MM-DD
+DD.MM.YY or DD.MM.YYYY
+DD-MMM(alpha)-YY or DD-MMM(alpha)-YYYY
+YYMMDD
+plus spans, [FROM, TO]
+year
+Jan-2010
+2010
+23_06_18
+two digit YY always 20YY
+** place:
+*** CUBE
+*** Experimentalstudio
+*** Lydgalleriet
+*** ORPHEUSinstitute
+*** Kunsthaus
+** persons
+** keywords: array of strings
+* TODO special fields to add to MetaData.hs
 ** order
 this field used when elements on a page need to be parsed consecutively
+** group...
+** quoted
+used together with the kind:quote to specify who is quoted and avoid
+ambiguity with tag 'author'
 * author date tag: e.g. {JCR, 18.09.21}
 * general metadata fields for entire page
 ** title: 

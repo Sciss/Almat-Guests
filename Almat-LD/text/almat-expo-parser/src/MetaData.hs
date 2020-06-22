@@ -40,10 +40,20 @@ data ElementKind
   | Title
   | Program
   | Slideshow
-  | Note
   | Diary
   | Catalogue
   | BlogEntry
+  | List
+  | Graph
+  | Pseudocode
+  | Report
+  | Git
+  | Subtitle
+  | ScreenRecording
+  | Keywords
+  | Pin
+  | Histogram
+  | Spectrogram
   deriving (Generic, Show, Eq)
 
 instance ToJSON ElementKind
@@ -66,6 +76,12 @@ data ElementFunction
   | Definition
   | Documentation
   | Sketch
+  | Note
+  | RoomRecording
+  | Response
+  | Prototype
+  | Brainstorming
+  | Memo
   deriving (Generic, Show, Eq)
 
 instance FromJSON ElementFunction
@@ -159,6 +175,9 @@ data ParsedMetaData =
     , persons  :: Maybe Value
     , date     :: Maybe Value
     , place    :: Maybe Value
+    , artwork  :: Maybe ElementArtwork
+    , project  :: Maybe ElementProject
+    , event    :: Maybe ElementEvent
     , origin   :: ElementOrigin
     }
   deriving (Generic, Show, Eq)
@@ -177,6 +196,9 @@ instance FromJSON ParsedMetaData where
       v .:? "persons" <*>
       v .:? "date" <*>
       v .:? "place" <*>
+      v .:? "artwork" <*>
+      v .:? "project" <*>
+      v .:? "event" <*>
       v .:? "origin" .!= RC
 
 -- |Specific JSON 'Value' semigroup for metadata "inheritance"
@@ -205,6 +227,9 @@ instance Semigroup ParsedMetaData where
       (persons m1 <> persons m2)
       (date m1 <> date m2)
       (place m1 <> place m2)
+      (artwork m1 <> artwork m2)
+      (project m1 <> project m2)
+      (event m1 <> event m2)
       (origin m1 <> origin m2)
 
 instance Monoid ParsedMetaData where
@@ -212,6 +237,9 @@ instance Monoid ParsedMetaData where
     ParsedMetaData
       Nothing
       False
+      Nothing
+      Nothing
+      Nothing
       Nothing
       Nothing
       Nothing
