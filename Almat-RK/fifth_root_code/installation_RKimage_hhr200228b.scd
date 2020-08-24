@@ -164,4 +164,4 @@
 };
 )
 
-~writeScores.("/data/temp/rk-scores.bin", ~scores);
+~writeScores.("rk-scores.bin", ~scores);
