@@ -14,10 +14,10 @@ import scala.swing.{Component, Dimension, Graphics2D, MainFrame, Swing}
 object Main {
   case class Config(binIn: File, elemWidth: Int = 1 /*6*/, elemHeight: Int = 2 /*6*/, voiceSpacing: Int = 4 /*18*/,
                    scoreSpacing: Int = 8 /*18*/, hPad: Int = 4, vPad: Int = 4, pdfOut: File,
-                    sliceFrom: Int = 60, sliceUntil: Int = 72, show: Boolean = false)
+                    sliceFrom: Int = 14, sliceUntil: Int = 26, show: Boolean = false)
 
   def main(args: Array[String]): Unit = {
-    run(Config(binIn = file("../rk-scores.bin"), pdfOut = file("../rk-scores.pdf")))
+    run(Config(binIn = file("../rk-scores.bin"), pdfOut = file("../rk-scores-14to25.pdf")))
   }
 
   def run(c: Config): Unit = {
@@ -49,7 +49,7 @@ object Main {
     val numScores         = slice.size
     val voiceInnerHeight  = c.elemHeight * 13
     val voiceHeight       = voiceInnerHeight + c.voiceSpacing
-    val voiceLengths      = slice.map(_.map(_.size).max)
+    val voiceLengths      = slice.map { score => if (score.isEmpty) 0 else score.map(_.size).max }
     val voiceLengthSum    = voiceLengths.sum
     val maxVoices         = slice.map(_.size).max
 
@@ -113,6 +113,7 @@ object Main {
             g.setColor(Color.white)
             g.fillRect(0, 0, drawWidth, drawHeight)
 
+            drawFun(g)
           }
         }
 
