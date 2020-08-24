@@ -140,3 +140,28 @@
 
 ~scores = ~mkScores.(100);
 ~scores[0].plot(bounds: Rect(0, 1000, 1500, 700), discrete: true, minval: 1, maxval: 8).plotMode_(\steps);
+
+
+(
+~writeScores = { arg fName, scores;
+	var f;
+	f = File.new(fName, mode: "w");
+	f.putInt32(scores.size);
+	scores.do { arg score;
+		f.putInt32(score.size);
+		score.do { arg voice;
+			f.putInt32(voice.size);
+			voice.do { arg elem;
+				if (elem.isKindOf(Integer)) {
+					f.putInt32(elem);
+				} {
+					["Not an integer:", elem, elem.class].postln;
+				}
+			};
+		};
+	};
+	f.close;
+};
+)
+
+~writeScores.("/data/temp/rk-scores.bin", ~scores);
