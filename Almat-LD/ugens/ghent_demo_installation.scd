@@ -68,11 +68,10 @@ s.meter
 	var hopf = Hopf.ar(mics, K2A.ar(0.014571), K2A.ar(0.0001));
 
 	var freqs = hopf.collect({ arg item,i; ( (item[2]  * 44100) / (2*pi) ) });
-	var phases = hopf.collect({ arg item; item[3] });
 
 	var oscs = Blip.ar(freqs/60, 125);
 	
-	oscs = oscs.collect({ arg ph, i;
+	oscs = oscs.collect({ arg ph;
 		var bands = BBandPass.ar(ph, Array.geom(32, 70, 1.18),
 			32.collect({ arg i; i.linlin(0,31,0.22,0.4)}));
 		Mix.ar(Compander.ar(bands, bands, 0.03, 0.4,
