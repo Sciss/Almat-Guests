@@ -1,0 +1,48 @@
+
+From: "Kuivila, Ronald" <rkuivila@wesleyan.edu>
+To: Hanns Holger Rutz <rutz@iem.at>
+Subject: a couple of paragraphs
+Date: Thu, 28 Sep 2017 18:03:56 +0000
+
+
+Hi Hanns,
+
+Here is some prose about the Weather at Six.
+I will follow up with a bit on "discovery" vs. "uncovery".
+
+
+The term "plausible" refers back to Max Neuhaus and his creation of a permanent public sound work carefully designed to blend with its 
+auditory environment.   Such pieces can be contrasted with concerts, where people gather at an appointed time to give their attention to
+music, and and with many public art works, which assert presence through some combination of scale and and intervention in the 
+normal operations of their sites.  Plausible sounds enact  a "passive aggressive" relation to potential listeners, they lie in wait for
+the listener who is ready to observe them and no schedule pertains.  But the margin of attention this exploits extends can also include 
+those aspects of experience one has never learned to observe or has learned to ignore or simply does not believe actually exist.  
+
+A carillon is a familiar soundmark now mostly associated with colleges and universities. But it also carries nostalgic overtones of a 
+period when bells so strongly defined their communities that, as Alain Corbin has described, they could become sites of political 
+contention between church and state. But of course it is the diffusion of easy listening and/or light classical muzak to discourage 
+undesirables  from lingering in parks and parking lots that seems closest to the lost power of the bell. And, the anonymous 
+carillonneur who sounds those bells out of sight of any listener enacts an "acousmatic" diffusion of sound that is not so different.
+
+The Weather at Six takes an active carillon as its "plausible" sound and creates its electronic doppelganger. On a daily basis over a 
+period of months this electronic version plays its mimicry of that carillon becoming increasingly erratic and unfamiliar in sound and 
+behavior.  Structuring this piece as a long term transformation slowly stretches the faux carillon from a state of 'plausible' familiarity
+to utterly implausible eccentricity.  It is my hope that this will create moments when the listening passers-by are led to change
+cognitive categories, to re-consider and re-hear what they have been hearing all along.  That is the moment when an aspect of the 
+margin moves to the center, a moment with a certain moral resonance and possibly even a certain moral force.
+
+While the piece was made within a thematic context of climate change, skepticism concerning its human origins and skepticism about 
+need for changes in human behavior, it's focus is on human attention and moments of changed belief.  But of course the experience of
+that long term effect requires short term attention as well.  Here compositional algorithms refer to long term and short term weather patterns
+to shape the sounding music.  Patterns of rain and sun over 100 years or in the few weeks that surround that day.  The slow increase 
+in average temperature only becomes discernible when temperatures are averaged over the long term.  That there is no way to 
+experience those averages directly may explain why meteorologists remained skeptical far longer the climatologists.  In the context of this
+piece, this effect can be heard as a very slow sharpening of the pitch of all the bells in the carillon over each of its daily episodes.
+These approaches are not an exercise in data representation so much as a way to allow the weather to give slightly different life to 
+each day's sounding.
+
+
+RJK
+
+
+
