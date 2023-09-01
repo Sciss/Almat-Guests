@@ -1,0 +1,176 @@
+TITLE:: Keyboard
+summary:: Server-Side Key Listener for the Language
+categories:: External Control
+related:: Classes/KeyState, Classes/View, Classes/HID
+
+DESCRIPTION::
+Server-side keyboard and mouse input that hooks into the language.
+Allows keylistening and mouse listening OS-wide, even when SuperCollider is not the key application.
+However, the key listener won't respond to key combinations.. eg. shift, cmd, alt, ctrl are ignored.
+
+Internally the implementation uses a Singleton pattern, so there can only be one keylistener active at
+any given time. You can have more complex behaviors by registering callbacks for each potential keypress.
+
+
+
+CLASSMETHODS::
+
+METHOD:: disable
+Disable the keyboard listener.
+
+
+METHOD:: listKeycodes
+Get a dictionary of keycode-readable pairs.
+
+returns:: A dictionary
+
+METHOD:: addKeyResponder
+(describe method here)
+
+ARGUMENT:: keysymbol
+(describe argument here)
+
+ARGUMENT:: cb_func
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: getKeycode
+(describe method here)
+
+ARGUMENT:: keysymbol
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: keycodes
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: getSingleton
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: doForKey
+(describe method here)
+
+ARGUMENT:: keysymbol
+(describe argument here)
+
+ARGUMENT:: state
+(describe argument here)
+
+ARGUMENT:: function
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: initKeycodes
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: enable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+
+INSTANCEMETHODS::
+
+METHOD:: disable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: callbacks
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: callbacks_down
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: oscresponder
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: initme
+(describe method here)
+
+ARGUMENT:: server
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: addKeyResponder
+(describe method here)
+
+ARGUMENT:: keysymbol
+(describe argument here)
+
+ARGUMENT:: cb_func
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: keysynths
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: verbose
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: enable
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: isEnabled
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: responderKey
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: doForKey
+(describe method here)
+
+ARGUMENT:: keysymbol
+(describe argument here)
+
+ARGUMENT:: state
+(describe argument here)
+
+ARGUMENT:: function
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: callbacks_up
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+
+EXAMPLES::
+
+code::
+s.boot;
+
+Keyboard.enable(s);
+Keyboard.addKeyResponder('up',{|val| if (val == 1) {"UP is down".postln;} {"UP is up".postln;}; });
+Keyboard.addKeyResponder('down',{|val| if (val == 1) {"DOWN is down".postln;} {"DOWN is up".postln;}; });
+Keyboard.disable;
+::

@@ -1,0 +1,34 @@
+ 'Working with live instruments in supercollider' (get it? :) ) . I guess people would need to bring an instrument or they could pair up with an instrumentalist. The topics would be:
+1400: start
+- introduce myself
+- introduce yourself and what you want from the workshop
+- setup dropbox
+- setup musiccircle
+- show the schedule
+- setup recording
+
+1415: topic 1: effects and live sampling
+1500: upload and discuss!
+1530: coffee
+... repeat over:
+
+- effects
+  * delays, filters, pitch tracking 
+
+- live sampling 
+  * LiveSampler
+
+- onset detection
+  * triggering things with onsets
+  * meta control of the live sampler with onset triggering
+
+- beat tracking	
+  * check out BeatTrack2 maybe if I get it to work
+
+- pitch detection
+  * MykFiddle
+
+- markov chains
+  * MykMarkov
+  
+
