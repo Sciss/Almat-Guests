@@ -1,0 +1,52 @@
+type Value = Some 0.1 | Done
+
+
+sinosc ph incr = sin ph . sinosc (ph + incr) incr
+
+sinosc 1 _ = Done
+
+
+
+0.0
+
+id 0.0
+
+id a = a . id a
+
+fm1 incr =
+    let osc1 = sinosc 0.0 incr in
+    let osc2 = sinsosc 0.0 (osc1 + (sinosc 0.0 (osc1 * 3))) in
+    	osc1 + osc2 . fm1 incr
+
+1!3
+
+
+myosc = sinosc 0.0 0.01
+
+
+
+
+fm1 incr =
+    let (osc1, contin1) = sinosc 0.0 incr in
+    let (osc2, contin2) = sinsosc 0.0 (osc1 + (sinosc 0.0 (osc1 * 3))) in
+    	osc1 + osc2 . fm1 incr
+
+
+
+
+play (sinosc 0.0 (sinosc 0.0 0.05),sinosc 0.0 (sinosc 0.0 0.05))
+
+
+
+
+
+
+
+
+
+
+
+
+sinosc ph incr = sin ph . (ph + incr) incr
+
+sinosc2 ph incr = sinsosc ph incr + sinosc ph incr

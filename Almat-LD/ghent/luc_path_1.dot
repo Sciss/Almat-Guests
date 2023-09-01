@@ -1,0 +1,28 @@
+graph graphname {
+	graph [bgcolor=grey70];
+	node [fontname = "courier new"];
+//	edge [color=gray50];
+//        Contingency[style=filled, fillcolor=white]
+	Synchronization -- "Epistemic\n object";
+	Synchronization -- Contingency;
+	Computation -- Entanglement;
+	//"Epistemic\n object"[style=filled]	
+	"Epistemic\n object" -- Entanglement;
+	Site[penwidth=2.0, label=<<B>Site</B>>];
+	Entanglement -- Site[color=black,penwidth=2.0];
+	Entanglement -- "Aesthetic\n experience";
+        // Contingency[style=filled, fillcolor=white]
+	Contingency -- Site;
+	Contingency -- "Aesthetic\n experience";
+	Computation -- Contingency;
+	Synchronization -- Computation;
+	Speculation -- Computation;
+	Speculation -- Contingency;
+	Formats[penwidth=2.0, label=<<B>Formats</B>>];
+	Formats -- Site[color=black,penwidth=2.0];
+	Formats -- Contingency;
+	Formats -- "Epistemic\n object";
+	Iterativity -- Formats;
+	Computation --  Iterativity
+	Entanglement[penwidth=2.0, label=<<B>Entanglement</B>>];
+}

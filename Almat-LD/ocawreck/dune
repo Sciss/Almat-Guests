@@ -1,0 +1,26 @@
+(menhir (modules parser))
+
+(ocamllex (modules lexer))
+
+(library (name wreckparse) (modules lexer parser ast parselib))
+
+(library
+ (name jack)
+ (libraries ctypes.foreign)
+ (modules jack_callback)
+ (c_library_flags (-ljack))
+ (c_names jack_callback))
+
+(executable
+ (name toplevel)	
+ (libraries
+   threads
+   wreckparse
+   jack
+   ctypes.foreign
+   llvm
+   llvm.analysis
+   llvm.executionengine
+   llvm.target
+   llvm.scalar_opts)
+ (modules toplevel codegen))

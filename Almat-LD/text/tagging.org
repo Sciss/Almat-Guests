@@ -1,0 +1,189 @@
+* anchors
+<a name="ML_as_memory"></a>
+<a href="#ML_as_memory">↗</a>
+** ⌕ content description
+** ↗ response 
+** ⁺ caption
+* image template
+** TODO add how to  
+---
+kind: photo
+author: POZ
+persons: EG
+place: lydgalleriet
+event: thresh
+keywords: [_, heart rate sensor, electronics, sensor, heart rate, Erin Gee]
+---
+* meta template
+---
+meta: true
+title: Iteration RK
+persons: [HHR, POZ, DP, RK]
+function: Overview
+keywords: [Experimentalism, Minimalism, Pattens, Ultrasound]
+---
+* How to add closed vocabulary entries:
+1. Open the file [[./almat-expo-parser/src/MetaData.hs]]
+2. There are a number of sum types for closed vocabulary fields, they
+   are prefixed with "Element". Names need be capitalized and used
+   caml case. 
+3. In order to add a new term (e.g. "foo") add "| Foo" to the sum type.
+
+* fields
+** links-to: relation to other object or page
+** meta: boolean (default=false)
+** group: grouping objects on a page by same group identifier
+** belongs-to: 
+** kind: 
+*** TODO describe what a kind is
+*** logo
+*** screenshot
+*** diagram
+*** video
+*** plan
+*** photo
+*** scan
+*** footer
+*** code
+*** sound
+*** bib
+*** resume
+*** conversation
+*** essay
+*** passim
+*** biography
+*** quote
+*** collage
+*** program
+*** slideshow
+*** note
+*** diary
+*** catalogue
+*** blogEntry
+*** list
+*** graph
+*** pseudocode
+*** report
+*** git (elements that only link to git)
+*** subtitle
+*** screenRecording
+*** keywords
+*** pin
+*** histogram
+*** spectrogram
+** function
+*** TODO describe what function is
+*** contextual
+*** comment
+*** caption
+*** description
+*** sketch
+*** experiment
+*** documentation
+*** overview
+*** info
+*** survey
+*** definition
+*** presentation
+*** note
+*** room recording
+*** response
+*** prototype
+*** brainstorming
+*** memo
+*** proposal
+** origin:
+*** skype
+*** project proposal
+*** spoken
+*** email
+*** presentation
+*** program notes
+when origin is not explicity declared, we assume origin:online
+this applies to comments, resume, proposals etc.
+*** RC (default)
+*** lecture performance
+*** dream
+** artwork:
+*** ListeningToTheAir
+*** TheFifthRootOfTwo
+*** PinchAndSoothe
+*** Moor
+*** Notebook
+*** Hough
+*** Site
+*** Fragments
+*** Spokes
+*** Knots
+*** PreciousObjects
+*** LeapSpace
+*** ThroughSegments
+** project
+*** SchwarmenVernetzen
+*** AlgorithmicSegments
+** event
+*** SCmeeting
+*** openCUBE
+*** signaleSoiree
+*** thresholdOfTheAlgorithmic
+*** SimulationAndComputerExperimentationInMusicAndSoundArt
+*** imperfectReconstruction
+*** interpolations
+*** artsBirthday2017
+*** schwarmenVernetzen
+** author
+author is the author of a RC contribution
+** date: 
+YYYY-MM-DD
+DD.MM.YY or DD.MM.YYYY
+DD-MMM(alpha)-YY or DD-MMM(alpha)-YYYY
+YYMMDD
+plus spans, [FROM, TO]
+year
+Jan-2010
+2010
+23_06_18
+two digit YY always 20YY
+** place:
+*** CUBE
+*** Experimentalstudio
+*** Lydgalleriet
+*** ORPHEUSinstitute
+*** Kunsthaus
+** persons
+** keywords: array of strings
+* TODO special fields to add to MetaData.hs
+** order
+this field used when elements on a page need to be parsed consecutively
+** group...
+** quoted
+used together with the kind:quote to specify who is quoted and avoid
+ambiguity with tag 'author'
+* author date tag: e.g. {JCR, 18.09.21}
+* general metadata fields for entire page
+** title: 
+** type: meta - refers to page
+** persons: e.g. [JR, HHR, DP, POZ]
+** kind: e.g. Introduction
+** keywords: e.g. [live coding, speech recognition]
+** date: optional
+* inheritance
+** normally fields accumulate (from page to objects on page)
+** default is overwrite, append/inherit first element of array is "_"
+* inferred
+** type for media: image, video, audio, text etc 
+** links-to with links in texts
+** navigational elements with text only containing a link, connects pages but not an object
+* page is also an object
+
+* issues
+** photo: keywords
+only the content or also the context?
+** list all possible date formats
+** kind and type is getting ambigous
+I think it make sense to use kind to distinguish different media
+type is also a specification when we have a 'textual' kind
+** timespan
+** case sensitivity
+** dialogue
+** type and kind confusion (meta) 504507
